@@ -48,7 +48,7 @@ The [openDesk Edu Landscape](https://landscape.openedusuite.example.org) is an i
 
 ### Service Categories
 
-The 25 services are organized into 5 main categories:
+The services are organized into 5 main categories:
 
 1. **🎓 Learning Management** - ILIAS, Moodle, BigBlueButton, Jitsi, XWiki
 2. **🔐 Identity & Access** - Keycloak, Nubus, Self-Service Password
