@@ -2,7 +2,7 @@
 title: "API Contracts"
 ---
 
-<!--
+&lt;!--
 SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
@@ -169,7 +169,7 @@ sp_logout=https://idp.openedusuite.example.com/auth/realms/opendek/protocol/saml
 ## Contract: Intercom Silent Login
 
 **Service**: Intercom → Consuming service (OX, Nextcloud, Element)
-**Endpoint**: `POST https://<intercom>/api/silent-login`
+**Endpoint**: `POST https://&lt;intercom>/api/silent-login`
 **Auth**: Shared secret (HMAC-SHA256)
 
 ### Request
@@ -204,7 +204,7 @@ sp_logout=https://idp.openedusuite.example.com/auth/realms/opendek/protocol/saml
 ### Redis Token Caching
 
 The Intercom caches silent login tokens in Redis with:
-- Key: `intercom:token:<consumer>:<target>`
+- Key: `intercom:token:&lt;consumer>:&lt;target>`
 - TTL: 300 seconds (5 minutes)
 - On cache hit: return cached token without contacting target service
 - On cache miss: perform silent login, cache result
@@ -251,8 +251,8 @@ it is excluded from the response by the Nubus Portal server.
 ## Contract: WOPI Discovery and CheckFileInfo
 
 **Service**: Nextcloud/OpenCloud → Collabora
-**Discovery**: `GET https://<collabora>/hosting/discovery`
-**CheckFileInfo**: `GET https://<collaboro>/cool/wopi/files/<fileId>?access_token=<token>`
+**Discovery**: `GET https://&lt;collabora>/hosting/discovery`
+**CheckFileInfo**: `GET https://&lt;collaboro>/cool/wopi/files/&lt;fileId>?access_token=&lt;token>`
 
 ### Discovery Response (200)
 
@@ -350,7 +350,7 @@ Content-Type: application/json
 ## Contract: BBB Greenlight Room API
 
 **Service**: Greenlight (Moodle custom) → BBB Backend
-**Endpoint**: `POST https://<bbb-server>/api/create`
+**Endpoint**: `POST https://&lt;bbb-server>/api/create`
 **Auth**: `BIGBLUEBUTTON_SECRET` checksum
 
 ### Request
@@ -432,10 +432,10 @@ All LDAP clients use `(uid, mail)` as `bindFields` for user lookup.
 
 | Operation | Method | Path | Headers |
 |-----------|--------|------|---------|
-| Put object | PUT | `/<bucket>/<path>` | `Content-Length`, `Content-Type` |
-| Get object | GET | `/<bucket>/<path>` | — |
-| Delete object | DELETE | `/<bucket>/<path>` | — |
-| List objects | GET | `/<bucket>?list-type=2` | — |
+| Put object | PUT | `/&lt;bucket>/&lt;path>` | `Content-Length`, `Content-Type` |
+| Get object | GET | `/&lt;bucket>/&lt;path>` | — |
+| Delete object | DELETE | `/&lt;bucket>/&lt;path>` | — |
+| List objects | GET | `/&lt;bucket>?list-type=2` | — |
 
 ### Per-Service Buckets
 
@@ -485,7 +485,7 @@ Nextcloud quarantines the file when `X-Infection-Found` header is present.
 ## Contract: Notify Push WebSocket
 
 **Service**: Nextcloud Notify Push → Browser clients
-**Endpoint**: `wss://<nextcloud>/push`
+**Endpoint**: `wss://&lt;nextcloud>/push`
 **Auth**: Nextcloud session cookie or OIDC token
 
 ### Connection
