@@ -11,7 +11,7 @@ Interactive OpenSpec documentation for the openDesk Edu ecosystem - integrated o
 
 ## What is This?
 
-This is the **interactive documentation platform** for the [openDesk Edu Spec](https://github.com/openEduSuite/openEduSuite-public/tree/main/openspec/specs), built with [Docusaurus](https://docusaurus.io/).
+This is the **interactive documentation platform** for the [openDesk Edu Spec](https://spec.openedusuite.example.org), built with [Docusaurus](https://docusaurus.io/).
 
 It provides:
 - 📖 **Complete specifications** for the full service portfolio
