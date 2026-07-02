@@ -5,10 +5,8 @@ SPDX-License-Identifier: Apache-2.0
 
 # openDesk Edu Spec
 
-Complete specification framework for the openDesk Edu ecosystem — 64 specs
-covering 32 services, 7 infrastructure components, 17 platform topics, auth, integrations, and registry.
+Complete specification framework for the openDesk Edu ecosystem — covering services, infrastructure components, platform topics, auth, integrations, and registry.
 
-**Live docs**: https://spec.openedusuite.example.org
 **Repository**: https://github.com/openEduSuite/openEduSuite-spec
 
 ## Structure
