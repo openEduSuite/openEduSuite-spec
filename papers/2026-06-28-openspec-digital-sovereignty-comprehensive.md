@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-License-Identifier: Apache-2.0
+-->
+
 ---
 title: "OpenSpec for Digital Sovereignty: A Complete Framework for Sovereign Educational Technology Platforms"
 subtitle: "Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openDesk Edu Ecosystem"
