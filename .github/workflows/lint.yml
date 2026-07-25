@@ -1,0 +1,391 @@
+name: Lint
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'specs/**'
+      - 'changes/**'
+      - 'archive/**'
+      - 'METADATA.yml'
+      - 'docs/sidebars.ts'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'specs/**'
+      - 'changes/**'
+      - 'archive/**'
+      - 'METADATA.yml'
+      - 'docs/sidebars.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spdx-headers:
+    name: SPDX License Headers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check SPDX headers in specs
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          VIOLATIONS=0
+          TOTAL=0
+          MISSING_FILES=""
+          
+          echo "Checking SPDX headers in all markdown files..."
+          
+          while IFS= read -r file; do
+            TOTAL=$((TOTAL + 1))
+            # Skip files that are explicitly allowed to not have SPDX headers
+            # (like sidebars, configs, etc.)
+            if [[ "$file" == "docs/sidebars.ts" ]] || \
+               [[ "$file" == "docs/docusaurus.config.ts" ]] || \
+               [[ "$file" == "METADATA.yml" ]]; then
+              continue
+            fi
+            
+            if ! head -5 "$file" | grep -q 'SPDX-FileCopyrightText'; then
+              echo "::error file=$file::Missing SPDX header"
+              VIOLATIONS=$((VIOLATIONS + 1))
+              MISSING_FILES="${MISSING_FILES}${file}\n"
+            fi
+          done < <(find specs/ changes/ archive/ -name '*.md' -type f)
+          
+          echo ""
+          echo "Checked $TOTAL specification files"
+          
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "::error::$VIOLATIONS files missing SPDX headers"
+            echo ""
+            echo "Files without SPDX headers:"
+            echo -e "$MISSING_FILES"
+            exit 1
+          fi
+          
+          echo "✅ All $TOTAL spec files have valid SPDX headers"
+
+  code-style:
+    name: Code Style (editorconfig)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install editorconfig-checker
+        run: npm install -g editorconfig-checker
+
+      - name: Check editorconfig compliance
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          # Check all markdown, yaml, json files
+          ec -exclude "node_modules/**" -exclude ".git/**" -exclude ".next/**" \
+            -exclude "docs/node_modules/**" -exclude "**/package-lock.json" \
+            -exclude "**/tsconfig.tsbuildinfo" \
+            specs/ changes/ archive/ METADATA.yml docs/
+          
+          echo "✅ All files comply with .editorconfig rules"
+
+  broken-links:
+    name: Broken Links & References
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check broken cross-references
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking for broken cross-references in specs..."
+          
+          BROKEN=0
+          # Find all relative markdown links (../something)
+          while IFS= read -r link; do
+            file="$(echo "$link" | cut -d: -f1)"
+            target="$(echo "$link" | cut -d: -f2-)"
+            
+            # Resolve the target path relative to the file's directory
+            dir="$(dirname "$file")"
+            resolved="$dir/$target"
+            
+            # If it ends with /, check as directory with index.md
+            if [[ "$target" == */ ]]; then
+              if [ ! -f "${resolved}index.md" ]; then
+                echo "::error file=$file::Broken cross-ref: $target"
+                BROKEN=$((BROKEN + 1))
+              fi
+            else
+              if [ ! -f "$resolved" ] && [ ! -d "$resolved" ]; then
+                echo "::error file=$file::Broken cross-ref: $target"
+                BROKEN=$((BROKEN + 1))
+              fi
+            fi
+          done < <(grep -rohn '\.\./[^) "\[]*' specs/ --include='*.md' | grep -v '\.\.$')
+          
+          if [ "$BROKEN" -gt 0 ]; then
+            echo "::error::$BROKEN broken cross-references found"
+            exit 1
+          fi
+          
+          echo "✅ All cross-references are valid"
+
+      - name: Check external links (basic)
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking syntax of external URLs..."
+          
+          # Just check that http/https URLs have proper format
+          # Don't actually fetch them to avoid rate limiting
+          BAD_URLS=0
+          while IFS= read -r url; do
+            if ! echo "$url" | grep -qE '^https?://[^\s]+$'; then
+              echo "::warning file=$file::Potentially malformed URL: $url"
+              BAD_URLS=$((BAD_URLS + 1))
+            fi
+          done < <(grep -rohn 'https://\|http://' specs/ --include='*.md' | cut -d: -f3-)
+          
+          if [ "$BAD_URLS" -gt 0 ]; then
+            echo "::warning::$BAD_URLS potentially malformed URLs found (syntax check only)"
+          fi
+          
+          echo "✅ External URL syntax check complete"
+
+  sidebar-consistency:
+    name: Sidebar Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check sidebar matches specs
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking sidebar entries match spec directories..."
+          
+          MISSING=0
+          VALID=0
+          
+          # Check every sidebar ID resolves to a spec index.md
+          while IFS= read -r id; do
+            # Clean the id (remove quotes)
+            id=$(echo "$id" | sed "s/id: '//;s/'//")
+            
+            if [ -f "specs/$id/index.md" ]; then
+              VALID=$((VALID + 1))
+            else
+              echo "::error file=docs/sidebars.ts::Sidebar references missing spec: $id"
+              MISSING=$((MISSING + 1))
+            fi
+          done < <(grep -oP "id: '([^']+)'" docs/sidebars.ts | sed "s/id: '//;s/'//")
+          
+          if [ "$MISSING" -gt 0 ]; then
+            echo "::error::$MISSING sidebar entries point to missing specs"
+            exit 1
+          fi
+          
+          echo "✅ All $VALID sidebar entries resolve to existing specs"
+
+  metadata-validation:
+    name: METADATA.yml Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check METADATA.yml spec count
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Validating METADATA.yml consistency..."
+          
+          # Count actual spec directories with index.md
+          ACTUAL=$(find specs/ -name 'index.md' | wc -l)
+          
+          # Get reported count from METADATA.yml
+          REPORTED=$(grep '^total_specs:' METADATA.yml | head -1 | awk '{print $2}')
+          
+          if [ -z "$REPORTED" ]; then
+            echo "::error file=METADATA.yml::Missing total_specs field"
+            exit 1
+          fi
+          
+          if [ "$ACTUAL" -ne "$REPORTED" ]; then
+            echo "::error file=METADATA.yml::total_specs is $REPORTED but found $ACTUAL index.md files"
+            exit 1
+          fi
+          
+          echo "✅ METADATA.yml spec count matches ($ACTUAL specs)"
+
+      - name: Check METADATA.yml completeness
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking METADATA.yml covers all specs..."
+          
+          MISSING=0
+          # Get all spec IDs from METADATA.yml
+          while IFS= read -r line; do
+            if echo "$line" | grep -qE '^\s+- id:'; then
+              spec_id=$(echo "$line" | sed 's/^\s*//;s/^-\s*id:\(.*\)/\1/;s/^[\s\"'\']*//;s/[\s\"'\']*$//')
+              if [ ! -f "specs/$spec_id/index.md" ]; then
+                echo "::error file=METADATA.yml::Spec ID $spec_id in METADATA.yml does not exist"
+                MISSING=$((MISSING + 1))
+              fi
+            fi
+          done < METADATA.yml
+          
+          if [ "$MISSING" -gt 0 ]; then
+            echo "::error::$MISSING spec IDs in METADATA.yml point to missing specs"
+            exit 1
+          fi
+          
+          echo "✅ All spec IDs in METADATA.yml exist"
+
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdownlint
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Running markdownlint on all spec files..."
+          
+          # Use a standard markdown lint config
+          # We're using a minimal config that checks common issues
+          markdownlint \
+            --config "{\"default\": true, \"line-length\": false, \"no-inline-html\": false, \"first-line-h1\": false}" \
+            --ignore node_modules \
+            --ignore .git \
+            specs/**/*.md changes/**/*.md archive/**/*.md
+          
+          echo "✅ All markdown files pass linting"
+
+  yaml-lint:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install yaml-lint
+        run: pip install yaml-lint
+
+      - name: Run yaml-lint on METADATA.yml
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking YAML syntax and style..."
+          
+          yamllint -d '{rules: {document-start: {present: false}, line-length: {max: 120, allow-non-breakable-words: true, allow-non-breakable-inline-mappings: true}}}' \
+            METADATA.yml
+          
+          echo "✅ YAML files are valid"
+
+  contract-anchors:
+    name: Contract Anchors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check contract anchors
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking contract anchor references..."
+          
+          # Collect all contract anchors used in service specs
+          BROKEN=0
+          WARNINGS=0
+          
+          while IFS= read -r AnchorRef; do
+            # Strip leading #
+            Anchor="${AnchorRef#\#}"
+            
+            # Check if this anchor exists in the contracts doc
+            if ! grep -q "id=\"$Anchor\"" specs/integrations/api-contracts/index.md; then
+              # Try to find matching contract header
+              if ! grep "^## Contract:" specs/integrations/api-contracts/index.md | \
+                sed 's/^## Contract: //' | tr '[:upper:]' '[:lower:]' | \
+                grep -q "$(echo "$Anchor" | tr '[:upper:]' '[:lower:]')"; then
+                
+                # More lenient check - just warn if it looks like a contract reference
+                if echo "$Anchor" | grep -qi 'contract-'; then
+                  echo "::warning::Possibly broken contract anchor: $AnchorRef"
+                  WARNINGS=$((WARNINGS + 1))
+                fi
+              fi
+            fi
+          done < <(grep -roh '#contract-[a-z0-9-]*' specs/services/ --include='*.md' | sort -u)
+          
+          if [ "$WARNINGS" -gt 0 ]; then
+            echo "::warning::$WARNINGS possible broken contract anchors (check manually)"
+          fi
+          
+          echo "✅ Contract anchor check complete"
+
+  summary:
+    name: Lint Summary
+    runs-on: ubuntu-latest
+    needs: [spdx-headers, code-style, broken-links, sidebar-consistency, metadata-validation, markdown-lint, yaml-lint, contract-anchors]
+    if: always()
+    steps:
+      - name: Summary
+        run: |
+          echo ""
+          echo "╔══════════════════════════════════════════════════════════════╗"
+          echo "║                    LINT SUMMARY                             ║"
+          echo "╚══════════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "All lint jobs:"
+          echo ""
+          
+          for job in "spdx-headers" "code-style" "broken-links" "sidebar-consistency" "metadata-validation" "markdown-lint" "yaml-lint" "contract-anchors"; do
+            status="${{ needs.$job.result }}"
+            if [ "$status" == "success" ]; then
+              echo "  ✅ $job"
+            elif [ "$status" == "failure" ]; then
+              echo "  ❌ $job"
+            else
+              echo "  ⚠️  $job (skipped)"
+            fi
+          done
+          
+          echo ""
+          if [ "${{ contains(needs.*.result, 'failure') }}" == "true" ]; then
+            echo "❌ LINT FAILED - Please fix the issues above"
+            exit 1
+          else
+            echo "✅ ALL LINT CHECKS PASSED"
+            exit 0
+          fi
