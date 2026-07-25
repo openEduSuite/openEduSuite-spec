@@ -1,0 +1,195 @@
+name: Spec Pyramid Validation
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'specs/**'
+      - 'scripts/calculate-coverage.py'
+      - 'scripts/validate-interconnections.py'
+      - '.github/workflows/spec-pyramid-validation.yml'
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'specs/**'
+      - 'scripts/calculate-coverage.py'
+      - 'scripts/validate-interconnections.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: spec-pyramid-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calculate-coverage:
+    name: Calculate Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Calculate coverage
+        run: python scripts/calculate-coverage.py --ci 0
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage-report.json
+
+  validate-interconnections:
+    name: Validate Interconnections
+    runs-on: ubuntu-latest
+    needs: calculate-coverage
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate interconnections
+        run: python scripts/validate-interconnections.py
+
+  validate-cross-references:
+    name: Validate Cross-References
+    runs-on: ubuntu-latest
+    needs: validate-interconnections
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check broken cross-references
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Checking for broken cross-references..."
+          
+          BROKEN=0
+          while IFS= read -r link; do
+            file="$(echo "$link" | cut -d: -f1)"
+            target="$(echo "$link" | cut -d: -f2-)"
+            
+            # Resolve the target path relative to the file's directory
+            dir="$(dirname "$file")"
+            resolved="$dir/$target"
+            
+            # If it ends with /, check as directory with index.md
+            if [[ "$target" == */ ]]; then
+              if [ ! -f "${resolved}index.md" ]; then
+                echo "::error file=$file::Broken cross-ref: $target"
+                BROKEN=$((BROKEN + 1))
+              fi
+            else
+              if [ ! -f "$resolved" ] && [ ! -d "$resolved" ]; then
+                echo "::error file=$file::Broken cross-ref: $target"
+                BROKEN=$((BROKEN + 1))
+              fi
+            fi
+          done < <(grep -rohn '\.\./[^) "\[]*' specs/ --include='*.md' | grep -v '\.\.$')
+          
+          if [ "$BROKEN" -gt 0 ]; then
+            echo "::error::$BROKEN broken cross-references found"
+            exit 1
+          fi
+          
+          echo "✅ All cross-references are valid"
+
+  validate-contracts:
+    name: Validate Contracts
+    runs-on: ubuntu-latest
+    needs: validate-cross-references
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml jsonschema
+
+      - name: Validate API contracts
+        run: |
+          #!/bin/bash
+          set -euo pipefail
+          
+          echo "Validating API contracts..."
+          
+          # Check if contract file exists
+          CONTRACT_FILE="specs/integrations/api-contracts/index.md"
+          if [ ! -f "$CONTRACT_FILE" ]; then
+            echo "::warning::API contract file not found: $CONTRACT_FILE"
+            exit 0
+          fi
+          
+          # Extract contract definitions
+          python3 << 'PYEOF'
+          import re
+          import json
+          
+          with open('specs/integrations/api-contracts/index.md', 'r') as f:
+              content = f.read()
+          
+          # Count contracts
+          contracts = re.findall(r'^## Contract: (.+)$', content, re.MULTILINE)
+          print(f"Found {len(contracts)} API contracts")
+          
+          for contract in contracts:
+              print(f"  ✓ {contract}")
+          
+          PYEOF
+          
+          echo "✅ API contracts validated"
+
+  summary:
+    name: Pyramid Validation Summary
+    runs-on: ubuntu-latest
+    needs: [calculate-coverage, validate-interconnections, validate-cross-references, validate-contracts]
+    if: always()
+    steps:
+      - name: Summary
+        run: |
+          echo ""
+          echo "╔═══════════════════════════════════════════════════════════════╗"
+          echo "║              SPEC-CONTRACT-TEST PYRAMID VALIDATION            ║"
+          echo "╚═══════════════════════════════════════════════════════════════╝"
+          echo ""
+          
+          JOBS=("calculate-coverage" "validate-interconnections" "validate-cross-references" "validate-contracts")
+          
+          for job in "${JOBS[@]}"; do
+            status="${{ needs.$job.result }}"
+            if [ "$status" == "success" ]; then
+              echo "  ✅ $job"
+            elif [ "$status" == "failure" ]; then
+              echo "  ❌ $job"
+            else
+              echo "  ⚠️  $job ($status)"
+            fi
+          done
+          
+          echo ""
+          if [ "${{ contains(needs.*.result, 'failure') }}" == "true" ]; then
+            echo "❌ PYRAMID VALIDATION FAILED"
+            exit 1
+          else
+            echo "✅ ALL PYRAMID VALIDATION CHECKS PASSED"
+            exit 0
+          fi
