@@ -140,7 +140,7 @@ Once approved:
 For questions about this change proposal:
 
 1. **Check the documents** - Most questions are answered in the proposal, specs, or tasks
-2. **Ask in Matrix** - `#opendesk-ce-public:matrix.openedusuite.example.com`
+2. **Ask in Matrix** - `#opendesk-ce-public:matrix.openedusuite.example.org`
 3. **Create an issue** - For formal questions or concerns
 4. **Request a meeting** - For complex discussion
 

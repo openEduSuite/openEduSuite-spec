@@ -446,7 +446,7 @@ Each developer reports:
 1. Read the task description carefully
 2. Check the linked spec sections
 3. Check the technical specification
-4. Ask in Matrix: `#opendesk-ce-public:matrix.openedusuite.example.com`
+4. Ask in Matrix: `#opendesk-ce-public:matrix.openedusuite.example.org`
 5. Create an issue for clarification
 
 ### I'm blocked by a dependency

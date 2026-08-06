@@ -901,7 +901,7 @@ We thank:
 **Paper Version**: 1.1
 **Date**: 2026-06-28
 **License**: Apache-2.0
-**Contact**: tobias.weiss@example.com
+**Contact**: contact@openedusuite.example.org
 
 **Citation:**
 ```bibtex

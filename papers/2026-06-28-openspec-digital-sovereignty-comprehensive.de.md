@@ -808,7 +808,7 @@ Wir danken:
 **Paper-Version**: 1.0
 **Datum**: 2026-06-28
 **Lizenz**: Apache-2.0
-**Kontakt**: tobias.weiss@example.com
+**Kontakt**: contact@openedusuite.example.org
 
 **Zitation:**
 ```bibtex

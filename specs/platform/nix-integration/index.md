@@ -1616,7 +1616,7 @@ nix run .#generate-sbom -- <service>
   namespace = "opendesk";
   ingress = {
     className = "haproxy";
-    domain = "openedusuite.example.com";
+    domain = "openedusuite.example.org";
     tls = {
       enabled = true;
       secretName = "opendesk-certificates-tls";
@@ -1628,7 +1628,7 @@ nix run .#generate-sbom -- <service>
     rwo = "ceph-rbd-ssd";
   };
   networking = {
-    proxy = "http://proxy.openedusuite.example.com:3128";
+    proxy = "http://proxy.openedusuite.example.org:3128";
     dns = [ "192.0.2.22" "192.0.2.5" "192.0.2.8" ];
   };
 }

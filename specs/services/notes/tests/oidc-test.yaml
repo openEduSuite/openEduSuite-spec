@@ -42,7 +42,7 @@ tests:
                   - name: notes
                     env:
                       - name: OIDC_ISSUER
-                        value: https://keycloak.openedusuite.example.com/auth/realms/opendek
+                        value: https://keycloak.openedusuite.example.org/auth/realms/opendek
 
   - it: should set OIDC client secret from secret
     release:

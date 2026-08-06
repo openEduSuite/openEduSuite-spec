@@ -40,7 +40,7 @@ tests:
                   - name: backend
                     env:
                       - name: OPENXCHANGE_OIDC_DISCOVERY_URL
-                        value: https://keycloak.openedusuite.example.com/auth/realms/opendek/.well-known/openid-configuration
+                        value: https://keycloak.openedusuite.example.org/auth/realms/opendek/.well-known/openid-configuration
 
   - it: should set OIDC client secret from secret
     release:
