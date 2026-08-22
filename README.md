@@ -29,6 +29,8 @@ openEduSuite-spec/
 ├── changes/                  # Active change proposals
 ├── archive/                  # Archived change proposals
 ├── papers/                   # Published papers (md + pdf)
+├── templates/                # Reusable templates
+│   └── paper-work/           # Generalized data-protection templates (VVT, DSFA, TOM, ...)
 ├── METADATA.yml              # Spec metadata index (domain, auth, tier, scenarios)
 ├── METHODOLOGY.md            # Spec methodology overview
 ├── opendesk_core.schema.json # Upstream integration contract schema
