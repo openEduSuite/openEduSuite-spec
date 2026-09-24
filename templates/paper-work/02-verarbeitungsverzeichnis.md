@@ -1,16 +1,16 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Verarbeitungsverzeichnis (VVT) – openDesk Edu
+# Verarbeitungsverzeichnis (VVT) – openEDU
 ## Anonymisierte Vorlage
 
 > **⚠️ Rechtlicher Hinweis**
 > Dieses Dokument ist **keine rechtlich geprüfte Vorlage**. Es dient ausschließlich als **Beispiel** und muss an die spezifischen Bedürfnisse der Institution angepasst werden.
 >
-> **Wichtig:** openDesk Edu ist ein **Betriebsmittel** (analog Microsoft 365, siehe [HBDI-Bericht, S. 79](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf)). 
-> **In diesem VVT werden die Verarbeitungstätigkeiten dokumentiert, die mithilfe von openDesk Edu durchgeführt werden.**
+> **Wichtig:** openEDU ist ein **Betriebsmittel** (analog Microsoft 365, siehe [HBDI-Bericht, S. 79](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf)). 
+> **In diesem VVT werden die Verarbeitungstätigkeiten dokumentiert, die mithilfe von openEDU durchgeführt werden.**
 >
 > Vor Nutzung durch **DSB/Rechtsabteilung** prüfen lassen.
 
@@ -21,7 +21,7 @@ SPDX-License-Identifier: Apache-2.0
 
 **Datum:** [TT.MM.JJJJ]
 **Version:** 1.0
-**Gültig für:** Einführung von openDesk Edu als Betriebsmittel für Verarbeitungstätigkeiten
+**Gültig für:** Einführung von openEDU als Betriebsmittel für Verarbeitungstätigkeiten
 
 ---
 
@@ -43,29 +43,29 @@ SPDX-License-Identifier: Apache-2.0
 ## 2. Betriebsmittel
 
 > **⚠️ Wichtiger Hinweis:**
-> openDesk Edu ist ein **Betriebsmittel** (technisches Hilfsmittel) und **keine Verarbeitungstätigkeit**.
-> Die in diesem VVT dokumentierten Verarbeitungstätigkeiten werden **mithilfe des Betriebsmittels openDesk Edu** durchgeführt.
-> Die vollständige Beschreibung von openDesk Edu als Betriebsmittel findet sich in:
+> openEDU ist ein **Betriebsmittel** (technisches Hilfsmittel) und **keine Verarbeitungstätigkeit**.
+> Die in diesem VVT dokumentierten Verarbeitungstätigkeiten werden **mithilfe des Betriebsmittels openEDU** durchgeführt.
+> Die vollständige Beschreibung von openEDU als Betriebsmittel findet sich in:
 > **[01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md)**
 
 | Feld | Inhalt |
 |------|--------|
-| **Name** | openDesk Edu (kollaborative Office-Suite) |
+| **Name** | openEDU (kollaborative Office-Suite) |
 | **Typ** | Betriebsmittel (technisches Hilfsmittel) |
 | **Beschreibung** | Siehe **[01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md)** |
 | **Betreiber** | Rechenzentrum (RZ) der Einrichtung |
 
 ---
 
-**Verweis:** Alle in diesem Dokument genannten Verarbeitungstätigkeiten nutzen openDesk Edu als Betriebsmittel. Für die technischen und organisatorischen Maßnahmen (TOM) sowie die Sicherheitsstandards von openDesk Edu verweisen wir auf die **[Betriebsmittel-Beschreibung](01-betriebsmittel-opendesk-edu.md)**.
+**Verweis:** Alle in diesem Dokument genannten Verarbeitungstätigkeiten nutzen openEDU als Betriebsmittel. Für die technischen und organisatorischen Maßnahmen (TOM) sowie die Sicherheitsstandards von openEDU verweisen wir auf die **[Betriebsmittel-Beschreibung](01-betriebsmittel-opendesk-edu.md)**.
 
 ---
 
 ## 3. Verarbeitungstätigkeiten
 
 ⚠️ **Hinweis:**
-Dieses VVT dokumentiert **konkrete Verarbeitungstätigkeiten**, die **mithilfe des Betriebsmittels openDesk Edu** durchgeführt werden.
-openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, S. 79](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf)).
+Dieses VVT dokumentiert **konkrete Verarbeitungstätigkeiten**, die **mithilfe des Betriebsmittels openEDU** durchgeführt werden.
+openEDU selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, S. 79](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf)).
 
 ### 3.1 Übersicht
 
@@ -87,7 +87,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name der Verarbeitungstätigkeit** | E-Mail-Kommunikation mit SOGo |
-| **Betriebsmittel** | [openDesk Edu (SOGo)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (SOGo)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Gemeinsam Verantwortliche** | – |
 | **Zweck der Verarbeitung** | Bereitstellung von E-Mail-Diensten für Forschung, Lehre und Verwaltung |
@@ -116,7 +116,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name der Verarbeitungstätigkeit** | Dateispeicherung und Kollaboration mit openCloud |
-| **Betriebsmittel** | [openDesk Edu (openCloud)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (openCloud)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Gemeinsam Verantwortliche** | – |
 | **Zweck der Verarbeitung** | Bereitstellung von Cloud-Speicher für Lehrmaterialien, Forschungsdaten, Verwaltungsdokumente |
@@ -145,7 +145,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name der Verarbeitungstätigkeit** | Online-Lehre mit Jitsi |
-| **Betriebsmittel** | [openDesk Edu (Jitsi)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (Jitsi)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Gemeinsam Verantwortliche** | – |
 | **Zweck der Verarbeitung** | Durchführung von digitalen Lehrveranstaltungen (Vorlesungen, Seminare, Übungen) |
@@ -176,7 +176,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name der Verarbeitungstätigkeit** | Teamkommunikation mit Element/Matrix |
-| **Betriebsmittel** | [openDesk Edu (Element/Matrix)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (Element/Matrix)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Gemeinsam Verantwortliche** | – |
 | **Zweck der Verarbeitung** | Austausch zwischen Mitarbeitenden und Studierenden (Projekte, Lehre, Verwaltung) |
@@ -285,7 +285,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 
 ## 8. Technische und organisatorische Maßnahmen (TOM)
 
-**Verweis:** Die TOM für openDesk Edu sind in **[01-betriebsmittel-opendesk-edu.md §8](01-betriebsmittel-opendesk-edu.md#8-technische-und-organisatorische-massnahmen-tom)** dokumentiert.
+**Verweis:** Die TOM für openEDU sind in **[01-betriebsmittel-opendesk-edu.md §8](01-betriebsmittel-opendesk-edu.md#8-technische-und-organisatorische-massnahmen-tom)** dokumentiert.
 
 **Zusammenfassung:**
 - **Vertraulichkeit:** Zutrittskontrolle, RBAC, MFA, Verschlüsselung (TLS 1.3, AES-256)
@@ -310,7 +310,7 @@ openDesk Edu selbst ist **keine Verarbeitungstätigkeit** (siehe [HBDI-Bericht, 
 
 | **Dokument** | **Zweck** |
 |--------------|-----------|
-| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openDesk Edu als Betriebsmittel |
+| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openEDU als Betriebsmittel |
 | [03-technisch-organisatorische-massnahmen.md](03-technisch-organisatorische-massnahmen.md) | Detaillierte TOM-Dokumentation |
 | [04-datenschutz-folgenabschaetzung.md](04-datenschutz-folgenabschaetzung.md) | DSFA für Hochrisiko-Verarbeitungen |
 | [HBDI-Bericht zu Microsoft 365](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf) | Rechtliche Begründung: Betriebsmittel-Klassifizierung |

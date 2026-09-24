@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Betriebsmittel-Beschreibung: openDesk Edu
+# Betriebsmittel-Beschreibung: openEDU
 
 > **⚠️ Rechtlicher Hinweis**
 > Dieses Dokument ist eine **anonymisierte Vorlage** und muss an die spezifischen Anforderungen der jeweiligen Institution angepasst werden. Es basiert auf:
@@ -19,7 +19,7 @@ SPDX-License-Identifier: Apache-2.0
 
 | Feld | Inhalt |
 |------|--------|
-| **Bezeichnung des Betriebsmittels** | openDesk Edu (kollaborative Office-Suite) |
+| **Bezeichnung des Betriebsmittels** | openEDU (kollaborative Office-Suite) |
 | **Version** | [z. B. openDesk CE 2026] |
 | **Aktenzeichen** | [internes Aktenzeichen, z. B. BM-2026-EDU-001] |
 | **Stand** | [TT.MM.JJJJ] |
@@ -42,9 +42,9 @@ Gemäß **Hessischer Beauftragter für Datenschutz und Informationsfreiheit (HBD
 > *Hervorzuheben ist zudem, dass es sich bei den von Microsoft im Rahmen von M365 zur Verfügung gestellten Produkten um Betriebsmittel handelt, die im Rahmen verschiedener Verarbeitungsverfahren personenbezogener Daten zum Einsatz kommen. Daher muss die datenschutzrechtliche Bewertung vom Verantwortlichen im Kontext des jeweiligen Einsatzzwecks erfolgen."
 
 **Folgerung:**
-- openDesk Edu ist eine **kollaborative Office-Suite** (Dateispeicher, E-Mail, Kalender, Chat, Videokonferenz) → **analog zu Microsoft 365**
-- **openDesk Edu ist ein Betriebsmittel** → **Kein VVT (Verarbeitungsverzeichnis) für openDesk Edu selbst**
-- **Verarbeitungstätigkeiten** (z. B. "E-Mail-Kommunikation", "Online-Lehre") werden **mithilfe von openDesk Edu** durchgeführt und sind **separat im VVT zu dokumentieren**
+- openEDU ist eine **kollaborative Office-Suite** (Dateispeicher, E-Mail, Kalender, Chat, Videokonferenz) → **analog zu Microsoft 365**
+- **openEDU ist ein Betriebsmittel** → **Kein VVT (Verarbeitungsverzeichnis) für openEDU selbst**
+- **Verarbeitungstätigkeiten** (z. B. "E-Mail-Kommunikation", "Online-Lehre") werden **mithilfe von openEDU** durchgeführt und sind **separat im VVT zu dokumentieren**
 
 ### 2.2 Abgrenzung
 **Nicht von dieser Beschreibung umfasst:**
@@ -57,7 +57,7 @@ Gemäß **Hessischer Beauftragter für Datenschutz und Informationsfreiheit (HBD
 ## 3. Eigenschaften des Betriebsmittels
 
 ### 3.1 Kurzdarstellung
-openDesk Edu ist eine **souveräne, On-Premises Office-Suite** für Bildungseinrichtungen.
+openEDU ist eine **souveräne, On-Premises Office-Suite** für Bildungseinrichtungen.
 **Zweck:** Bereitstellung eines **digitalen Arbeitsplatzes** für Forschung, Lehre und Verwaltung mit:
 - **openCloud** (Dateispeicher & Kollaboration, Nextcloud-basiert)
 - **SOGo** (E-Mail & Kalender, Groupware)
@@ -171,7 +171,7 @@ openDesk Edu ist eine **souveräne, On-Premises Office-Suite** für Bildungseinr
 ## 5. Freigabe von nutzenden Verarbeitungen
 
 ### 5.1 Freigegebene Verarbeitungen
-openDesk Edu darf für folgende **Verarbeitungstätigkeiten** genutzt werden (unter Einhaltung der jeweiligen Rechtsgrundlagen):
+openEDU darf für folgende **Verarbeitungstätigkeiten** genutzt werden (unter Einhaltung der jeweiligen Rechtsgrundlagen):
 
 | **Verarbeitungstätigkeit** | **Rechtsgrundlage** | **Datenkategorien** | **Betroffene** |
 |----------------------------|---------------------|---------------------|----------------|
@@ -184,7 +184,7 @@ openDesk Edu darf für folgende **Verarbeitungstätigkeiten** genutzt werden (un
 | Forschungsdaten-Kollaboration | Art. 6 Abs. 1 lit. e DSGVO | Forschungsdaten (keine sensiblen Daten i.S.v. Art. 9 DSGVO) | Forschende |
 
 ### 5.2 Nicht freigegebene Verarbeitungen
-openDesk Edu **darf nicht** genutzt werden für:
+openEDU **darf nicht** genutzt werden für:
 
 - **Besondere Kategorien personenbezogener Daten (Art. 9 Abs. 1 DSGVO):**
   - Gesundheitsdaten
@@ -210,7 +210,7 @@ Für folgende Verarbeitungen ist eine **individuelle Risikobewertung (DSFA) gem�
 | **Externe Freigabe von Daten** an Drittländer oder internationale Organisationen | Hoch (Drittlandübermittlung) | Art. 35 Abs. 1 DSGVO + Art. 44-49 DSGVO | EUGdP Leitlinien 3/2018 |
 
 > **⚠️ Hinweis zu KI-Funktionen:**
-> Falls openDesk Edu **KI-Assistenten, automatisierte Textanalyse oder intelligente Suchfunktionen** nutzt, die **Profiling** oder **automatisierte Entscheidungsfindung** ermöglichen, **muss eine DSFA durchgeführt werden**. Dies gilt insbesondere, wenn:
+> Falls openEDU **KI-Assistenten, automatisierte Textanalyse oder intelligente Suchfunktionen** nutzt, die **Profiling** oder **automatisierte Entscheidungsfindung** ermöglichen, **muss eine DSFA durchgeführt werden**. Dies gilt insbesondere, wenn:
 > - Nutzer:innen **keine transparente Information** über den KI-Einsatz erhalten,
 > - die KI **ohne menschliche Kontrolle** Entscheidungen trifft,
 > - die KI **personenbezogene Daten** in einer Weise verarbeitet, die **Risiken für Rechte und Freiheiten** birgt (z. B. Diskriminierung, falsche Klassifizierung).
@@ -222,9 +222,9 @@ Für folgende Verarbeitungen ist eine **individuelle Risikobewertung (DSFA) gem�
 ## 6. Kategorien personenbezogener Daten
 
 ### 6.1 Betriebsmittelspezifische Daten
-*(Daten, die durch den Betrieb von openDesk Edu selbst anfallen – unabhängig von der Nutzung)*
+*(Daten, die durch den Betrieb von openEDU selbst anfallen – unabhängig von der Nutzung)*
 
-> **⚠️ Wichtig:** Diese Datenkategorien gelten **nur für den Betrieb des Betriebsmittels openDesk Edu**. 
+> **⚠️ Wichtig:** Diese Datenkategorien gelten **nur für den Betrieb des Betriebsmittels openEDU**. 
 > Die **Inhaltsdaten** (z. B. E-Mails, Dateien, Nachrichten) werden **nicht hier**, sondern in den **Verarbeitungstätigkeiten** (§5) dokumentiert.
 
 | **Kategorie** | **Beispiele** | **Speicherdauer** | **Rechtsgrundlage** |
@@ -262,7 +262,7 @@ Für folgende Verarbeitungen ist eine **individuelle Risikobewertung (DSFA) gem�
 ## 8. Technische und organisatorische Maßnahmen (TOM)
 
 ### 8.1 Übersicht
-Die TOM für openDesk Edu entsprechen den Anforderungen aus:
+Die TOM für openEDU entsprechen den Anforderungen aus:
 - **Art. 32 DSGVO** – Sicherheit der Verarbeitung
 - **BSI IT-Grundschutz** (Modulare Sicherheitskonzepte, Kritikalität: **hoch**)
 - **ISO/IEC 27001** (Informationssicherheits-Managementsysteme, optional)
@@ -361,7 +361,7 @@ Die TOM für openDesk Edu entsprechen den Anforderungen aus:
 
 | **Nr.** | **Bezeichnung** | **Quelle** |
 |---------|-----------------|------------|
-| A1 | Risikoanalyse openDesk Edu | Intern (RZ) |
+| A1 | Risikoanalyse openEDU | Intern (RZ) |
 | A2 | Technisches Rollen- und Berechtigungskonzept | Intern (RZ) |
 | A3 | Kryptokonzept (Verschlüsselung) | Intern (RZ) |
 | A4 | Protokollierungskonzept | Intern (RZ) |
@@ -375,7 +375,7 @@ Die TOM für openDesk Edu entsprechen den Anforderungen aus:
 
 | **Datum** | **Änderung** | **Verantwortlich** |
 |-----------|--------------|--------------------|
-| [TT.MM.JJJJ] | Erstellung der Vorlage | openDesk Edu Contributors |
+| [TT.MM.JJJJ] | Erstellung der Vorlage | openEDU Contributors |
 | [TT.MM.JJJJ] | Anpassung an [Institution] | [Name] |
 
 ---

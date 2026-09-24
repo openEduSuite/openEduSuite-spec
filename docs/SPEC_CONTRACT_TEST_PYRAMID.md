@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Overview
 
-This document outlines the **Spec-Contract-Test Pyramid** framework for the openDesk Edu specification repository. This three-tiered approach ensures comprehensive documentation, clear interfaces, and automated validation across all components.
+This document outlines the **Spec-Contract-Test Pyramid** framework for the openEDU specification repository. This three-tiered approach ensures comprehensive documentation, clear interfaces, and automated validation across all components.
 
 ```
                     ┌─────────────────┐
@@ -755,7 +755,7 @@ By systematically improving each layer and the connections between them, we can 
 - ✅ Faster troubleshooting
 - ✅ Higher quality software
 
-Implementing this framework will transform the openDesk Edu specification from a static documentation repository into a living, validated system that ensures correctness from specification to production.
+Implementing this framework will transform the openEDU specification from a static documentation repository into a living, validated system that ensures correctness from specification to production.
 
 ---
 
@@ -765,6 +765,6 @@ Implementing this framework will transform the openDesk Edu specification from a
 3. Generate initial coverage report
 4. Track progress against targets
 
-**Owner:** openDesk Edu Architecture Team
+**Owner:** openEDU Architecture Team
 **Last Updated:** 2026-07-25
 **Status:** Draft

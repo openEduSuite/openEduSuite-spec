@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Struktur
 
-Dieses Verzeichnis enthält **anonymisierte Vorlagen** für den Datenschutz bei openDesk Edu. Die Dokumente basieren auf:
+Dieses Verzeichnis enthält **anonymisierte Vorlagen** für den Datenschutz bei openEDU. Die Dokumente basieren auf:
 
 - **HBDI-Bericht zu Microsoft 365 (2025-11-15, S. 79, 3173-3180)** – Klassifizierung von Office-Suiten als *Betriebsmittel* (nicht als Verarbeitungstätigkeit)
 - **BayLfD-Vorlagen** – Standardisierte Beschreibung von Betriebsmitteln und Verarbeitungstätigkeiten
@@ -29,8 +29,8 @@ Dieses Verzeichnis enthält **anonymisierte Vorlagen** für den Datenschutz bei 
 
 | Datei | Typ | Zweck | Rechtsgrundlage |
 |-------|-----|-------|-----------------|
-| **[01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md)** | Betriebsmittel-Beschreibung | openDesk Edu als *technisches Hilfsmittel* (analog M365) | HBDI-Einschätzung |
-| **[02-verarbeitungsverzeichnis.md](02-verarbeitungsverzeichnis.md)** | Verarbeitungsverzeichnis (VVT) | Dokumentation konkreter Verarbeitungstätigkeiten *mit* openDesk Edu | Art. 30 DSGVO |
+| **[01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md)** | Betriebsmittel-Beschreibung | openEDU als *technisches Hilfsmittel* (analog M365) | HBDI-Einschätzung |
+| **[02-verarbeitungsverzeichnis.md](02-verarbeitungsverzeichnis.md)** | Verarbeitungsverzeichnis (VVT) | Dokumentation konkreter Verarbeitungstätigkeiten *mit* openEDU | Art. 30 DSGVO |
 | **[03-technisch-organisatorische-massnahmen.md](03-technisch-organisatorische-massnahmen.md)** | TOM-Dokumentation | Sicherheitsmaßnahmen nach Art. 32 DSGVO | Art. 32 DSGVO |
 | **[04-datenschutz-folgenabschaetzung.md](04-datenschutz-folgenabschaetzung.md)** | DSFA | Risikobewertung für Hochrisiko-Verarbeitungen | Art. 35 DSGVO |
 | **[05-betroffenrechte.md](05-betroffenrechte.md)** | Formular | Antrag auf Auskunft/Löschung (Artt. 15, 17 DSGVO) | Artt. 15, 17, 20, 21 DSGVO |
@@ -40,19 +40,19 @@ Dieses Verzeichnis enthält **anonymisierte Vorlagen** für den Datenschutz bei 
 
 ## Rechtliche Einordnung
 
-### openDesk Edu als Betriebsmittel
+### openEDU als Betriebsmittel
 Gemäß **HBDI (Hessischer Beauftragter für Datenschutz und Informationsfreiheit)** im **[Bericht zu Microsoft 365 (2025-11-15, S. 79, Absätze 3173-3180)](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf)**:
 
 > *"Der Einsatz eines M365-Produkts für sich genommen stellt **keine Verarbeitungstätigkeit** im Sinne von Art. 30 DSGVO dar. Es handelt sich vielmehr um ein **technisches Hilfs- oder Betriebsmittel**, mit dessen Unterstützung unterschiedliche Verarbeitungstätigkeiten durchgeführt werden können."*
 
-**Folgerung für openDesk Edu:**
-- openDesk Edu ist eine **kollaborative Office-Suite** (Dateispeicher, E-Mail, Kalender, Chat, Videokonferenz) → **analog zu M365**
-- **openDesk Edu selbst ist ein Betriebsmittel** → **Kein VVT für openDesk Edu möglich**
-- **Verarbeitungstätigkeiten** (z. B. "E-Mail-Versand", "Online-Lehre") werden **mithilfe von openDesk Edu** durchgeführt → **Diese sind im VVT zu dokumentieren**
+**Folgerung für openEDU:**
+- openEDU ist eine **kollaborative Office-Suite** (Dateispeicher, E-Mail, Kalender, Chat, Videokonferenz) → **analog zu M365**
+- **openEDU selbst ist ein Betriebsmittel** → **Kein VVT für openEDU möglich**
+- **Verarbeitungstätigkeiten** (z. B. "E-Mail-Versand", "Online-Lehre") werden **mithilfe von openEDU** durchgeführt → **Diese sind im VVT zu dokumentieren**
 
 ### Praktische Umsetzung
 1. **Betriebsmittel-Beschreibung** (01-betriebsmittel-opendesk-edu.md)
-   - Technische und organisatorische Beschreibung von openDesk Edu
+   - Technische und organisatorische Beschreibung von openEDU
    - Sicherheitsmaßnahmen (TOM)
    - Verantwortlichkeiten
 2. **Verarbeitungsverzeichnis (VVT)** (02-verarbeitungsverzeichnis.md)
@@ -75,7 +75,7 @@ Die Vorlagen richten sich an:
 ### Benötigte Informationen
 - Name und Anschrift der Institution
 - Kontaktdaten des **Datenschutzbeauftragten (DSB)**
-- Verantwortliche für openDesk Edu (RZ/IT)
+- Verantwortliche für openEDU (RZ/IT)
 - Datenkategorien (z. B. Matrikelnummern, E-Mails)
 - Technische Details (Serverstandort, Backups, Verschlüsselung)
 
@@ -94,7 +94,7 @@ Die Vorlagen richten sich an:
 - [ ] TOM (Sicherheitsmaßnahmen) ergänzen
 
 ### 2. Verarbeitungstätigkeiten identifizieren
-- [ ] **Welche konkreten Verarbeitungen** werden mit openDesk Edu durchgeführt?
+- [ ] **Welche konkreten Verarbeitungen** werden mit openEDU durchgeführt?
   - Beispiele: E-Mail-Kommunikation, Online-Lehre, Forschungsdaten-Kollaboration
 - [ ] **Rechtsgrundlagen** prüfen (Art. 6 Abs. 1 DSGVO)
 
@@ -136,12 +136,12 @@ Die Vorlagen richten sich an:
 
 ## Häufige Fragen (FAQ)
 
-**F: Muss für openDesk Edu ein VVT erstellt werden?**
-A: ❌ Nein. openDesk Edu ist ein **Betriebsmittel** (wie M365). Stattdessen sind die **Verarbeitungstätigkeiten**, die mit openDesk Edu durchgeführt werden, im VVT zu dokumentieren.
+**F: Muss für openEDU ein VVT erstellt werden?**
+A: ❌ Nein. openEDU ist ein **Betriebsmittel** (wie M365). Stattdessen sind die **Verarbeitungstätigkeiten**, die mit openEDU durchgeführt werden, im VVT zu dokumentieren.
 
 **F: Wo ist der Unterschied zwischen Betriebsmittel und Verarbeitungstätigkeit?**
 A: 
-- **Betriebsmittel** = Werkzeug (z. B. openDesk Edu, M365)
+- **Betriebsmittel** = Werkzeug (z. B. openEDU, M365)
 - **Verarbeitungstätigkeit** = Konkrete Nutzung des Werkzeugs (z. B. "E-Mail schreiben mit SOGo")
 
 **F: Wann ist eine DSFA erforderlich?**
@@ -182,7 +182,7 @@ Die folgenden Aufsichtsbehörden und Ressourcen sind für die Umsetzung der Date
 ## Verwandte Dokumente
 
 - **[INFRASTRUCTURE.md](../INFRASTRUCTURE.md)** – Technische Infrastruktur-Beschreibung (K3s, Ceph, Netzwerk)
-- **[helmfile/](../helmfile/)** – Kubernetes-Konfiguration für openDesk Edu
+- **[helmfile/](../helmfile/)** – Kubernetes-Konfiguration für openEDU
 
 ---
 

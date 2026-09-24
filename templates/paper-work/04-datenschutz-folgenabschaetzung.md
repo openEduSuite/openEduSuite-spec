@@ -1,10 +1,10 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 # Datenschutz-Folgenabschätzung (DSFA)
-## openDesk Edu – Hochrisiko-Verarbeitungen
+## openEDU – Hochrisiko-Verarbeitungen
 
 > **⚠️ Rechtlicher Hinweis**
 > Dieses Dokument ist eine **anonymisierte Vorlage** und muss an die spezifischen Anforderungen der jeweiligen Institution angepasst werden.
@@ -37,7 +37,7 @@ SPDX-License-Identifier: Apache-2.0
 ## 1. Einleitung
 
 ### 1.1 Ziel
-Bewertung der **Risiken** für die Rechte und Freiheiten natürlicher Personen bei der Nutzung von openDesk Edu für:
+Bewertung der **Risiken** für die Rechte und Freiheiten natürlicher Personen bei der Nutzung von openEDU für:
 1. **Dateispeicherung und Kollaboration** (openCloud)
 2. **Online-Lehrveranstaltungen** (Jitsi)
 3. **Forschungsdaten-Management** (openCloud)
@@ -49,7 +49,7 @@ Bewertung der **Risiken** für die Rechte und Freiheiten natürlicher Personen b
 - **[Landesdatenschutzgesetz (LDSG)]** – Landesrechtliche Ergänzungen
 
 ### 1.3 Geltungsbereich
-Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von openDesk Edu (siehe [02-verarbeitungsverzeichnis.md §3.2.2, 3.2.3, 3.2.5](02-verarbeitungsverzeichnis.md)).
+Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von openEDU (siehe [02-verarbeitungsverzeichnis.md §3.2.2, 3.2.3, 3.2.5](02-verarbeitungsverzeichnis.md)).
 
 ---
 
@@ -60,7 +60,7 @@ Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name** | Dateispeicherung und Kollaboration mit openCloud |
-| **Betriebsmittel** | [openDesk Edu (openCloud)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (openCloud)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Zweck** | Bereitstellung von Cloud-Speicher für Lehrmaterialien, Forschungsdaten, Verwaltungsdokumente |
 | **Rechtsgrundlage** | Art. 6 Abs. 1 lit. e DSGVO |
@@ -74,7 +74,7 @@ Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name** | Online-Lehre mit Jitsi |
-| **Betriebsmittel** | [openDesk Edu (Jitsi)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (Jitsi)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Zweck** | Durchführung von digitalen Lehrveranstaltungen |
 | **Rechtsgrundlage** | Art. 6 Abs. 1 lit. e DSGVO |
@@ -88,7 +88,7 @@ Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von 
 | **Feld** | **Wert** |
 |----------|----------|
 | **Name** | Kollaboratives Forschungsdaten-Management mit openCloud |
-| **Betriebsmittel** | [openDesk Edu (openCloud)](01-betriebsmittel-opendesk-edu.md) |
+| **Betriebsmittel** | [openEDU (openCloud)](01-betriebsmittel-opendesk-edu.md) |
 | **Verantwortlicher** | [Name der Einrichtung] – Rechenzentrum |
 | **Zweck** | Speicherung und kollaborative Bearbeitung von Forschungsdaten |
 | **Rechtsgrundlage** | Art. 6 Abs. 1 lit. e DSGVO (ggf. + Einwilligung für externe Partner) |
@@ -111,7 +111,7 @@ Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von 
 ### 3.2 Verhältnismäßigkeit
 | **Aspekt** | **Begründung** |
 |------------|----------------|
-| **Eignung** | openDesk Edu erfüllt die Anforderungen an Datenschutz (On-Premises, keine Drittlandübermittlung) und Funktionalität (Kollaboration, Videokonferenz). |
+| **Eignung** | openEDU erfüllt die Anforderungen an Datenschutz (On-Premises, keine Drittlandübermittlung) und Funktionalität (Kollaboration, Videokonferenz). |
 | **Erforderlichkeit** | Alternativen (z. B. lokale Einzelinstallationen) wären weniger effizient oder nicht skalierbar. |
 | **Angemessenheit** | Die Risiken werden durch **umfassende TOM** (Verschlüsselung, RBAC, Backups) minimiert. Der Nutzen überwiegt die Restrisiken. |
 
@@ -121,7 +121,7 @@ Diese DSFA gilt für die **Hochrisiko-Verarbeitungstätigkeiten** im Rahmen von 
 | **Externe Cloud-Dienste (z. B. OneDrive, Google Drive)** | ❌ Abgelehnt (Drittlandübermittlung, keine volle Datenhoheit) |
 | **Lokale Netzlaufwerke (SMB/NFS)** | ⚠️ Eingeschränkt geeignet (keine Kollaborationsfunktionen, keine Versionierung) |
 | **Eigene Nextcloud-Instanz (ohne openDesk)** | ⚠️ Teilweise geeignet (fehlende Integration mit E-Mail/Video) |
-| **openDesk Edu (On-Premises)** | ✅ **Gewählte Lösung** (beste Balance aus Datenschutz und Funktionalität) |
+| **openEDU (On-Premises)** | ✅ **Gewählte Lösung** (beste Balance aus Datenschutz und Funktionalität) |
 
 ---
 
@@ -281,7 +281,7 @@ Die DSFA ist erforderlich, wenn mindestens **zwei** der folgenden Kriterien erf�
 ## 10. Anhang
 
 ### 10.1 Referenzierte Dokumente
-- [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) – Beschreibung von openDesk Edu als Betriebsmittel
+- [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) – Beschreibung von openEDU als Betriebsmittel
 - [02-verarbeitungsverzeichnis.md](02-verarbeitungsverzeichnis.md) – Verarbeitungsverzeichnis (VVT)
 - [03-technisch-organisatorische-massnahmen.md](03-technisch-organisatorische-massnahmen.md) – Detaillierte TOM-Dokumentation
 - [HBDI-Bericht zu Microsoft 365](https://datenschutz.hessen.de/sites/datenschutz.hessen.de/files/2025-11/hbdi_bericht_m365_2025_11_15.pdf) – Betriebsmittel-Klassifizierung
@@ -291,7 +291,7 @@ Die DSFA ist erforderlich, wenn mindestens **zwei** der folgenden Kriterien erf�
 
 | **Begriff** | **Bedeutung** |
 |-------------|---------------|
-| **Betriebsmittel** | Technisches Hilfsmittel (z. B. openDesk Edu), das zur Durchführung von Verarbeitungstätigkeiten genutzt wird |
+| **Betriebsmittel** | Technisches Hilfsmittel (z. B. openEDU), das zur Durchführung von Verarbeitungstätigkeiten genutzt wird |
 | **Verarbeitungstätigkeit** | Konkrete Nutzung eines Betriebsmittels (z. B. "Online-Lehre mit Jitsi") |
 | **DSFA** | Datenschutz-Folgenabschätzung (Art. 35 DSGVO) |
 | **TOM** | Technische und organisatorische Maßnahmen (Art. 32 DSGVO) |

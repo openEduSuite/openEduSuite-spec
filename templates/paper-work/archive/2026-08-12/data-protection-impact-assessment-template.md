@@ -1,10 +1,10 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 # Datenschutz-Folgenabschätzung (DSFA)
-## Einführung von openDesk Edu auf einem Kubernetes-Cluster (K3s) im Rechenzentrum einer Bildungseinrichtung
+## Einführung von openEDU auf einem Kubernetes-Cluster (K3s) im Rechenzentrum einer Bildungseinrichtung
 
 > **⚠️ Rechtlicher Hinweis / Legal Disclaimer**
 >
@@ -31,7 +31,7 @@ SPDX-License-Identifier: Apache-2.0
 
 **Datum:** [TT.MM.JJJJ]
 **Version:** 1.0 – anonymisierte Vorlage
-**Gültig für:** Einführung von openDesk Edu (openCloud, SOGo, Jitsi, Element, Portal) auf einem eigenen Kubernetes-Cluster (K3s)
+**Gültig für:** Einführung von openEDU (openCloud, SOGo, Jitsi, Element, Portal) auf einem eigenen Kubernetes-Cluster (K3s)
 
 ---
 
@@ -62,9 +62,9 @@ SPDX-License-Identifier: Apache-2.0
 
 ### 1.1 Zweck der DSFA
 
-Diese **Datenschutz-Folgenabschätzung (DSFA)** gem. **Art. 35 DSGVO** analysiert und bewertet die **Risiken für die Rechte und Freiheiten natürlicher Personen**, die mit der Einführung von **openDesk Edu** auf einem **Kubernetes-Cluster (K3s)** im **Rechenzentrum einer Bildungseinrichtung** verbunden sind.
+Diese **Datenschutz-Folgenabschätzung (DSFA)** gem. **Art. 35 DSGVO** analysiert und bewertet die **Risiken für die Rechte und Freiheiten natürlicher Personen**, die mit der Einführung von **openEDU** auf einem **Kubernetes-Cluster (K3s)** im **Rechenzentrum einer Bildungseinrichtung** verbunden sind.
 
-Die DSFA dient als **Grundlage für die Entscheidung**, ob die Einführung von openDesk Edu:
+Die DSFA dient als **Grundlage für die Entscheidung**, ob die Einführung von openEDU:
 - **datenschutzrechtlich zulässig** ist,
 - **zusätzliche Schutzmaßnahmen** erfordert,
 - **vor der Einführung genehmigt** werden muss.
@@ -73,7 +73,7 @@ Die DSFA dient als **Grundlage für die Entscheidung**, ob die Einführung von o
 
 | **Aspekt** | **Gültigkeit** |
 |------------|----------------|
-| **System** | openDesk Edu (openCloud, SOGo, Jitsi, Element, Portal) |
+| **System** | openEDU (openCloud, SOGo, Jitsi, Element, Portal) |
 | **Infrastruktur** | Kubernetes-Cluster (K3s) auf Servern im Rechenzentrum |
 | **Betreiber** | Rechenzentrum (RZ) der Einrichtung |
 | **Nutzer:innen** | Mitarbeitende, Studierende, externe Gäste |
@@ -84,7 +84,7 @@ Die DSFA dient als **Grundlage für die Entscheidung**, ob die Einführung von o
 
 #### 1.3.1 Hintergrund
 
-Die Einrichtung evaluiert die Einführung von **openDesk Edu** als **souveräne Alternative** zu kommerziellen Cloud-Diensten (z. B. Microsoft 365, Google Workspace). Ziel ist die Bereitstellung eines **datenschutzkonformen, selbstbetriebenen digitalen Arbeitsplatzes** für:
+Die Einrichtung evaluiert die Einführung von **openEDU** als **souveräne Alternative** zu kommerziellen Cloud-Diensten (z. B. Microsoft 365, Google Workspace). Ziel ist die Bereitstellung eines **datenschutzkonformen, selbstbetriebenen digitalen Arbeitsplatzes** für:
 - **Forschung** (Kollaboration, Forschungsdatenmanagement),
 - **Lehre** (Materialien, Videokonferenzen, Kommunikation),
 - **Verwaltung** (Dokumentenmanagement, E-Mail, Terminplanung).
@@ -101,7 +101,7 @@ Die Einrichtung evaluiert die Einführung von **openDesk Edu** als **souveräne 
 | **IdM-Anbindung** | Zentrales Identity-Management (IdM) | RZ | RZ |
 | **Backup** | Backup-Server + S3-kompatibler Objekt-Speicher | RZ | RZ |
 
-#### 1.3.3 openDesk Edu-Komponenten
+#### 1.3.3 openEDU-Komponenten
 
 | **Komponente** | **Zweck** | **Datenverarbeitung** | **Risikostufe** |
 |----------------|-----------|----------------------|----------------|
@@ -119,7 +119,7 @@ Die Einführung erfolgt in **drei Stufen** (orientiert an einem typischen Piloti
 2. **Stufe 2 (Verwaltung):** Verwaltungsbereiche – **8-10 Wochen**
 3. **Stufe 3 (Fachbereiche & zentrale Einrichtungen):** ausgewählte Fachbereiche und Einrichtungen – **10-12 Wochen**
 
-Nach erfolgreichem Pilot wird openDesk Edu **einrichtungsweit** eingeführt.
+Nach erfolgreichem Pilot wird openEDU **einrichtungsweit** eingeführt.
 
 ---
 
@@ -244,7 +244,7 @@ graph TD
 
 ### 3.2 Verhältnis der Verarbeitung (Art. 5 Abs. 1 lit. c DSGVO)
 
-| **Grundsatz** | **Umsetzung in openDesk Edu** | **Nachweis** |
+| **Grundsatz** | **Umsetzung in openEDU** | **Nachweis** |
 |---------------|--------------------------------|--------------|
 | **Zweckbindung** | Daten werden **ausschließlich für die in Kap. 2.1 genannten Zwecke** verarbeitet. | VVT, DSFA, Nutzungsbedingungen |
 | **Datenminimierung** | Es werden **nur die notwendigen Attribute** aus dem IdM synchronisiert (z. B. `eduPersonAffiliation`, `mail`). | IdM-Anbindung, Attribut-Mapping |
@@ -497,7 +497,7 @@ Nach Umsetzung aller Maßnahmen verbleiben folgende **Restrisiken**:
 
 ### 7.2 Empfehlung
 
-✅ **Die Einführung von openDesk Edu auf dem Kubernetes-Cluster ist datenschutzrechtlich zulässig**, wenn:
+✅ **Die Einführung von openEDU auf dem Kubernetes-Cluster ist datenschutzrechtlich zulässig**, wenn:
 
 1. **Alle in dieser DSFA und im VVT beschriebenen technischen und organisatorischen Maßnahmen (TOM) umgesetzt** werden.
 2. **Das Verarbeitungsverzeichnis (VVT) regelmäßig aktualisiert** wird (mindestens jährlich).
@@ -588,11 +588,11 @@ Nach Umsetzung aller Maßnahmen verbleiben folgende **Restrisiken**:
 
 | Version | Datum | Änderungen | Bearbeitet von |
 |---------|-------|------------|----------------|
-| 1.0 | [TT.MM.JJJJ] | Erstellung der anonymisierten Vorlage auf Basis der DSFA einer Bildungseinrichtung | openDesk Edu Contributors |
+| 1.0 | [TT.MM.JJJJ] | Erstellung der anonymisierten Vorlage auf Basis der DSFA einer Bildungseinrichtung | openEDU Contributors |
 
 ---
 
 > **⚠️ WICHTIG:**
-> - Dieses Dokument ist eine **Vorlage** und muss vor der Inbetriebnahme von **openDesk Edu** durch den **Datenschutzbeauftragten (DSB)** der Einrichtung **freigegeben** werden.
+> - Dieses Dokument ist eine **Vorlage** und muss vor der Inbetriebnahme von **openEDU** durch den **Datenschutzbeauftragten (DSB)** der Einrichtung **freigegeben** werden.
 > - **Änderungen** an diesem Dokument müssen **dokumentiert** und vom DSB **genehmigt** werden.
 > - Die DSFA muss **alle 2 Jahre** oder bei **wesentlichen Änderungen** (z. B. neue Komponenten, geänderte Datenflüsse) **überarbeitet** werden.

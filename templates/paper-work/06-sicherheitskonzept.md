@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Sicherheitskonzept: openDesk Edu
+# Sicherheitskonzept: openEDU
 
 > **⚠️ Rechtlicher Hinweis**
 > Dieses Dokument ist eine **anonymisierte Vorlage** und muss an die spezifischen Anforderungen der jeweiligen Institution angepasst werden.
@@ -33,13 +33,13 @@ SPDX-License-Identifier: Apache-2.0
 
 ### 1.1 Zweck
 Dieses Dokument beschreibt ein **modulares Sicherheitskonzept** für den Betrieb von
-**openDesk Edu** in einer Bildungseinrichtung oder öffentlichen Verwaltung.
+**openEDU** in einer Bildungseinrichtung oder öffentlichen Verwaltung.
 
 Es ergänzt das übergeordnete **Modulare Sicherheitskonzept der Einrichtung** und
 definiert die openDesk-spezifischen Sicherheitsmaßnahmen, Verantwortlichkeiten und Prozesse.
 
 ### 1.2 Geltungsbereich
-- **System:** openDesk Edu (Portal, Keycloak, openCloud, SOGo, Element/Matrix, Etherpad, XWiki, …)
+- **System:** openEDU (Portal, Keycloak, openCloud, SOGo, Element/Matrix, Etherpad, XWiki, …)
 - **Externe Dienste:** BigBlueButton (Videokonferenzen) – sofern extern betrieben
 - **Infrastruktur:** Kubernetes-Cluster des Rechenzentrums, On-Premises
 - **Betriebsphasen:** Pilotbetrieb, Produktivbetrieb
@@ -48,7 +48,7 @@ definiert die openDesk-spezifischen Sicherheitsmaßnahmen, Verantwortlichkeiten 
 | Dokument | Ort | Zweck |
 |----------|-----|-------|
 | Modulares Sicherheitskonzept der Einrichtung | zentrales ISMS | Rahmenbedingungen, übergeordnete Maßnahmen |
-| Betriebsmittel-Beschreibung openDesk Edu | paper-work | openDesk Edu als technisches Hilfsmittel |
+| Betriebsmittel-Beschreibung openEDU | paper-work | openEDU als technisches Hilfsmittel |
 | Verarbeitungsverzeichnis (VVT) | paper-work | Verarbeitungstätigkeiten (Art. 30 DSGVO) |
 | TOM-Dokumentation | paper-work | Technisch-organisatorische Maßnahmen (Art. 32) |
 | Datenschutz-Folgenabschätzung (DSFA) | paper-work | Hochrisiko-Verarbeitungen (Art. 35) |

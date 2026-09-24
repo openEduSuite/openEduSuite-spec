@@ -1,10 +1,10 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 # Technische und Organisatorische Maßnahmen (TOM)
-## openDesk Edu – Kubernetes-Cluster im Rechenzentrum einer Bildungseinrichtung
+## openEDU – Kubernetes-Cluster im Rechenzentrum einer Bildungseinrichtung
 
 > **⚠️ Rechtlicher Hinweis / Legal Disclaimer**
 >
@@ -31,7 +31,7 @@ SPDX-License-Identifier: Apache-2.0
 
 **Datum:** [TT.MM.JJJJ]
 **Version:** 1.0 – anonymisierte Vorlage
-**Gültig für:** openDesk Edu auf einem Kubernetes-Cluster (K3s) im Rechenzentrum der Einrichtung
+**Gültig für:** openEDU auf einem Kubernetes-Cluster (K3s) im Rechenzentrum der Einrichtung
 
 ---
 
@@ -41,7 +41,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## 1. Einleitung
 
-Die Technischen und Organisatorischen Maßnahmen (TOM) sind gemäß Art. 32 Abs. 1 lit. a-d DSGVO umgesetzt, um ein dem Risiko angemessenes Schutzniveau für die Verarbeitung personenbezogener Daten im Rahmen von openDesk Edu sicherzustellen.
+Die Technischen und Organisatorischen Maßnahmen (TOM) sind gemäß Art. 32 Abs. 1 lit. a-d DSGVO umgesetzt, um ein dem Risiko angemessenes Schutzniveau für die Verarbeitung personenbezogener Daten im Rahmen von openEDU sicherzustellen.
 
 ### 1.1 Risikobasierte Herangehensweise
 
@@ -223,7 +223,7 @@ Die Maßnahmen werden regelmäßig auf ihre Angemessenheit geprüft und an techn
 | Maßnahme | Status | Beschreibung |
 |----------|--------|--------------|
 | **ISO 27001** | ⚠️ Optional | [Optional] Zertifizierung des Rechenzentrums |
-| **BSI-IT-Grundschutz** | ✅ Umgesetzt | Audit nach BSI-Grundschutz, Testschonung für openDesk Edu |
+| **BSI-IT-Grundschutz** | ✅ Umgesetzt | Audit nach BSI-Grundschutz, Testschonung für openEDU |
 | **Penetrationstests** | ✅ Umgesetzt | Regelmäßige Pentests und Security-Audits durch interne/externe Experten |
 | **Compliance-Reporting** | ✅ Umgesetzt | Jährlicher Sicherheitsbericht an die Leitung der Einrichtung |
 

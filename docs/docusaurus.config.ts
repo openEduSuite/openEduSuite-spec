@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'OpenSpec | openDesk Edu',
-  tagline: 'Complete specification framework for the openDesk Edu ecosystem',
+  title: 'OpenSpec | openEDU',
+  tagline: 'Complete specification framework for the openEDU ecosystem',
 
   url: 'https://spec.openedusuite.example.org',
   baseUrl: '/',
@@ -85,7 +85,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} openDesk Edu Contributors. Licensed under Apache-2.0.`,
+      copyright: `Copyright © ${new Date().getFullYear()} openEDU Contributors. Licensed under Apache-2.0.`,
     },
     prism: {
       theme: prismThemes.github,

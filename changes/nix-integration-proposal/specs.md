@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -94,7 +94,7 @@ This document defines the delta specifications (ADDED/MODIFIED/REMOVED) for the 
   - Command: `nix build .#k8s-manifests`
 
 - `opendesk-nix/scripts/deploy.sh` — Deploy to a cluster
-  - Purpose: Deploy openDesk Edu to a Kubernetes cluster
+  - Purpose: Deploy openEDU to a Kubernetes cluster
   - Command: `nix run .#deploy-opendesk-edu -- --environment <env>`
 
 - `opendesk-nix/scripts/push-images.sh` — Push images to registries
@@ -141,7 +141,7 @@ This document defines the delta specifications (ADDED/MODIFIED/REMOVED) for the 
   - Purpose: Guide users through building images
 
 - `opendesk-nix/docs/DEPLOYING.md` — Deployment instructions
-  - Purpose: Guide users through deploying openDesk Edu
+  - Purpose: Guide users through deploying openEDU
 
 - `opendesk-nix/docs/SECURITY.md` — Security practices
   - Purpose: Document security requirements and practices

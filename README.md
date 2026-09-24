@@ -1,11 +1,11 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# openDesk Edu Spec
+# openEDU Spec
 
-Complete specification framework for the openDesk Edu ecosystem — covering services, infrastructure components, platform topics, auth, integrations, and registry.
+Complete specification framework for the openEDU ecosystem — covering services, infrastructure components, platform topics, auth, integrations, and registry.
 
 **Repository**: https://github.com/openEduSuite/openEduSuite-spec
 

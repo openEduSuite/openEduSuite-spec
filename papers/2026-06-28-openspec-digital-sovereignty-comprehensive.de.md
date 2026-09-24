@@ -1,14 +1,14 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 ---
 title: "OpenSpec für Digitale Souveränität: Ein Vollständiges Framework für Souveräne Bildungstechnologie-Plattformen"
-subtitle: "Spezifikationsmethodik, Kontinuierliche Selbstverbesserung und Produktionsnachweise aus dem openDesk Edu-Ökosystem"
+subtitle: "Spezifikationsmethodik, Kontinuierliche Selbstverbesserung und Produktionsnachweise aus dem openEDU-Ökosystem"
 authors:
   - "Tobias Weiß"
-  - "openDesk Edu Contributors"
+  - "openEDU Contributors"
 date: 2026-06-28
 version: 1.0
 status: Entwurf zur Überprüfung
@@ -35,7 +35,7 @@ abstract: |
   maschinell überprüfbare Spezifikationsmethodik für den Aufbau und Betrieb
   digital souveräner Arbeitsplätze — gepaart mit dem Ralph Loop, einer
   kontinuierlichen Selbstverbesserungsmethodik, die Dokumentationsregression
-  verhindert. Wir präsentieren die openDesk Edu-Plattform als einen in der
+  verhindert. Wir präsentieren die openEDU-Plattform als einen in der
   Produktion eingesetzten Fallstudien-Nachweis, der 25+ Open-Source-Dienste
   am UDC auf einem 9-Knoten-K3s-Cluster integriert. Ausgehend von
   0% Spezifikationskonformität erreichten wir 100% Abdeckung über vier
@@ -240,7 +240,7 @@ Der **Ralph Loop** ist eine kontinuierliche Selbstverbesserungsmethodik, die als
 
 ### 3.3 Ergebnisse: Von 0% zu 100% Abdeckung
 
-Durch die Anwendung der Ralph Loop-Methodik auf die openDesk Edu-Plattform erreichten wir eine vollständige Spezifikationsabdeckung:
+Durch die Anwendung der Ralph Loop-Methodik auf die openEDU-Plattform erreichten wir eine vollständige Spezifikationsabdeckung:
 
 | Spezifikationssäule | Ursprüngliche Abdeckung | Endgültige Abdeckung | Verbesserung |
 |---------------------|-------------------------|-----------------------|--------------|
@@ -271,19 +271,19 @@ Die kritische Innovation des Ralph Loop ist die **Regressionsverhinderung**. Tra
 
 Diese Automatisierung verhindert die Dokumentationsregression, die traditionelle Ansätze plagt. Probleme werden innerhalb von Tagen statt Monaten erkannt, und Korrekturen werden inkrementell anstatt durch disruptive Umschreibungen angewendet.
 
-## 4. Fallstudie: openDesk Edu
+## 4. Fallstudie: openEDU
 
 ### 4.1 Ein anderer Ansatz
 
-**openDesk Edu** repräsentiert einen grundlegend anderen Ansatz für Bildungstechnologie. Anstatt sich für einen einzelnen Anbieter zu entscheiden oder alles von Grund auf neu zu bauen, **integriert es weltklasse Open-Source-Anwendungen** in ein einheitliches, produktionsreifes Ökosystem.
+**openEDU** repräsentiert einen grundlegend anderen Ansatz für Bildungstechnologie. Anstatt sich für einen einzelnen Anbieter zu entscheiden oder alles von Grund auf neu zu bauen, **integriert es weltklasse Open-Source-Anwendungen** in ein einheitliches, produktionsreifes Ökosystem.
 
 Die entscheidende Einsicht: **man muss nicht zwischen Herstellerabhängigkeit und Selbstentwicklung wählen**. Das Open-Source-Ökosystem enthält bereits exzellente Lösungen für jeden Bildungsbedarf. Was fehlt, ist **Integration**.
 
-openDesk Edu bietet diese Integrationsschicht — nicht als proprietären Code, sondern als offene Spezifikationen, Konfigurationen und Automatisierung.
+openEDU bietet diese Integrationsschicht — nicht als proprietären Code, sondern als offene Spezifikationen, Konfigurationen und Automatisierung.
 
 ### 4.2 Plattformübersicht
 
-openDesk Edu ist eine in der Produktion eingesetzte digitale Arbeitsplatzplattform für Bildungseinrichtungen. Auf **Kubernetes (K3s v1.32.3)** mit **9 Knoten am UDC** aufgebaut, integriert es Open-Source-Dienste in fünf Bereichen:
+openEDU ist eine in der Produktion eingesetzte digitale Arbeitsplatzplattform für Bildungseinrichtungen. Auf **Kubernetes (K3s v1.32.3)** mit **9 Knoten am UDC** aufgebaut, integriert es Open-Source-Dienste in fünf Bereichen:
 
 **Kernplattform** — Keycloak SSO, OpenCloud-Dateisynchronisation, Dovecot/Postfix-Mail, SOGo Groupware, Matrix/Element-Chat, Etherpad zur kollaborativen Bearbeitung, Nubus-Portal, PostgreSQL/MySQL-Datenbanken, MinIO-S3-Speicher
 
@@ -297,13 +297,13 @@ openDesk Edu ist eine in der Produktion eingesetzte digitale Arbeitsplatzplattfo
 
 ### 4.3 Architekturprinzipien
 
-Drei Kernprinzipien leiten die openDesk Edu-Architektur:
+Drei Kernprinzipien leiten die openEDU-Architektur:
 
 **1. Ökosystem statt Anbieter**
 
-Im Gegensatz zu kommerziellen Plattformen schafft openDesk Edu keine proprietären Alternativen. Es **orchestriert bestehende Open-Source-Projekte**, die Sie unabhängig nutzen können:
+Im Gegensatz zu kommerziellen Plattformen schafft openEDU keine proprietären Alternativen. Es **orchestriert bestehende Open-Source-Projekte**, die Sie unabhängig nutzen können:
 
-- **Nextcloud** in openDesk Edu ist die echte Nextcloud, kein modifizierter Fork
+- **Nextcloud** in openEDU ist die echte Nextcloud, kein modifizierter Fork
 - **Moodle** ist Standard-Moodle mit Keycloak-Integration
 - **Collabora Online** ist das offizielle Collabora Online Office
 
@@ -328,7 +328,7 @@ Die gesamte Konfiguration ist deklarativ, versioniert und wird über **ArgoCD** 
 
 ### 4.4 Die Integrationsarchitektur
 
-Die "Magie" von openDesk Edu liegt nicht in den einzelnen Diensten — jeder ist bereits exzellent. Die Magie liegt in der **vorgefertigten Integration**:
+Die "Magie" von openEDU liegt nicht in den einzelnen Diensten — jeder ist bereits exzellent. Die Magie liegt in der **vorgefertigten Integration**:
 
 **80+ dokumentierte Dienstbeziehungen** stellen sicher, dass Dienste nahtlos zusammenarbeiten:
 - Nextcloud authentifiziert über Keycloak und teilt Dateien mit OpenProject
@@ -356,7 +356,7 @@ Durch die Ralph Loop-Methodik zur kontinuierlichen Verbesserung erreichte das Pr
 
 ### 5.1 Souveränität durch Design
 
-Für deutsche Bildungseinrichtungen ist Datensouveränität nicht optional — sie ist gesetzlich vorgeschrieben. openDesk Edu adressiert dies durch:
+Für deutsche Bildungseinrichtungen ist Datensouveränität nicht optional — sie ist gesetzlich vorgeschrieben. openEDU adressiert dies durch:
 
 **Datenstandort:**
 - Alle Daten werden auf Servern deutscher Universitäten gespeichert (UDC-Cluster)
@@ -388,7 +388,7 @@ Für deutsche Bildungseinrichtungen ist Datensouveränität nicht optional — s
 
 ### 5.3 DFN-AAI-Integration
 
-Die **Deutsche Forschungsnetz (DFN)**-Föderation ist der Standard für deutsche Forschung und Bildung. openDesk Edu integriert mit DFN-AAI durch:
+Die **Deutsche Forschungsnetz (DFN)**-Föderation ist der Standard für deutsche Forschung und Bildung. openEDU integriert mit DFN-AAI durch:
 - Shibboleth Service Provider (SP)-Konfiguration in Keycloak
 - Metadatenaustausch mit der DFN-Föderation
 - Attribut-Mapping für institutionelle Attribute
@@ -398,7 +398,7 @@ Dies bedeutet, dass Studierende und Mitarbeiter ihre Heimateinrichtungs-Anmelded
 
 ### 5.4 Der UDC-Produktionscluster
 
-Das **University Data Center (UDC)** betreibt eine Produktionsbereitstellung von openDesk Edu auf einem 9-Knoten-K3s-Cluster:
+Das **University Data Center (UDC)** betreibt eine Produktionsbereitstellung von openEDU auf einem 9-Knoten-K3s-Cluster:
 
 **Infrastruktur:**
 - **3 Control-Plane-Knoten** (vproduction2331-2333) für Hochverfügbarkeit
@@ -432,7 +432,7 @@ Vergleichen wir die 5-Jahres-Gesamtbetriebskosten für eine mittelgroße deutsch
 | **Zwischensumme Indirekt** | | **140.000 €** | **700.000 €** |
 | **GESAMTSUMME** | | **520.000 €/Jahr** | **2.600.000 €** |
 
-**openDesk Edu-Bereitstellung:**
+**openEDU-Bereitstellung:**
 
 | Komponente | Dienst | Jährliche Kosten | Kosten über 5 Jahre |
 |------------|--------|------------------|---------------------|
@@ -464,7 +464,7 @@ Die direkten Kosten oben unterschätzen die tatsächliche Belastung. Organisatio
 
 ### 6.4 Nicht-Finanzielle Vorteile
 
-Über direkte Kosteneinsparungen hinaus bietet openDesk Edu:
+Über direkte Kosteneinsparungen hinaus bietet openEDU:
 
 **Strategische Vorteile:**
 - **Anbieterunabhängigkeit**: Keine Abhängigkeit, volle Kontrolle über den Technologie-Stack
@@ -492,7 +492,7 @@ Die direkten Kosten oben unterschätzen die tatsächliche Belastung. Organisatio
 
 ### 6.5 Finanzierungs- und Nachhaltigkeitsmodelle
 
-Einrichtungen können openDesk Edu durch verschiedene Modelle finanzieren:
+Einrichtungen können openEDU durch verschiedene Modelle finanzieren:
 
 **Modell 1: Zentrale IT-Finanzierung** — Finanziert aus dem zentralen IT-Budget, behandelt als institutionelle Infrastruktur. Am häufigsten an großen Universitäten.
 
@@ -597,12 +597,12 @@ Open-Source-Einführung ist nicht ohne Herausforderungen. Eine ehrliche Bewertun
 
 **Herausforderung 2: Integrationskomplexität**
 - **Problem**: Mehrere Dienste erfordern sorgfältige Integration
-- **Lösung**: Vorkonfigurierte openDesk Edu-Pakete und OpenSpec-Dokumentation
+- **Lösung**: Vorkonfigurierte openEDU-Pakete und OpenSpec-Dokumentation
 - **Abhilfe**: Umfassende, maschinell überprüfbare Spezifikationen reduzieren Integrationsrisiken
 
 **Herausforderung 3: Supportbedenken**
 - **Problem**: Kein einzelner Anbieter, den man bei Störungen anrufen kann
-- **Lösung**: Kommerzieller Support durch openDesk Edu-Partner, Community-Foren
+- **Lösung**: Kommerzieller Support durch openEDU-Partner, Community-Foren
 - **Abhilfe**: Gemeinsame Runbooks, Incident-Response-Playbooks, Wissensdatenbank der Gemeinschaft
 
 **Herausforderung 4: Migrationsrisiko**
@@ -619,11 +619,11 @@ Open-Source-Einführung ist nicht ohne Herausforderungen. Eine ehrliche Bewertun
 
 - **Wartungsaufwand für Spezifikationen**: Während der Ralph Loop Regression reduziert, erfordert die anfängliche Spezifikationserstellung erheblichen Aufwand (ca. 50 Stunden für den vollständigen Satz)
 - **Automatisierte Überprüfungslücken**: Nicht alle Spezifikationsdimensionen sind gleichermaßen für automatisierte Überprüfungen geeignet. Die SLO-Validierung erfordert Produktionsüberwachungsdaten
-- **Gemeinschaftsakzeptanz**: Der Wert des Frameworks steigt mit Netzwerkeffekten, aber die Akzeptanz ist derzeit auf das openDesk Edu-Ökosystem beschränkt
+- **Gemeinschaftsakzeptanz**: Der Wert des Frameworks steigt mit Netzwerkeffekten, aber die Akzeptanz ist derzeit auf das openEDU-Ökosystem beschränkt
 
 ### 8.3 Wann NICHT einzuführen
 
-Einrichtungen sollten openDesk Edu **nicht** einführen, wenn:
+Einrichtungen sollten openEDU **nicht** einführen, wenn:
 - Sie weniger als 1.000 Nutzer haben (kommerzielle Lösungen können für sehr kleine Einrichtungen kostengünstiger sein)
 - Ihnen IT-Personal mit Linux/Kubernetes-Erfahrung fehlt
 - Sie sich nicht zu mehrjährigen Infrastrukturinvestitionen verpflichten können
@@ -631,7 +631,7 @@ Einrichtungen sollten openDesk Edu **nicht** einführen, wenn:
 - Sie regulatorische Anforderungen haben, die bestimmte Zertifizierungen vorschreiben
 
 **Alternativen:**
-- **Verwaltetes Open Source**: Gehostetes openDesk Edu durch einen Drittanbieter
+- **Verwaltetes Open Source**: Gehostetes openEDU durch einen Drittanbieter
 - **Hybridmodell**: Open Source für einige Dienste, kommerziell für andere
 - **Kleinerer Maßstab**: Vereinfachte Bereitstellung für kleinere Einrichtungen
 - **Andere Plattform**: Andere Open-Source-Plattformen (Sandstorm, Cozy Cloud)
@@ -665,7 +665,7 @@ Wir identifizieren mehrere Richtungen für die zukünftige Entwicklung:
 
 Europäische Bildungseinrichtungen stehen an einem Scheideweg. Sie können weiterhin den Weg zunehmender Anbieterabhängigkeit, eskalierender Kosten und Souveränitätsverlust gehen. Oder sie können den Weg der Open-Source-Ökosysteme, der digitalen Souveränität und der gemeinschaftlichen Zusammenarbeit wählen.
 
-**Das openDesk Edu-Projekt bietet einen bewährten, produktionsreifen Weg nach vorne.**
+**Das openEDU-Projekt bietet einen bewährten, produktionsreifen Weg nach vorne.**
 
 **Wichtigste Erkenntnisse:**
 
@@ -679,8 +679,8 @@ Europäische Bildungseinrichtungen stehen an einem Scheideweg. Sie können weite
 ### Sofortmaßnahmen für Einrichtungen
 
 1. **Evaluieren**: Aktuelle Kosten, Anbieterabhängigkeiten und Souveränitätslücken bewerten
-2. **Pilotieren**: openDesk Edu in einer kleinen Testumgebung bereitstellen
-3. **Engagieren**: Der openDesk Edu-Gemeinschaft beitreten, an Workshops teilnehmen
+2. **Pilotieren**: openEDU in einer kleinen Testumgebung bereitstellen
+3. **Engagieren**: Der openEDU-Gemeinschaft beitreten, an Workshops teilnehmen
 4. **Planen**: Einen mehrjährigen Migrationsfahrplan entwickeln
 5. **Verpflichten**: Budget und Personal für die Transformation bereitstellen
 6. **Beitragen**: Verbesserungen an die Gemeinschaft zurückgeben
@@ -703,7 +703,7 @@ Stellen Sie sich eine Zukunft vor, in der:
 - Kosten sinken, während die Fähigkeiten steigen
 - Die nächste Generation mit offenen Werkzeugen lernt, die sie studieren, modifizieren und verbessern kann
 
-**Diese Zukunft ist erreichbar. openDesk Edu macht sie real.**
+**Diese Zukunft ist erreichbar. openEDU macht sie real.**
 
 Die Frage ist nicht mehr, ob digitale Souveränität möglich ist. Die Frage ist, ob Organisationen sie wählen werden.
 
@@ -711,7 +711,7 @@ Die Frage ist nicht mehr, ob digitale Souveränität möglich ist. Die Frage ist
 
 ## Anhang A: Dienstevergleichsmatrix
 
-| Bedarf | Kommerzielle Lösung | openDesk Edu-Alternative | Kosteneinsparung |
+| Bedarf | Kommerzielle Lösung | openEDU-Alternative | Kosteneinsparung |
 |--------|---------------------|--------------------------|------------------|
 | E-Mail | Microsoft 365, Google Workspace | SOGo / OX App Suite | 90% |
 | Dateispeicher | Dropbox, OneDrive, Google Drive | Nextcloud / OpenCloud | 85% |
@@ -778,21 +778,21 @@ Die Frage ist nicht mehr, ob digitale Souveränität möglich ist. Die Frage ist
 Wir danken:
 - Dem **UDC**-Team für die Produktionsbereitstellung und betriebliches Feedback
 - Der **ZenDiS** (Zentrum für Digitale Souveränität der Öffentlichen Verwaltung) für die institutionelle Unterstützung
-- Den **openDesk Edu Contributors** für ihre unermüdliche Arbeit
+- Den **openEDU Contributors** für ihre unermüdliche Arbeit
 - Der **Open-Source-Gemeinschaft** für die Erstellung der integrierten Dienste
-- Den **deutschen Bildungseinrichtungen**, die openDesk Edu übernommen haben oder evaluieren
+- Den **deutschen Bildungseinrichtungen**, die openEDU übernommen haben oder evaluieren
 
 ## Referenzen
 
-1. Weiß, T. & openDesk Edu Contributors (2026). "Breaking Free from Vendor Lock-in: How Educational Institutions Can Reclaim Digital Sovereignty Through Open-Source Ecosystems." openDesk Edu Papers.
-2. Weiß, T. & openDesk Edu Contributors (2026). "OpenSpec for the Digital Sovereign Workplace: A Complete Specification Framework for Open-Source, GDPR-Compliant, Vendor-Independent Organizations." openDesk Edu Papers.
-3. Weiß, T. & openDesk Edu Contributors (2026). "From Vague Documentation to Living Specifications: A Continuous Self-Improvement Approach for Educational Technology Platforms." openDesk Edu Papers.
+1. Weiß, T. & openEDU Contributors (2026). "Breaking Free from Vendor Lock-in: How Educational Institutions Can Reclaim Digital Sovereignty Through Open-Source Ecosystems." openEDU Papers.
+2. Weiß, T. & openEDU Contributors (2026). "OpenSpec for the Digital Sovereign Workplace: A Complete Specification Framework for Open-Source, GDPR-Compliant, Vendor-Independent Organizations." openEDU Papers.
+3. Weiß, T. & openEDU Contributors (2026). "From Vague Documentation to Living Specifications: A Continuous Self-Improvement Approach for Educational Technology Platforms." openEDU Papers.
 4. Europäischer Gerichtshof. (2020). *Data Protection Commissioner v. Facebook Ireland and Maximillian Schrems* (Rechtssache C-311/18).
 5. Europäisches Parlament & Rat (2016). *Datenschutz-Grundverordnung (DSGVO)*. Verordnung (EU) 2016/679.
 6. Bundesamt für Sicherheit in der Informationstechnik. (2023). *IT-Grundschutz-Katalog*.
 7. Deutsches Forschungsnetz. (2024). *DFN-AAI-Föderationsrichtlinie*.
 8. ZenDiS. (2024). *Sovereign Cloud Strategy für die Öffentliche Verwaltung*.
-9. openDesk Project. (2026). *openDesk Edu Platform*. https://openedusuite.example.org
+9. openDesk Project. (2026). *openEDU Platform*. https://openedusuite.example.org
 10. Stallman, R. (2002). *Free Software, Free Society*. GNU Press.
 11. Raymond, E. (1999). *The Cathedral and the Bazaar*. O'Reilly Media.
 12. Beyer, B., Jones, C., Petoff, J., & Murphy, N. R. (2016). *Site Reliability Engineering: How Google Runs Production Systems*. O'Reilly Media.
@@ -814,8 +814,8 @@ Wir danken:
 ```bibtex
 @paper{opendesk2026comprehensive,
   title={OpenSpec for Digital Sovereignty: A Complete Framework for Sovereign Educational Technology Platforms},
-  subtitle={Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openDesk Edu Ecosystem},
-  author={Weiß, Tobias and openDesk Edu Contributors},
+  subtitle={Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openEDU Ecosystem},
+  author={Weiß, Tobias and openEDU Contributors},
   year={2026},
   month={June},
   institution={UDC},

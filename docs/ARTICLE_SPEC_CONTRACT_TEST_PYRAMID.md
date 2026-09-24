@@ -13,7 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 In complex infrastructure deployments, maintaining consistency between *what is specified*, *how components communicate*, and *what is actually tested* becomes increasingly difficult. The **Spec-Contract-Test Pyramid** is a novel framework that addresses this challenge by organizing documentation into three clearly defined layers: **Specifications** (Level 3), **Contracts** (Level 2), and **Tests** (Level 1). This hierarchical approach, combined with automated validation tools and CI/CD integration, transforms static documentation into a living, validated system that ensures correctness from design to production deployment.
 
-This article explores the pyramid concept, its implementation in the openDesk Edu project, and demonstrates how it can achieve **100% traceability** from high-level requirements to automated validation.
+This article explores the pyramid concept, its implementation in the openEDU project, and demonstrates how it can achieve **100% traceability** from high-level requirements to automated validation.
 
 ---
 
@@ -23,7 +23,7 @@ This article explores the pyramid concept, its implementation in the openDesk Ed
 2. [Introducing the Pyramid Framework](#2-introducing-the-pyramid-framework)
 3. [The Three Levels](#3-the-three-levels)
 4. [The Registry: Meta-Documentation](#4-the-registry-meta-documentation)
-5. [Implementation: The openDesk Edu Experience](#5-implementation-the-opendesk-edu-experience)
+5. [Implementation: The openEDU Experience](#5-implementation-the-opendesk-edu-experience)
 6. [Automation: Bringing the Pyramid to Life](#6-automation-bringing-the-pyramid-to-life)
 7. [Metrics and Success Stories](#7-metrics-and-success-stories)
 8. [Lessons Learned](#8-lessons-learned)
@@ -52,9 +52,9 @@ SPECIFICATION  →  DEPLOYMENT  →  OPERATION
 - Don't define clear interfaces between components
 - Aren't validated against actual deployments
 
-### The openDesk Edu Challenge
+### The openEDU Challenge
 
-The openDesk Edu project deploys a complete educational platform with:
+The openEDU project deploys a complete educational platform with:
 - **50+ services** (Nextcloud, Keycloak, MariaDB, Element, SOGo, etc.)
 - **400+ Helm chart values** across deployments
 - **12+ namespaces** in Kubernetes
@@ -375,7 +375,7 @@ This matrix enables:
 
 ---
 
-## 5. Implementation: The openDesk Edu Experience
+## 5. Implementation: The openEDU Experience
 
 ### Before the Pyramid
 
@@ -453,7 +453,7 @@ Benefits:
 
 ## 6. Automation: Bringing the Pyramid to Life
 
-The pyramid's power comes from **automation**. Manual maintenance of 65+ specs, 30+ contracts, and 60+ tests would be impossible. The openDesk Edu project implements comprehensive automation.
+The pyramid's power comes from **automation**. Manual maintenance of 65+ specs, 30+ contracts, and 60+ tests would be impossible. The openEDU project implements comprehensive automation.
 
 ### CI/CD Workflows
 
@@ -1242,7 +1242,7 @@ tests:
 - [OpenAPI Specification](https://swagger.io/specification/)
 - [JSON Schema](https://json-schema.org/)
 - [SPDX License List](https://spdx.org/licenses/)
-- [openDesk Edu Spec Repository](https://github.com/openEduSuite/openEduSuite-spec)
+- [openEDU Spec Repository](https://github.com/openEduSuite/openEduSuite-spec)
 
 ---
 

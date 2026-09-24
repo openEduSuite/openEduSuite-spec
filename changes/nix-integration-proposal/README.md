@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Change Proposal: Nix Integration for openDesk Edu
+# Change Proposal: Nix Integration for openEDU
 
 **⚠️ WORK IN PROGRESS - This change proposal is currently in DRAFT status**
 
@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Summary
 
-This change proposes integrating **Nix-based build and deployment systems** into the openDesk Edu ecosystem to address critical issues with:
+This change proposes integrating **Nix-based build and deployment systems** into the openEDU ecosystem to address critical issues with:
 
 - ❌ Build irreproducibility
 - ❌ Missing centralized SBOM generation
@@ -81,7 +81,7 @@ A unified Nix-based system for:
 ### Business (5/5 required)
 
 - [ ] ✅ Meets ZKI IT-Grundschutz compliance requirements
-- [ ] ✅ Can be maintained by the openDesk Edu Team
+- [ ] ✅ Can be maintained by the openEDU Team
 - [ ] ✅ Scales to support future service additions
 - [ ] ✅ Backward compatibility with Helmfile maintained
 - [ ] ✅ No breaking changes to end-user experience

@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Contributing to openDesk Edu Specs
+# Contributing to openEDU Specs
 
 ## Quick Start
 
@@ -28,7 +28,7 @@ Every service spec MUST include these sections (in order):
 
 ```markdown
 <!--
-SPDX-FileCopyrightText: 2026 openDesk Edu Contributors
+SPDX-FileCopyrightText: 2026 openEDU Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
