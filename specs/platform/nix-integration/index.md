@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 
 **Status:** Draft v0.1.0  
 **Last Updated:** 2026-08-28  
-**Authors:** openEDU Team  
+**Authors:** openEduSuite Team  
 **License:** Apache-2.0  
 **Category:** Platform / Deployment Infrastructure
 
@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Purpose
 
-This specification defines the integration of Nix-based build and deployment systems into the openEDU ecosystem. The goal is to establish a unified, reproducible, and declarative approach to container image building and Kubernetes manifest generation.
+This specification defines the integration of Nix-based build and deployment systems into the openEduSuite ecosystem. The goal is to establish a unified, reproducible, and declarative approach to container image building and Kubernetes manifest generation.
 
 ---
 
@@ -23,7 +23,7 @@ This specification defines the integration of Nix-based build and deployment sys
 
 ### Current State
 
-openEDU currently uses:
+openEduSuite currently uses:
 - **Helmfile** for Kubernetes deployments
 - **Docker** for container image builds
 - **Multiple Dockerfiles** across repositories
@@ -397,12 +397,12 @@ All images MUST include the following OCI labels:
 
 ```nix
 standardLabels = {
-  maintainer = "openEDU Team <team@openedusuite.example.org>";
-  vendor = "openEDU";
+  maintainer = "openEduSuite Team <team@openedusuite.example.org>";
+  vendor = "openEduSuite";
   license = "Apache-2.0";
   
   # OCI Standard
-  "org.opencontainers.image.vendor" = "openEDU";
+  "org.opencontainers.image.vendor" = "openEduSuite";
   "org.opencontainers.image.license" = "Apache-2.0";
   "org.opencontainers.image.source" = "https://github.com/openEduSuite/openEduSuite-public";
   "org.opencontainers.image.title" = "<Service Name>";
@@ -1515,10 +1515,10 @@ kubectl apply -f k8s/services/<service>.yaml
 
 ### Related Projects
 
-- [openEDU](https://openedusuite.example.org) - Main project website
-- [openEDU GitHub](https://github.com/openEduSuite) - GitHub organization
-- [openEDU GitLab](https://gitlab.com/opendesk-edu) - GitLab organization
-- [openEDU Spec](https://github.com/openEduSuite/openEduSuite-spec) - This specification repository
+- [openEduSuite](https://openedusuite.example.org) - Main project website
+- [openEduSuite GitHub](https://github.com/openEduSuite) - GitHub organization
+- [openEduSuite GitLab](https://gitlab.com/opendesk-edu) - GitLab organization
+- [openEduSuite Spec](https://github.com/openEduSuite/openEduSuite-spec) - This specification repository
 
 ---
 

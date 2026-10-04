@@ -1,10 +1,10 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 # Technische und organisatorische Maßnahmen (TOM)
-## openEDU – On-Premises-Betrieb
+## openEduSuite – On-Premises-Betrieb
 
 > **⚠️ Rechtlicher Hinweis**
 > Dieses Dokument ist eine **anonymisierte Vorlage** und muss an die spezifischen Anforderungen der jeweiligen Institution angepasst werden.
@@ -25,14 +25,14 @@ SPDX-License-Identifier: Apache-2.0
 
 ---
 
-*Dieses Dokument beschreibt die **technischen und organisatorischen Maßnahmen (TOM)** nach **Art. 32 DSGVO** für den Betrieb von openEDU.*
+*Dieses Dokument beschreibt die **technischen und organisatorischen Maßnahmen (TOM)** nach **Art. 32 DSGVO** für den Betrieb von openEduSuite.*
 
 ---
 
 ## 1. Einleitung
 
 ### 1.1 Ziel
-Sicherstellung eines **dem Risiko angemessenen Schutzniveaus** für personenbezogene Daten, die im Rahmen von openEDU verarbeitet werden.
+Sicherstellung eines **dem Risiko angemessenen Schutzniveaus** für personenbezogene Daten, die im Rahmen von openEduSuite verarbeitet werden.
 
 **Rechtsgrundlagen:**
 - **Art. 32 DSGVO** – Sicherheit der Verarbeitung
@@ -42,9 +42,9 @@ Sicherstellung eines **dem Risiko angemessenen Schutzniveaus** für personenbezo
 
 ### 1.2 Geltungsbereich
 Diese TOM gelten für:
-- **Alle openEDU-Komponenten** (openCloud, SOGo, Jitsi, Element, Portal)
+- **Alle openEduSuite-Komponenten** (openCloud, SOGo, Jitsi, Element, Portal)
 - **Die zugrundeliegende Infrastruktur** (K3s, Ceph, Shibboleth, IdM-Anbindung)
-- **Alle Administrator:innen und Nutzer:innen** von openEDU
+- **Alle Administrator:innen und Nutzer:innen** von openEduSuite
 
 ---
 
@@ -274,7 +274,7 @@ Diese TOM gelten für:
 
 | **Dokument** | **Zweck** |
 |--------------|-----------|
-| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openEDU als Betriebsmittel |
+| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openEduSuite als Betriebsmittel |
 | [02-verarbeitungsverzeichnis.md](02-verarbeitungsverzeichnis.md) | Verarbeitungsverzeichnis (VVT) |
 | [BSI IT-Grundschutz-Kompendium](https://www.bsi.bund.de/DE/Themen/ITGrundschutz/itgrundschutzkompendium_node.html) | Sicherheitsstandards |
 | [ISO/IEC 27001](https://www.iso.org/isoiec-27001-information-security.html) | Informationssicherheits-Management |

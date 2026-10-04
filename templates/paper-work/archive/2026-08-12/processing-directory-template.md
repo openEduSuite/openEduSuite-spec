@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Verarbeitungsverzeichnis (VVT) – openEDU
+# Verarbeitungsverzeichnis (VVT) – openEduSuite
 ## Anonymisierte und generalisierte Fassung
 
 > **⚠️ Rechtlicher Hinweis / Legal Disclaimer**
@@ -31,11 +31,11 @@ SPDX-License-Identifier: Apache-2.0
 
 **Datum:** [TT.MM.JJJJ]
 **Version:** 1.0 – anonymisierte Vorlage
-**Gilt für:** Einführung von openEDU auf einem Kubernetes-Cluster (K3s) im Rechenzentrum der Einrichtung
+**Gilt für:** Einführung von openEduSuite auf einem Kubernetes-Cluster (K3s) im Rechenzentrum der Einrichtung
 
 ---
 
-*Dieses Dokument erfüllt die gesetzliche Pflicht nach **Artikel 30 der Datenschutz-Grundverordnung (DSGVO)**. Es beschreibt für alle Interessierten verständlich, welche Daten im Rahmen von openEDU verarbeitet werden und warum.*
+*Dieses Dokument erfüllt die gesetzliche Pflicht nach **Artikel 30 der Datenschutz-Grundverordnung (DSGVO)**. Es beschreibt für alle Interessierten verständlich, welche Daten im Rahmen von openEduSuite verarbeitet werden und warum.*
 
 ---
 
@@ -61,7 +61,7 @@ SPDX-License-Identifier: Apache-2.0
 - **Netzwerk:** Isoliertes VLAN (kein direkter Internet-Zugriff auf Node-IPs)
 - **Standort:** On-Premises im Rechenzentrum der Einrichtung
 
-### 2.2 openEDU-Komponenten
+### 2.2 openEduSuite-Komponenten
 | Komponente | Zweck | Datenkategorien |
 |------------|-------|-----------------|
 | **openCloud** | Dateispeicher & Kollaboration | Dateiinhalte, Metadaten, Freigabelinks |
@@ -86,7 +86,7 @@ SPDX-License-Identifier: Apache-2.0
 
 | Nr. | Zweck (einfach erklärt) | Rechtsgrundlage | Welche Daten? | Wer ist betroffen? |
 |-----|-------|-----------------|-----------------------------------|------------|
-| 1 | Bereitstellung eines souveränen digitalen Arbeitsplatzes (openEDU) für Forschung, Lehre und Verwaltung | Art. 6 Abs. 1 lit. e DSGVO i.V.m. dem Landesdatenschutzgesetz (LDSG) des jeweiligen Bundeslandes – öffentlich-rechtliche Aufgabe | Account-Daten, Authentifizierungsdaten, Nutzungsdaten | Angehörige der Einrichtung (Mitarbeitende, Studierende, externe Gäste) |
+| 1 | Bereitstellung eines souveränen digitalen Arbeitsplatzes (openEduSuite) für Forschung, Lehre und Verwaltung | Art. 6 Abs. 1 lit. e DSGVO i.V.m. dem Landesdatenschutzgesetz (LDSG) des jeweiligen Bundeslandes – öffentlich-rechtliche Aufgabe | Account-Daten, Authentifizierungsdaten, Nutzungsdaten | Angehörige der Einrichtung (Mitarbeitende, Studierende, externe Gäste) |
 | 2 | Identitätsmanagement und Single-Sign-On (Shibboleth) | Art. 6 Abs. 1 lit. e DSGVO | SAML-Attribute (Affiliation, E-Mail, Name), Session-Daten | Alle Nutzer:innen |
 | 3 | Automatisierte User-Provisionierung (REST-API an zentrales IdM) | Art. 6 Abs. 1 lit. e DSGVO | Account-Informationen (Benutzername, Rollen, Status) | Alle Nutzer:innen |
 | 4 | Bereitstellung von Dateispeicher (openCloud) | Art. 6 Abs. 1 lit. e DSGVO | Dateiinhalte, Metadaten (Name, Größe, Berechtigungen), Freigabelinks | Nutzer:innen |
@@ -501,7 +501,7 @@ Nach Umsetzung aller TOM verbleiben folgende **Restrisiken**:
 
 ### 12.3 Empfehlung
 
-✅ **Die Einführung von openEDU auf dem Kubernetes-Cluster ist datenschutzrechtlich zulässig**, sofern:
+✅ **Die Einführung von openEduSuite auf dem Kubernetes-Cluster ist datenschutzrechtlich zulässig**, sofern:
 1. Alle in diesem VVT und der DSFA genannten **technischen und organisatorischen Maßnahmen (TOM)** umgesetzt werden.
 2. Das **VVT regelmäßig aktualisiert** wird (mindestens jährlich).
 3. Der **Datenschutzbeauftragte (DSB)** die Einführung **freigibt**.
@@ -559,7 +559,7 @@ Nach Umsetzung aller TOM verbleiben folgende **Restrisiken**:
 
 | Version | Datum | Änderungen | Bearbeitet von |
 |---------|-------|------------|----------------|
-| 1.0 | [TT.MM.JJJJ] | Erstellung der anonymisierten Vorlage auf Basis des VVT einer Bildungseinrichtung | openEDU Contributors |
+| 1.0 | [TT.MM.JJJJ] | Erstellung der anonymisierten Vorlage auf Basis des VVT einer Bildungseinrichtung | openEduSuite Contributors |
 
 ---
 
@@ -574,7 +574,7 @@ Nach Umsetzung aller TOM verbleiben folgende **Restrisiken**:
 ---
 
 > **⚠️ WICHTIG:**
-> Dies ist eine **Vorlage** und muss vor der Inbetriebnahme von **openEDU** durch
+> Dies ist eine **Vorlage** und muss vor der Inbetriebnahme von **openEduSuite** durch
 > 1. den **Datenschutzbeauftragten (DSB)** der Einrichtung,
 > 2. die **Leitung des Rechenzentrums** und
 > 3. die **Leitung der Einrichtung** (z. B. Rektorat/Präsidium)

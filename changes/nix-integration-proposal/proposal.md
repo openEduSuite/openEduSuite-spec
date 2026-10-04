@@ -1,13 +1,13 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Change Proposal: Nix Integration for openEDU
+# Change Proposal: Nix Integration for openEduSuite
 
 **Status:** Draft  
 **Created:** 2026-08-28  
-**Authors:** openEDU Team  
+**Authors:** openEduSuite Team  
 **Change ID:** nix-integration-001  
 **Priority:** High  
 **Complexity:** High  
@@ -17,7 +17,7 @@ SPDX-License-Identifier: Apache-2.0
 
 ## Abstract
 
-This proposal describes the integration of Nix-based build and deployment systems into the openEDU ecosystem. The goal is to establish a unified, reproducible, and declarative approach to container image building and Kubernetes manifest generation, addressing the current issues with build reproducibility, security, and maintainability.
+This proposal describes the integration of Nix-based build and deployment systems into the openEduSuite ecosystem. The goal is to establish a unified, reproducible, and declarative approach to container image building and Kubernetes manifest generation, addressing the current issues with build reproducibility, security, and maintainability.
 
 ---
 
@@ -25,7 +25,7 @@ This proposal describes the integration of Nix-based build and deployment system
 
 ### Current Problems
 
-The current openEDU deployment system has several critical issues:
+The current openEduSuite deployment system has several critical issues:
 
 1. **-build irreproducibility:** Builds vary across environments due to inconsistent dependencies and manual processes
 2. **No centralized SBOM generation:** Security compliance requires manual SBOM generation for each service
@@ -127,7 +127,7 @@ Nix provides several key benefits:
 
 | Stakeholder | Impact | Communication Plan |
 |-------------|--------|-------------------|
-| openEDU Team | High | Team meetings, documentation, training |
+| openEduSuite Team | High | Team meetings, documentation, training |
 | UDC Operations | Medium | Documentation, migration guide, support |
 | Security Team | Medium | Security review, vulnerability scan results |
 | End Users | Low | No direct impact (transparent change) |
@@ -368,7 +368,7 @@ The migration will happen in 8 phases over 14-16 weeks:
 ### Business Criteria
 
 1. **AC-016:** System meets ZKI IT-Grundschutz compliance requirements
-2. **AC-017:** System can be maintained by the openEDU Team
+2. **AC-017:** System can be maintained by the openEduSuite Team
 3. **AC-018:** System scales to support future service additions
 4. **AC-019:** Backward compatibility with Helmfile is maintained
 5. **AC-020:** No breaking changes to end-user experience
@@ -491,7 +491,7 @@ The migration will happen in 8 phases over 14-16 weeks:
 
 ## Next Steps
 
-1. **NS-001:** Review this proposal with the openEDU Team
+1. **NS-001:** Review this proposal with the openEduSuite Team
 2. **NS-002:** Address feedback and refine the proposal
 3. **NS-003:** Set up project tracking (issues, milestones, etc.)
 4. **NS-004:** Begin Phase 1: Foundation
@@ -583,5 +583,5 @@ See the [Nix Integration Specification](../specs/platform/nix-integration/index.
 
 - [Nix Integration Specification](../specs/platform/nix-integration/index.md)
 - [OpenSpec Methodology](../METHODOLOGY.md)
-- [openEDU Architecture](https://openedusuite.example.org/architecture)
+- [openEduSuite Architecture](https://openedusuite.example.org/architecture)
 - [ZKI IT-Grundschutz Requirements](https://www.zki.de/it-grundschutz)

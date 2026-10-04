@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 
 > **Wichtiger Hinweis**
 >
-> Dieses Dokument dient rein dokumentarischen Zwecken und fasst die bei der Erstellung der openEDU Datenschutzvorlagen verwendeten Quellen und Informationen zusammen.
+> Dieses Dokument dient rein dokumentarischen Zwecken und fasst die bei der Erstellung der openEduSuite Datenschutzvorlagen verwendeten Quellen und Informationen zusammen.
 >
 > Es ersetzt keine rechtliche Beratung. Bei konkreten Fragen wenden Sie sich an Ihre Rechtsabteilung oder den Datenschutzbeauftragten.
 
@@ -20,7 +20,7 @@ Dieses Dokument dokumentiert:
 1. **Rechtsgrundlagen** für VVT (Art. 30), TOM (Art. 32) und DSFA (Art. 35) DSGVO
 2. **Referenzen und Quellen** für die Erstellung der Templates
 3. **Checklisten** für die Anwendung der Dokumente
-4. **Spezifische Aspekte** für openEDU (KI-Nutzung, Videoüberwachung)
+4. **Spezifische Aspekte** für openEduSuite (KI-Nutzung, Videoüberwachung)
 
 ---
 
@@ -71,7 +71,7 @@ Das Verzeichnis von Verarbeitungstätigkeiten muss folgende Informationen enthal
 
 ---
 
-### 2.2 VVT-Checkliste für openEDU
+### 2.2 VVT-Checkliste für openEduSuite
 
 Vor Verwendung der VVT-Vorlage sollten folgende Punkte geklärt sein:
 
@@ -139,7 +139,7 @@ Gemäß Art. 35 Abs. 1 DSGVO ist eine DSFA **durchzuführen**, wenn eine Verarbe
 
 4. **Kategorisierung/Kriterien für sensitive Entscheidungen**
 
-**Hinweis für openEDU:** Eine DSFA ist **durchzuführen**, wenn in openEDU Funktionen mit folgendem Charakter eingesetzt werden:
+**Hinweis für openEduSuite:** Eine DSFA ist **durchzuführen**, wenn in openEduSuite Funktionen mit folgendem Charakter eingesetzt werden:
 
 - KI-Assistenten mit Profiling-Analysen
 - Überwachung von Campus-Bereichen (Videoüberwachung)
@@ -163,11 +163,11 @@ Gemäß Art. 35 Abs. 1 DSGVO ist eine DSFA **durchzuführen**, wenn eine Verarbe
 
 ---
 
-### 3.3 DSFA-Checkliste für openEDU
+### 3.3 DSFA-Checkliste für openEduSuite
 
 | Kategorie | Prüfpunkt | Status |
 |-----------|-----------|--------|
-| **Projekt** | Einführung von openEDU in der Bildungseinrichtung | ☐ |
+| **Projekt** | Einführung von openEduSuite in der Bildungseinrichtung | ☐ |
 | **KI-Nutzung** |Werden KI-Assistenten verwendet? (z. B. Chat-Bot, intelligente Suche) | ☐ |
 | | Ist eine Option zur Deaktivierung der KI vorhanden? | ☐ |
 | | Wird Profiling ohne ausdrückliche Zustimmung durchgeführt? | ☐ |
@@ -183,7 +183,7 @@ Gemäß Art. 35 Abs. 1 DSGVO ist eine DSFA **durchzuführen**, wenn eine Verarbe
 
 ### 3.4 KI-Spezifische DSFA-Ergänzungen
 
-Wenn openEDU KI-Funktionen nutzt (z. B. intelligente Suche, Übersetzung, Chat-Bot), sollten folgende Punkte in der DSFA ergänzt werden:
+Wenn openEduSuite KI-Funktionen nutzt (z. B. intelligente Suche, Übersetzung, Chat-Bot), sollten folgende Punkte in der DSFA ergänzt werden:
 
 1. **Transparenz über KI-Nutzung**
    - Information der Betroffenen über KI-Einsatz
@@ -263,7 +263,7 @@ Verantwortliche und Auftragsverarbeiter setzen TOM ein, um ein **dem Risiko ange
 
 Das BSI-IT-Grundschutz-Kompendium bietet detaillierte Aufbauten für TOM-Evaluationen.
 
-| BSI-Modul | Inhalt | Relevanz für openEDU |
+| BSI-Modul | Inhalt | Relevanz für openEduSuite |
 |-----------|--------|---------------------------|
 | **APP.4.2** | Webanwendungen | HTTPS, OWASP Top 10, XSS-Schutz |
 | **KA.2** | Kabel- und LWL-Netze | Segmentierung, Firewalls, DMZ |
@@ -343,11 +343,11 @@ Das BSI-IT-Grundschutz-Kompendium bietet detaillierte Aufbauten für TOM-Evaluat
 
 ---
 
-## 6. Empfehlungen für openEDU
+## 6. Empfehlungen für openEduSuite
 
 ### 6.1 Templating-Empfehlungen
 
-| Dokument | Struktur | Anpassungen für openEDU |
+| Dokument | Struktur | Anpassungen für openEduSuite |
 |----------|----------|---------------------------|
 | **VVT** | Struktur gem. Art. 30 Abs. 1 DSGVO | Spezifizierung für openCloud, SOGo, Jitsi, Element |
 | **TOM** | Checklisten gem. Art. 32 DSGVO + BSI-IT-Grundschutz | Cluster-spezifische TOMs (K3s, Ceph) |
@@ -431,7 +431,7 @@ Die Templates für VVT, TOM und DSFA entsprechen den **Mindestanforderungen** de
 - ✅ **BfDI** (Bundesbeauftragter für den Datenschutz)
 - ✅ **BSI** (Bundesamt für Sicherheit in der Informationstechnik)
 
-**Hervorzuhebende openEDU-spezifische Anpassungen:**
+**Hervorzuhebende openEduSuite-spezifische Anpassungen:**
 - KI-spezifische DSFA-Elemente (bei Chat-Bot-Nutzung / Intelligente Suche)
 - Klärung zum Kameraservice Jitsi: keine Überwachung öffentlicher Bereiche
 - Empfehlung zur Deaktivierungsoption für KI-Funktionen

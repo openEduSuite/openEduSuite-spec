@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'OpenSpec | openEDU',
-  tagline: 'Complete specification framework for the openEDU ecosystem',
+  title: 'OpenSpec | openEduSuite',
+  tagline: 'Complete specification framework for the openEduSuite ecosystem',
 
   url: 'https://spec.openedusuite.example.org',
   baseUrl: '/',
@@ -85,7 +85,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} openEDU Contributors. Licensed under Apache-2.0.`,
+      copyright: `Copyright © ${new Date().getFullYear()} openEduSuite Contributors. Licensed under Apache-2.0.`,
     },
     prism: {
       theme: prismThemes.github,

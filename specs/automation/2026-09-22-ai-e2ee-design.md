@@ -1,18 +1,18 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# openEDU Workspace: Agentic AI + Unified Search + Optional E2EE
+# openEduSuite Workspace: Agentic AI + Unified Search + Optional E2EE
 
 > **Design Doc** — 2026-09-22
 > **Status:** Approved (Ansatz C, E2EE = Toggle-Modus)
-> **Project:** openEDU extension: ai-e2ee-workspace
+> **Project:** openEduSuite extension: ai-e2ee-workspace
 > **Entscheidungen:** Auf bestehende OSS aufbauen (kein Greenfield) · Connector-Manifest-Ökosystem (YAML ≠ Code) · E2EE als User-Toggle, nicht always-on
 
 ## 1. Overview
 
-openEDU ist eine Kubernetes-basierte, quelloffene digitale Arbeitsplatz-Plattform für Bildung. Sie bietet SSO-föderierte Apps (SOGo Mail, OpenProject, OpenCloud/Nextcloud, XWiki, ILIAS, Element) sowie AI-Bausteine (Open WebUI + Ollama, n8n Automation). Es fehlt:
+openEduSuite ist eine Kubernetes-basierte, quelloffene digitale Arbeitsplatz-Plattform für Bildung. Sie bietet SSO-föderierte Apps (SOGo Mail, OpenProject, OpenCloud/Nextcloud, XWiki, ILIAS, Element) sowie AI-Bausteine (Open WebUI + Ollama, n8n Automation). Es fehlt:
 
 1. **Agentische AI eingebettet in Alltagsworkflows** — eine Such-Engine kombiniert mit agentischen AI-Fähigkeiten: komplexe Aktionen automatisieren, Informationen app-übergreifend abrufen, repetitive Aufgaben per Klick erledigen — ohne die Arbeitsumgebung zu verlassen, auch in Partner-Apps.
 2. **Native E2EE-Option** — User können Daten und Kommunikation verschlüsseln (Opt-in). Ist Verschlüsselung aktiv, laufen Suche und agentische AI **direkt auf dem Gerät des Users** (Browser), sensible Daten werden lokal verarbeitet.

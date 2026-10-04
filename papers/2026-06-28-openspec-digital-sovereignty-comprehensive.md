@@ -1,14 +1,14 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
 ---
 title: "OpenSpec for Digital Sovereignty: A Complete Framework for Sovereign Educational Technology Platforms"
-subtitle: "Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openEDU Ecosystem"
+subtitle: "Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openEduSuite Ecosystem"
 authors:
   - "Tobias Weiß"
-  - "openEDU Contributors"
+  - "openEduSuite Contributors"
 date: 2026-06-28
 version: 1.1
 status: Draft for Review
@@ -36,7 +36,7 @@ abstract: |
   that bind service specifications to the platform's operational requirements
   through schema-validated manifests, the Ralph Loop continuous self-improvement
   methodology that prevents documentation regression, and production evidence
-  from the openEDU ecosystem. We present the openEDU platform as a
+  from the openEduSuite ecosystem. We present the openEduSuite platform as a
   production-deployed case study, integrating 25+ open-source services at UDC
   Example City on a 9-node K3s cluster. Starting from 0% specification compliance,
   we achieved 100% coverage across four critical documentation dimensions through
@@ -291,7 +291,7 @@ specs/services/*/index.md  (contract manifest — declaration)
 
 Without this chain, the platform team defines requirements, the spec team documents behavior, and the operations team configures services — each working from different sources of truth. The contract manifests collapse these into a single verifiable artifact.
 
-**Scope Exclusion.** Not every service requires a contract. Stateless tools (Draw.io, Excalidraw) that have no authentication, no routing, and no persistence are excluded. The criterion is simple: if a service declares at least one integration domain (identity, portal, routing, persistence, or observability), it must declare all that apply. Twenty-three of twenty-five services in the openEDU platform meet this criterion.
+**Scope Exclusion.** Not every service requires a contract. Stateless tools (Draw.io, Excalidraw) that have no authentication, no routing, and no persistence are excluded. The criterion is simple: if a service declares at least one integration domain (identity, portal, routing, persistence, or observability), it must declare all that apply. Twenty-three of twenty-five services in the openEduSuite platform meet this criterion.
 
 **Metadata Generation.** Because contract data is structured and machine-parseable, it can drive downstream artifacts. The `METADATA.yml` index — a table listing all services with their auth method, database engine, storage type, cache, and tier — can be auto-generated from contract manifests rather than hand-maintained. This eliminates the duplication problem: when a service's contract changes, the metadata index regenerates automatically.
 
@@ -333,7 +333,7 @@ The **Ralph Loop** is a continuous self-improvement methodology that operates as
 
 ### 3.3 Results: From 0% to 100% Coverage
 
-Applying the Ralph Loop methodology to the openEDU platform, we achieved complete specification coverage:
+Applying the Ralph Loop methodology to the openEduSuite platform, we achieved complete specification coverage:
 
 | Specification Pillar | Initial Coverage | Final Coverage | Improvement |
 |---------------------|-----------------|----------------|-------------|
@@ -364,19 +364,19 @@ The critical innovation of the Ralph Loop is **regression prevention**. Traditio
 
 This automation prevents the documentation regression that plagues traditional approaches. Issues are detected within days rather than months, and fixes are applied incrementally rather than through disruptive rewrites.
 
-## 4. Case Study: openEDU
+## 4. Case Study: openEduSuite
 
 ### 4.1 A Different Approach
 
-**openEDU** represents a fundamentally different approach to educational technology. Instead of choosing a single vendor or building everything from scratch, it **integrates world-class open-source applications** into a unified, production-ready ecosystem.
+**openEduSuite** represents a fundamentally different approach to educational technology. Instead of choosing a single vendor or building everything from scratch, it **integrates world-class open-source applications** into a unified, production-ready ecosystem.
 
 The key insight: **you don't need to choose between vendor lock-in and building everything yourself**. The open-source ecosystem already contains excellent solutions for every educational need. What's missing is **integration**.
 
-openEDU provides that integration layer — not as proprietary code, but as open specifications, configurations, and automation.
+openEduSuite provides that integration layer — not as proprietary code, but as open specifications, configurations, and automation.
 
 ### 4.2 Platform Overview
 
-openEDU is a production-deployed digital workplace platform serving educational institutions. Built on **Kubernetes (K3s v1.32.3)** with **9 nodes at UDC**, it integrates open-source services across five domains:
+openEduSuite is a production-deployed digital workplace platform serving educational institutions. Built on **Kubernetes (K3s v1.32.3)** with **9 nodes at UDC**, it integrates open-source services across five domains:
 
 **Core Platform** — Keycloak SSO, OpenCloud file sync, Dovecot/Postfix mail, SOGo groupware, Matrix/Element chat, Etherpad collaborative editing, Nubus portal, PostgreSQL/MySQL databases, MinIO S3 storage
 
@@ -390,13 +390,13 @@ openEDU is a production-deployed digital workplace platform serving educational 
 
 ### 4.3 Architectural Principles
 
-Three core principles guide the openEDU architecture:
+Three core principles guide the openEduSuite architecture:
 
 **1. Ecosystem Over Vendor**
 
-Unlike commercial platforms, openEDU doesn't create proprietary alternatives. It **orchestrates existing open-source projects** that you can use independently:
+Unlike commercial platforms, openEduSuite doesn't create proprietary alternatives. It **orchestrates existing open-source projects** that you can use independently:
 
-- **Nextcloud** in openEDU is the actual Nextcloud, not a modified fork
+- **Nextcloud** in openEduSuite is the actual Nextcloud, not a modified fork
 - **Moodle** is standard Moodle with Keycloak integration
 - **Collabora Online** is the official Collabora Online Office
 
@@ -421,7 +421,7 @@ All configuration is declarative, version-controlled, and deployed via **ArgoCD*
 
 ### 4.4 The Integration Architecture
 
-The "magic" of openEDU is not in the individual services — each is already excellent. The magic is in the **pre-wired integration**:
+The "magic" of openEduSuite is not in the individual services — each is already excellent. The magic is in the **pre-wired integration**:
 
 **80+ documented service relationships** ensure that services work together seamlessly:
 - Nextcloud authenticates via Keycloak and shares files with OpenProject
@@ -449,7 +449,7 @@ Using the Ralph Loop continuous improvement methodology, the project achieved co
 
 ### 5.1 Sovereignty by Design
 
-For German educational institutions, data sovereignty is not optional — it's legally required. openEDU addresses this through:
+For German educational institutions, data sovereignty is not optional — it's legally required. openEduSuite addresses this through:
 
 **Data Residency:**
 - All data stored on German university servers (UDC cluster)
@@ -481,7 +481,7 @@ For German educational institutions, data sovereignty is not optional — it's l
 
 ### 5.3 DFN-AAI Integration
 
-The **Deutsches Forschungsnetz (DFN)** federation is the standard for German research and education. openEDU integrates with DFN-AAI through:
+The **Deutsches Forschungsnetz (DFN)** federation is the standard for German research and education. openEduSuite integrates with DFN-AAI through:
 - Shibboleth Service Provider (SP) configuration in Keycloak
 - Metadata exchange with DFN federation
 - Attribute mapping for institutional attributes
@@ -491,7 +491,7 @@ This means students and staff can use their home institution credentials, cross-
 
 ### 5.4 The UDC Production Cluster
 
-The **University Data Center (UDC)** operates a production deployment of openEDU on a 9-node K3s cluster:
+The **University Data Center (UDC)** operates a production deployment of openEduSuite on a 9-node K3s cluster:
 
 **Infrastructure:**
 - **3 control-plane nodes** (vproduction2331-2333) for high availability
@@ -525,7 +525,7 @@ Let's compare the 5-year TCO for a medium-sized German university (10,000 users)
 | **Subtotal Indirect** | | **€140,000** | **€700,000** |
 | **GRAND TOTAL** | | **€520,000/year** | **€2,600,000** |
 
-**openEDU Deployment:**
+**openEduSuite Deployment:**
 
 | Component | Service | Annual Cost | 5-Year Cost |
 |-----------|---------|-------------|-------------|
@@ -557,7 +557,7 @@ The direct costs above understate the true burden. Organizations also bear:
 
 ### 6.4 Non-Financial Benefits
 
-Beyond direct cost savings, openEDU provides:
+Beyond direct cost savings, openEduSuite provides:
 
 **Strategic Benefits:**
 - **Vendor independence**: No lock-in, full control over the technology stack
@@ -585,7 +585,7 @@ Beyond direct cost savings, openEDU provides:
 
 ### 6.5 Funding and Sustainability Models
 
-Institutions can fund openEDU through various models:
+Institutions can fund openEduSuite through various models:
 
 **Model 1: Central IT Funding** — Funded through central IT budget, treated as institutional infrastructure. Most common in large universities.
 
@@ -690,12 +690,12 @@ Open-source adoption is not without challenges. Honest assessment is critical:
 
 **Challenge 2: Integration Complexity**
 - **Issue**: Multiple services require careful integration
-- **Solution**: Pre-configured openEDU packages and OpenSpec documentation
+- **Solution**: Pre-configured openEduSuite packages and OpenSpec documentation
 - **Mitigation**: Comprehensive, machine-verifiable specifications reduce integration risk
 
 **Challenge 3: Support Concerns**
 - **Issue**: No single vendor to call when things break
-- **Solution**: Commercial support from openEDU partners, community forums
+- **Solution**: Commercial support from openEduSuite partners, community forums
 - **Mitigation**: Shared runbooks, incident response playbooks, community knowledge base
 
 **Challenge 4: Migration Risk**
@@ -712,11 +712,11 @@ Open-source adoption is not without challenges. Honest assessment is critical:
 
 - **Specification maintenance cost**: While the Ralph Loop reduces regression, initial specification creation requires significant effort (approximately 50 hours for the complete set)
 - **Automated verification gaps**: Not all specification dimensions are equally amenable to automated verification. SLO validation requires production monitoring data
-- **Community adoption**: The framework's value increases with network effects, but adoption is currently limited to the openEDU ecosystem
+- **Community adoption**: The framework's value increases with network effects, but adoption is currently limited to the openEduSuite ecosystem
 
 ### 8.3 When NOT to Adopt
 
-Institutions should **not** adopt openEDU if:
+Institutions should **not** adopt openEduSuite if:
 - They have fewer than 1,000 users (commercial solutions may be more cost-effective for very small institutions)
 - They lack any IT staff with Linux/Kubernetes experience
 - They cannot commit to multi-year infrastructure investment
@@ -724,7 +724,7 @@ Institutions should **not** adopt openEDU if:
 - They have regulatory requirements mandating specific certifications
 
 **Alternatives:**
-- **Managed open-source**: Hosted openEDU by a third-party provider
+- **Managed open-source**: Hosted openEduSuite by a third-party provider
 - **Hybrid model**: Open-source for some services, commercial for others
 - **Smaller scale**: Simplified deployment for smaller institutions
 - **Different platform**: Other open-source platforms (Sandstorm, Cozy Cloud)
@@ -758,7 +758,7 @@ We identify several directions for future development:
 
 European educational institutions stand at a crossroads. They can continue down the path of increasing vendor dependence, escalating costs, and sovereignty loss. Or they can choose the path of open-source ecosystems, digital sovereignty, and community collaboration.
 
-**The openEDU project provides a proven, production-ready path forward.**
+**The openEduSuite project provides a proven, production-ready path forward.**
 
 **Key Findings:**
 
@@ -772,8 +772,8 @@ European educational institutions stand at a crossroads. They can continue down 
 ### Immediate Actions for Institutions
 
 1. **Evaluate**: Assess current costs, vendor dependencies, and sovereignty gaps
-2. **Pilot**: Deploy openEDU in a small test environment
-3. **Engage**: Join the openEDU community, attend workshops
+2. **Pilot**: Deploy openEduSuite in a small test environment
+3. **Engage**: Join the openEduSuite community, attend workshops
 4. **Plan**: Develop a multi-year migration roadmap
 5. **Commit**: Allocate budget and personnel for transformation
 6. **Contribute**: Share improvements back to the community
@@ -796,7 +796,7 @@ Imagine a future where:
 - Costs decrease while capabilities increase
 - The next generation learns with open tools they can study, modify, and improve
 
-**This future is achievable. openEDU is making it real.**
+**This future is achievable. openEduSuite is making it real.**
 
 The question is no longer whether digital sovereignty is possible. The question is whether organizations will choose it.
 
@@ -804,7 +804,7 @@ The question is no longer whether digital sovereignty is possible. The question 
 
 ## Appendix A: Service Comparison Matrix
 
-| Need | Commercial Solution | openEDU Alternative | Cost Savings |
+| Need | Commercial Solution | openEduSuite Alternative | Cost Savings |
 |------|--------------------|-------------------------|--------------|
 | Email | Microsoft 365, Google Workspace | SOGo / OX App Suite | 90% |
 | File Storage | Dropbox, OneDrive, Google Drive | Nextcloud / OpenCloud | 85% |
@@ -871,21 +871,21 @@ The question is no longer whether digital sovereignty is possible. The question 
 We thank:
 - The **UDC** team for production deployment and operational feedback
 - The **ZenDiS** (Zentrum für Digitale Souveränität der Öffentlichen Verwaltung) for institutional support
-- The **openEDU Contributors** for their tireless work
+- The **openEduSuite Contributors** for their tireless work
 - The **open-source community** for creating the integrated services
-- The **German educational institutions** that have adopted or are evaluating openEDU
+- The **German educational institutions** that have adopted or are evaluating openEduSuite
 
 ## References
 
-1. Weiß, T. & openEDU Contributors (2026). "Breaking Free from Vendor Lock-in: How Educational Institutions Can Reclaim Digital Sovereignty Through Open-Source Ecosystems." openEDU Papers.
-2. Weiß, T. & openEDU Contributors (2026). "OpenSpec for the Digital Sovereign Workplace: A Complete Specification Framework for Open-Source, GDPR-Compliant, Vendor-Independent Organizations." openEDU Papers.
-3. Weiß, T. & openEDU Contributors (2026). "From Vague Documentation to Living Specifications: A Continuous Self-Improvement Approach for Educational Technology Platforms." openEDU Papers.
+1. Weiß, T. & openEduSuite Contributors (2026). "Breaking Free from Vendor Lock-in: How Educational Institutions Can Reclaim Digital Sovereignty Through Open-Source Ecosystems." openEduSuite Papers.
+2. Weiß, T. & openEduSuite Contributors (2026). "OpenSpec for the Digital Sovereign Workplace: A Complete Specification Framework for Open-Source, GDPR-Compliant, Vendor-Independent Organizations." openEduSuite Papers.
+3. Weiß, T. & openEduSuite Contributors (2026). "From Vague Documentation to Living Specifications: A Continuous Self-Improvement Approach for Educational Technology Platforms." openEduSuite Papers.
 4. European Court of Justice. (2020). *Data Protection Commissioner v. Facebook Ireland and Maximillian Schrems* (Case C-311/18).
 5. European Parliament & Council (2016). *General Data Protection Regulation (GDPR)*. Regulation (EU) 2016/679.
 6. Bundesamt für Sicherheit in der Informationstechnik. (2023). *IT-Grundschutz Catalog*.
 7. Deutsches Forschungsnetz. (2024). *DFN-AAI Federation Policy*.
 8. ZenDiS. (2024). *Sovereign Cloud Strategy for Public Administration*.
-9. openDesk Project. (2026). *openEDU Platform*. https://openedusuite.example.org
+9. openDesk Project. (2026). *openEduSuite Platform*. https://openedusuite.example.org
 10. Stallman, R. (2002). *Free Software, Free Society*. GNU Press.
 11. Raymond, E. (1999). *The Cathedral and the Bazaar*. O'Reilly Media.
 12. Beyer, B., Jones, C., Petoff, J., & Murphy, N. R. (2016). *Site Reliability Engineering: How Google Runs Production Systems*. O'Reilly Media.
@@ -907,8 +907,8 @@ We thank:
 ```bibtex
 @paper{opendesk2026comprehensive,
   title={OpenSpec for Digital Sovereignty: A Complete Framework for Sovereign Educational Technology Platforms},
-  subtitle={Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openEDU Ecosystem},
-  author={Weiß, Tobias and openEDU Contributors},
+  subtitle={Specification Methodology, Continuous Self-Improvement, and Production Evidence from the openEduSuite Ecosystem},
+  author={Weiß, Tobias and openEduSuite Contributors},
   year={2026},
   month={June},
   institution={UDC},

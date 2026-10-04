@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Anpassungs-Checkliste – openEDU Datenschutzvorlagen
+# Anpassungs-Checkliste – openEduSuite Datenschutzvorlagen
 
 > **⚠️ Rechtlicher Hinweis**
 > Diese Checkliste dient als **Hilfsmittel** zur Anpassung der Datenschutzvorlagen an Ihre Institution.
@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
   - [ ] Kontaktdaten (E-Mail, Telefon, Website)
 
 - [ ] **Verantwortliche benennen**
-  - [ ] Verantwortlicher für openEDU (z. B. RZ-Leitung)
+  - [ ] Verantwortlicher für openEduSuite (z. B. RZ-Leitung)
   - [ ] Name, E-Mail, Telefon
   - [ ] Stellvertreter:in benennen
 
@@ -62,7 +62,7 @@ SPDX-License-Identifier: Apache-2.0
   - [ ] Gibt es zusätzliche Verarbeitungstätigkeiten in Ihrer Institution?
   - [ ] Sind alle genannten Verarbeitungen **rechtlich zulässig**?
 - [ ] **§5.2:** Nicht freigegebene Verarbeitungen bestätigen
-  - [ ] **Art. 9 DSGVO-Daten** (Gesundheit, Ethnie, etc.) **nicht** in openEDU verarbeiten
+  - [ ] **Art. 9 DSGVO-Daten** (Gesundheit, Ethnie, etc.) **nicht** in openEduSuite verarbeiten
   - [ ] Keine **Videoüberwachung** mit Jitsi
 - [ ] **§5.3:** Verarbeitungen mit Einzelfallprüfung identifizieren
   - [ ] Wird **KI** genutzt? → DSFA erstellen
@@ -221,7 +221,7 @@ SPDX-License-Identifier: Apache-2.0
 
 | **Datum** | **Version** | **Änderung** | **Verantwortlich** | **Status** |
 |-----------|-------------|--------------|--------------------|------------|
-| [TT.MM.JJJJ] | 1.0 | Initialisierung (Vorlage) | openEDU Contributors | ✅ |
+| [TT.MM.JJJJ] | 1.0 | Initialisierung (Vorlage) | openEduSuite Contributors | ✅ |
 | [TT.MM.JJJJ] | 1.1 | Anpassung an [Institution] | [Name] | ☐ |
 | [TT.MM.JJJJ] | 1.2 | DSB-Prüfung | [DSB-Name] | ☐ |
 | [TT.MM.JJJJ] | 1.3 | Freigabe | [RZ-Leitung] | ☐ |
@@ -257,7 +257,7 @@ SPDX-License-Identifier: Apache-2.0
 ## 12. Häufige Fehler (Checkliste)
 
 ❌ **Nicht machen:**
-- [ ] **Betriebsmittel als Verarbeitungstätigkeit dokumentieren** (openEDU ≠ VVT-Eintrag)
+- [ ] **Betriebsmittel als Verarbeitungstätigkeit dokumentieren** (openEduSuite ≠ VVT-Eintrag)
 - [ ] **Platzhalter `[...]` nicht ersetzen** (alle Dokumente müssen vollständig sein)
 - [ ] **DSB nicht einbinden** (Pflicht nach DSGVO!)
 - [ ] **Rechtsgrundlagen nicht prüfen** (Art. 6 DSGVO + LDSG)

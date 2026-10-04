@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
@@ -142,9 +142,9 @@ Bitte ankreuzen oder ausfüllen, welche Daten betroffen sind:
 
 ---
 
-## Warum setzen openEDU auf KI?
+## Warum setzen openEduSuite auf KI?
 
-Wir nutzen KI (künstliche Intelligenz) in bestimmten Anwendungsfällen, um openEDU benutzerfreundlicher und effizienter zu gestalten:
+Wir nutzen KI (künstliche Intelligenz) in bestimmten Anwendungsfällen, um openEduSuite benutzerfreundlicher und effizienter zu gestalten:
 
 | Anwendungsbereich | KI-Nutzung | Option zur Deaktivierung |
 |-------------------|-----------|--------------------------|
@@ -164,7 +164,7 @@ Wir nutzen KI (künstliche Intelligenz) in bestimmten Anwendungsfällen, um open
 
 - [ ] Ich habe die KI-Informationsblätter gelesen
 - [ ] Ich habe das Wahlrecht bezüglich KI-Deaktivation geprüft
-- [ ] Ich habe das Vertrauen in openEDU-prozess management-Control aufgestellt
+- [ ] Ich habe das Vertrauen in openEduSuite-prozess management-Control aufgestellt
 
 ---
 

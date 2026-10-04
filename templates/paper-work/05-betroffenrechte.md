@@ -1,9 +1,9 @@
 <!--
-SPDX-FileCopyrightText: 2026 openEDU Contributors
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Betroffenenrechte – openEDU
+# Betroffenenrechte – openEduSuite
 ## Formulare und Verfahren
 
 > **⚠️ Rechtlicher Hinweis**
@@ -83,13 +83,13 @@ SPDX-License-Identifier: Apache-2.0
 | **E-Mail-Adresse** | [E-Mail] |
 | **Telefonnummer** | [Telefon] |
 | **Matrikelnummer / Personalnummer** | [Nummer] |
-| **Nutzerkennung (openEDU)** | [Benutzername] |
+| **Nutzerkennung (openEduSuite)** | [Benutzername] |
 
 ---
 
 ### Antrag
 
-Ich beantrage gemäß **Art. 15 DSGVO** Auskunft über die folgenden von mir personenbezogenen Daten, die im Rahmen von **openEDU** verarbeitet werden:
+Ich beantrage gemäß **Art. 15 DSGVO** Auskunft über die folgenden von mir personenbezogenen Daten, die im Rahmen von **openEduSuite** verarbeitet werden:
 
 - [ ] Alle über mich gespeicherten Daten
 - [ ] Daten in **openCloud** (Dateispeicher)
@@ -500,7 +500,7 @@ Mit freundlichen Grüßen
 
 | **Dokument** | **Zweck** |
 |--------------|-----------|
-| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openEDU als Betriebsmittel |
+| [01-betriebsmittel-opendesk-edu.md](01-betriebsmittel-opendesk-edu.md) | Beschreibung von openEduSuite als Betriebsmittel |
 | [02-verarbeitungsverzeichnis.md](02-verarbeitungsverzeichnis.md) | Verarbeitungsverzeichnis (VVT) |
 | [DSGVO – Artt. 12-22](https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A32016R0679#d1e2600-1-1) | Betroffenenrechte |
 | [BayLfD – Betroffenenrechte](https://www.datenschutz-bayern.de/datenschutzreform2018/) | Praxishinweise |
