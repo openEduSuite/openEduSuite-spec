@@ -14,7 +14,7 @@ Complete specification framework for the openEduSuite ecosystem — covering ser
 ```
 openEduSuite-spec/
 ├── specs/                    # Source of truth — all specifications
-│   ├── services/             # 42 service specs (nextcloud, element, operaton, ...)
+│   ├── services/             # 51 service specs (nextcloud, element, operaton, ...)
 │   ├── platform/             # 17 platform specs (deployment, monitoring, security, ...)
 │   ├── auth/                 # OIDC, SAML, LDAP, federation
 │   ├── integrations/         # Intercom, provisioning, API contracts, LTI
