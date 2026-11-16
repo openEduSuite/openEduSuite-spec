@@ -1,9 +1,9 @@
-# MySQL Exporter (Prometheus)
-
 <!--
 SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
+
+# MySQL Exporter (Prometheus)
 
 ## Purpose
 

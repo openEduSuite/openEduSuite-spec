@@ -75,7 +75,7 @@ Wave 3 — Collaboration add-ons (depend on Wave 2 services):
 
 Wave 4 — Education services (depend on Wave 0-1 infrastructure):
 
-  ILIAS, Moodle, BigBlueButton, Etherpad, BookStack
+  ILIAS, Moodle, BigBlueButton, Greenlight (BBB frontend), Etherpad, BookStack
 
 
 
@@ -94,7 +94,12 @@ Wave 6 — Stateless tools (no dependencies):
 Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 
   Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton (engine),
-  Discourse, Grist, HedgeDoc, Stalwart (mail), RT, Toss, Typst
+  Discourse, Grist, HedgeDoc, Stalwart (mail), RT, Toss, Typst,
+  Ewoks, Kitodo, Portal (home dashboard)
+
+Wave 8 — Infrastructure utilities (no user SSO):
+
+  Cloud Alias Redirect (301 to canonical cloud domain), MySQL Exporter (Galera metrics)
 
 ```
 
@@ -123,6 +128,7 @@ Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 | [Jitsi](../services/jitsi/) | OIDC | — | — | — | Apache-2.0 | BigBlueButton |
 
 | [BigBlueButton](../services/bigbluebutton/) | SAML 2.0 | PostgreSQL | RWX PVC | Redis | LGPL-3.0 | Jitsi |
+| [Greenlight](../services/greenlight/) | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | AGPL-3.0 | — |
 
 | [OpenProject](../services/openproject/) | OIDC | PostgreSQL | S3 | — | GPL-3.0 | — |
 | [Operaton](../services/operaton/) | OIDC | PostgreSQL | RWO PVC | — | Apache-2.0 | — |
@@ -135,6 +141,14 @@ Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 | [Grist](../services/grist/) | OIDC (native) | File/SQLite | RWO PVC | — | Apache-2.0 | — |
 | [HedgeDoc](../services/hedgedoc/) | OIDC (oauth2-proxy) | SQLite | RWO PVC | — | AGPL-3.0 | — |
 | [Stalwart](../services/stalwart/) | OAuth/XOAUTH2 | — | RWO PVC | — | AGPL-3.0 | — |
+| [RT](../services/rt/) | OIDC (oauth2-proxy) | MariaDB Galera | RWO PVC | — | GPL-2.0-or-later | — |
+| [Toss](../services/toss/) | OIDC (oauth2-proxy) | — | RWO PVC | — | MIT | — |
+| [Typst](../services/typst/) | OIDC (oauth2-proxy) | — | — | — | Apache-2.0 | — |
+| [Ewoks](../services/ewoks/) | OIDC (oauth2-proxy) | — | RWO PVC | — | Apache-2.0 | — |
+| [Kitodo](../services/kitodo/) | OIDC (oauth2-proxy) | MySQL | Elasticsearch PVC | — | GPL-3.0 | — |
+| [Portal (Home)](../services/portal/) | OIDC (oauth2-proxy) | — | — | — | Apache-2.0 | — |
+| [MySQL Exporter](../services/mysqld-exporter/) | — | — | — | — | Apache-2.0 | — |
+| [Cloud Alias Redirect](../services/cloud-alias-redirect/) | — | — | — | — | Custom (nginx) | — |
 
 | [XWiki](../services/xwiki/) | OIDC | MariaDB / PostgreSQL | — | — | LGPL-2.1 | — |
 

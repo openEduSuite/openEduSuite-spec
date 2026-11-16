@@ -57,8 +57,8 @@ Both mount `specs/` as a read-only volume — the specs are read directly, no im
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| Services | 42 | Individual service deployment, auth, and configuration specs |
-| Platform | 17 | Cross-cutting concerns (backup, networking, security, monitoring) |
+| Services | 51 | Individual service deployment, auth, and configuration specs |
+| Platform | 18 | Cross-cutting concerns (backup, networking, security, monitoring) |
 | Auth | 5 | OIDC, SAML, LDAP, federation, oauth2-proxy gateway |
 | Integrations | 6 | Inter-service communication and data flow |
 | Registry | 5 | Component index, test mapping, interconnection matrix |

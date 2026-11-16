@@ -1,9 +1,9 @@
-# cloud-alias-redirect (Legacy Alias 301 Redirector)
-
 <!--
 SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
+
+# cloud-alias-redirect (Legacy Alias 301 Redirector)
 
 ## Purpose
 

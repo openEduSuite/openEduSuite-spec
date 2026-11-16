@@ -1,9 +1,9 @@
-# Greenlight (BigBlueButton Frontend)
-
 <!--
 SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
+
+# Greenlight (BigBlueButton Frontend)
 
 ## Purpose
 

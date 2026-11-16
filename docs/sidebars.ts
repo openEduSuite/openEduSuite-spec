@@ -14,6 +14,7 @@ const sidebars: SidebarsConfig = {
         {type: 'doc', id: 'platform/deployment'},
         {type: 'doc', id: 'platform/environments'},
         {type: 'doc', id: 'platform/networking'},
+        {type: 'doc', id: 'platform/nix-integration'},
         {type: 'doc', id: 'platform/security'},
         {type: 'doc', id: 'platform/security/compliance-checklists'},
         {type: 'doc', id: 'platform/security/threat-model'},

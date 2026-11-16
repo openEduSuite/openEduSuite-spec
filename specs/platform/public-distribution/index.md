@@ -1,11 +1,9 @@
-# Public Distribution
-
 <!--
 SPDX-FileCopyrightText: 2026 openEduSuite Contributors
 SPDX-License-Identifier: Apache-2.0
 -->
 
-
+# Public Distribution
 
 ## Purpose
 
