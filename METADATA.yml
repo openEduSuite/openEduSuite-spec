@@ -34,7 +34,8 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | notes | OIDC | PostgreSQL | S3 | Redis | 7 | Low |
 | nubus | SAML 2.0 | — | — | — | 8 | Critical |
 | opencloud | OIDC | — | S3 | — | 14 | Critical |
-| openproject | SAML 2.0 | PostgreSQL | S3, RWO PVC | Memcached | 19 | Low |
+| openproject | OIDC | PostgreSQL | S3, RWO PVC | Memcached | 20 | Low |
+| operaton | OIDC | PostgreSQL | RWO PVC | — | 7 | Medium |
 | ox-appsuite | SAML 2.0 | MariaDB | — | — | 21 | Critical |
 | planka | OIDC | PostgreSQL | RWO PVC | — | 6 | Low |
 | postgresql | OIDC | PostgreSQL | S3, RWO PVC | — | 5 | Critical |

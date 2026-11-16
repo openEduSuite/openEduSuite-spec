@@ -8,12 +8,13 @@ SPDX-License-Identifier: Apache-2.0
 ## Purpose
 
 BPMN 2.0 / DMN 1.3 process orchestration engine for the suite: workflow
-automation for administrative and teaching-support processes (course
-approval workflows, onboarding pipelines, request/approval chains) with
-human-in-the-loop tasks. Operaton is the community-maintained Apache 2.0
-successor of Camunda 7 Community Edition (EOL October 2025); it preserves
-the Camunda 7 API, model format, and database schema while providing
-continued security patches.
+automation with human-in-the-loop tasks. Its primary production workload is
+**user lifecycle automation** — self-service user provisioning and
+reconciliation across the suite's individual services (Keycloak, n8n,
+Synapse, ...) via an external-task worker. Operaton is the
+community-maintained Apache 2.0 successor of Camunda 7 Community Edition
+(EOL October 2025); it preserves the Camunda 7 API, model format, and
+database schema while providing continued security patches.
 
 ## Scope
 
@@ -53,6 +54,14 @@ persistent volume.
 - THEN deployed process definitions and process history remain intact
 - AND no manual schema intervention is required (consecutive-version schema compatibility is a documented Operaton guarantee)
 
+The user-lifecycle process suite is the engine's primary workload; its model
+source lives in `k8s/operaton/processes/` in the deployment repo:
+`user-provisioning.bpmn`, `user-deprovisioning.bpmn`,
+`user-deletion.bpmn`, `user-reconciliation.bpmn`. They are NOT deployed by
+git/GitOps — they are pushed to the engine at runtime via the engine REST
+API (`scripts/deploy-operaton-lifecycle.sh`, deployment name
+`user-lifecycle`).
+
 ### Requirement: SSO via Keycloak (mandatory central auth)
 
 The engine web applications (Cockpit, Tasklist, Admin) SHALL authenticate
@@ -65,6 +74,16 @@ accounts SHALL NOT be used for regular users.
 - WHEN the user opens the engine web app at `bpm.<cluster-domain>`
 - THEN authentication is delegated to Keycloak (OIDC)
 - AND no local password prompt is shown
+
+#### Scenario: Lifecycle flows deployed to the engine
+
+- GIVEN the operator runs `scripts/deploy-operaton-lifecycle.sh`
+- WHEN the engine REST API receives the `user-lifecycle` deployment
+- THEN `user-provisioning`, `user-deprovisioning`, `user-deletion` and
+  `user-reconciliation` appear as process definitions (engine
+  `ACT_RE_PROCDEF` / `process-definition` REST)
+- AND each deployment run creates a new deployment version (versions
+  accumulate deliberately for audit)
 
 ### Requirement: REST-only integration contract
 
@@ -100,6 +119,7 @@ chain.
 | Component | Purpose | Replicas | Storage |
 |-----------|---------|----------|---------|
 | Operaton (Tomcat distro) | BPMN/DMN engine + Cockpit/Tasklist/Admin + REST API | 1 | none (stateless pod) |
+| Lifecycle external-task worker | subscribes to `user-reconcile`, `provision-*`, `deprovision-*`, `delete-*` service-task topics; drives Keycloak/n8n/Synapse via REST | 1 | none |
 | PostgreSQL (dedicated DB/role) | process runtime + history store | shared cluster instance | PVC (managed by DB layer) |
 
 ## Security Context
@@ -128,8 +148,13 @@ chain.
 ## Integrates With
 
 - Nubus Portal (tile for Cockpit/Tasklist)
-- Keycloak (OIDC SSO)
-- n8n (complementary: n8n orchestrates system glue; Operaton executes audited human workflows — REST in both directions where needed)
+- Keycloak (OIDC SSO; lifecycle worker uses the admin API for
+  provision/deprovision/delete of users)
+- n8n (complementary: n8n orchestrates system glue; Operaton executes audited
+  human workflows; lifecycle worker invokes n8n via its internal JWT API)
+- Synapse (lifecycle worker deprovisions matrix accounts on
+  `matrix.<cluster-domain>` via admin API)
+- PostgreSQL (peristence via dedicated `operaton` database)
 
 ## SLO
 
@@ -145,6 +170,9 @@ chain.
 - Pod restart loop >3 in 10 minutes → P2 alert (process data at risk)
 - DB connection failures in engine logs → P2 alert
 - 5xx rate >2% for 10 minutes → P3 alert
+- Lifecycle worker `POLL-FEHLER`/`fetch failed` burst >5 in 10 minutes → P2
+  (user provisioning/reconciliation stalls; a `fetch failed` burst during
+  engine startup is benign noise)
 
 **Capacity**:
 - Start: single replica; process throughput needs of administrative workflows are modest (tens of instances/day scale, not thousands/sec)
@@ -164,7 +192,7 @@ chain.
 3. SSO/Ingress verification — 10 min
 
 **Critical Data**:
-- Process definitions (BPMN/DMN models) — additionally version-controlled in Git by process authors
+- Process definitions (BPMN/DMN models) — additionally version-controlled in Git by process authors AND pushed to the engine at runtime (`user-lifecycle` deployment); re-deploy via `scripts/deploy-operaton-lifecycle.sh` after a DB restore
 - Running process instances and history — recoverable from DB backups only
 
 **Failure Scenarios**:
