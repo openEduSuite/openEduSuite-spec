@@ -9,20 +9,21 @@ SPDX-License-Identifier: Apache-2.0
 
 Expose MySQL/MariaDB/Galera metrics (server status, replication,
 performance_schema) to the cluster Prometheus/metrics stack for dashboards
-and alerting. Runs as a stateless single-replica DaemonSet scraped by
-Prometheus for the mariadb-galera cluster.
+and alerting. Runs as a stateless, single-replica workload scraped by
+Prometheus for the mariadb-galera cluster; it holds no data of its own.
 
 ## Scope
 
 - ✅ **In scope**: mysqld-exporter deployment (pinned image), metrics HTTP
-  endpoint on port 9104, DB credentials from the `mysqld-exporter` secret,
-  Prometheus scraping via the `networkpolicy-allow-prometheus-metrics` rule
-- ❌ **Out of scope**: the MariaDB/Galera server itself (see
-  `../mariadb/`), alert rule authoring, Grafana dashboards
+  endpoint on port `9104`, DB credentials from the `mysqld-exporter`
+  secret, Prometheus scraping via the
+  `networkpolicy-allow-prometheus-metrics` NetworkPolicy
+- ❌ **Out of scope**: the MariaDB/Galera server itself (see `../mariadb/`),
+  alert-rule authoring, Grafana dashboard design
 
 ## Non-Goals
 
-- Owning or managing the MariaDB/Galera cluster (only scrapes it)
+- Owning or managing the MariaDB/Galera cluster (it only scrapes it)
 - Storing metrics locally (Prometheus is the source of truth)
 - Exporting metrics for PostgreSQL (see `../postgresql/`)
 
@@ -49,7 +50,7 @@ The exporter SHALL read Galera cluster credentials from the
 - GIVEN the `mysqld-exporter` secret containing DB credentials
 - WHEN the exporter starts
 - THEN it connects to the mariadb-galera cluster using those credentials
-- AND no credentials appear in the pod spec env vars in cleartext
+- AND no credentials appear in cleartext in the pod spec env vars
 
 ### Requirement: Prometheus scraping
 
@@ -77,9 +78,9 @@ mariadb-galera cluster.
 > **Quirk (known ops context):** the mysqld-exporter pod has been observed
 > in Error/FailedCreate state due to systemic Kyverno `zki-*` enforce
 > denials (e.g. `drop-all-capabilities`). The target posture is
-> `drop: ALL`, no privilege escalation, `RuntimeDefault` seccomp. Admission
-> denial follow-up is tracked under platform/security (Kyverno BSI
-> INF.1 M 1.84 requirement).
+> `drop: ALL`, no privilege escalation, `RuntimeDefault` seccomp.
+> Admission-denial follow-up is tracked under platform/security (Kyverno
+> BSI INF.1 M 1.84 requirement).
 
 ## Configuration Reference
 
@@ -100,7 +101,7 @@ mariadb-galera cluster.
 
 - Prometheus (scrapes `:9104`)
 - Grafana (dashboards consuming the exported metrics)
-- Kyverno admission policies (security posture enforcement)
+- Kyverno admission policies (security-posture enforcement)
 
 ## SLO
 
@@ -117,6 +118,6 @@ mariadb-galera cluster.
 **Tier**: Low (RPO: n/a, RTO: 4 h)
 
 - **Configuration**: GitOps-managed manifests + `mysqld-exporter` secret
-- **User data**: none (stateless exporter; metrics stored in Prometheus)
+- **User data**: none (stateless exporter; metrics live in Prometheus)
 - **Recovery order**: redeploy from GitOps → verify Prometheus scraping
   `:9104` → confirm dashboards populate
