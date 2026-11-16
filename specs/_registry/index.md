@@ -93,7 +93,8 @@ Wave 6 — Stateless tools (no dependencies):
 
 Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 
-  Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton (engine)
+  Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton (engine),
+  Discourse, Grist, HedgeDoc, Stalwart (mail), RT, Toss, Typst
 
 ```
 
@@ -130,6 +131,10 @@ Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 | [Indico](../services/indico/) | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | MIT | — |
 | [Overleaf](../services/overleaf/) | OIDC (oauth2-proxy) | MongoDB | RWO PVC | Redis | AGPL-3.0 | — |
 | [Invoice Ninja](../services/invoiceninja/) | OIDC (oauth2-proxy) | DB backend | RWO PVC | — | Elastic License 2.0 | — |
+| [Discourse](../services/discourse/) | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | GPL-2.0 | — |
+| [Grist](../services/grist/) | OIDC (native) | File/SQLite | RWO PVC | — | Apache-2.0 | — |
+| [HedgeDoc](../services/hedgedoc/) | OIDC (oauth2-proxy) | SQLite | RWO PVC | — | AGPL-3.0 | — |
+| [Stalwart](../services/stalwart/) | OAuth/XOAUTH2 | — | RWO PVC | — | AGPL-3.0 | — |
 
 | [XWiki](../services/xwiki/) | OIDC | MariaDB / PostgreSQL | — | — | LGPL-2.1 | — |
 
@@ -198,7 +203,8 @@ Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
 |--------|----------|------|
 
 | OIDC | Nubus, SOGo, OpenCloud, Element, XWiki, Planka, Etherpad, Notes, TYPO3 | [OIDC](../auth/oidc/) |
-| OIDC (gateway) | Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton, RT, Toss, Typst, Stalwart, ... (~26 apps) | [oauth2-proxy](../auth/oauth2-proxy/) |
+| OIDC (gateway) | Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton, Discourse, HedgeDoc, RT, Toss, Typst, ... (~26 apps) | [oauth2-proxy](../auth/oauth2-proxy/) |
+| OAuth/XOAUTH2 | Stalwart (IMAP/SMTP) | [OIDC](../auth/oidc/) |
 
 | SAML 2.0 | Nextcloud, OX AppSuite, BigBlueButton, ILIAS, Moodle, BookStack, Zammad | [SAML](../auth/saml/) |
 

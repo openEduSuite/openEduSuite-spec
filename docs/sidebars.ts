@@ -102,6 +102,7 @@ const sidebars: SidebarsConfig = {
     {type: 'doc', id: 'services/element', label: 'Element'},
     {type: 'doc', id: 'services/ox-appsuite', label: 'OX AppSuite'},
     {type: 'doc', id: 'services/sogo', label: 'SOGo'},
+    {type: 'doc', id: 'services/stalwart', label: 'Stalwart'},
     {type: 'doc', id: 'services/jitsi', label: 'Jitsi'},
     {type: 'doc', id: 'services/openproject', label: 'OpenProject'},
     {type: 'doc', id: 'services/operaton', label: 'Operaton'},
@@ -118,7 +119,10 @@ const sidebars: SidebarsConfig = {
     {type: 'doc', id: 'services/self-service-password', label: 'Self-Service Password'},
     {type: 'doc', id: 'services/typo3', label: 'TYPO3 CMS'},
     {type: 'doc', id: 'services/drawio', label: 'Draw.io'},
+    {type: 'doc', id: 'services/discourse', label: 'Discourse'},
     {type: 'doc', id: 'services/excalidraw', label: 'Excalidraw'},
+    {type: 'doc', id: 'services/grist', label: 'Grist'},
+    {type: 'doc', id: 'services/hedgedoc', label: 'HedgeDoc'},
   ],
 };
 

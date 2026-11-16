@@ -14,7 +14,7 @@ Complete specification framework for the openEduSuite ecosystem — covering ser
 ```
 openEduSuite-spec/
 ├── specs/                    # Source of truth — all specifications
-│   ├── services/             # 38 service specs (nextcloud, element, operaton, ...)
+│   ├── services/             # 42 service specs (nextcloud, element, operaton, ...)
 │   ├── platform/             # 17 platform specs (deployment, monitoring, security, ...)
 │   ├── auth/                 # OIDC, SAML, LDAP, federation
 │   ├── integrations/         # Intercom, provisioning, API contracts, LTI
@@ -57,7 +57,7 @@ Both mount `specs/` as a read-only volume — the specs are read directly, no im
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| Services | 38 | Individual service deployment, auth, and configuration specs |
+| Services | 42 | Individual service deployment, auth, and configuration specs |
 | Platform | 17 | Cross-cutting concerns (backup, networking, security, monitoring) |
 | Auth | 5 | OIDC, SAML, LDAP, federation, oauth2-proxy gateway |
 | Integrations | 6 | Inter-service communication and data flow |

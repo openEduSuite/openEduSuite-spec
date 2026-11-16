@@ -1,7 +1,7 @@
 ---
 title: openEduSuite OpenSpec Metadata Index
 generated: "2026-11-11"
-total_specs: 74
+total_specs: 78
 ---
 
 # Spec Metadata Index
@@ -18,12 +18,15 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | collabora | Internal | — | — | — | 16 | Standard |
 | cryptpad | OIDC | — | S3, RWX PVC | Redis | 21 | Low |
 | dify | OIDC (dify bridge) | PostgreSQL | RWO PVC, Weaviate | — | 4 | Medium |
+| discourse | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | 4 | Standard |
 | dovecot-postfix | LDAP | PostgreSQL | RWO PVC | — | 13 | Low |
 | drawio | Internal | — | — | — | 19 | Low |
 | element | OIDC | PostgreSQL | S3 | Redis | 12 | Critical |
 | etherpad | OIDC | PostgreSQL | RWO PVC | — | 8 | Low |
 | excalidraw | Internal | — | — | — | 4 | Low |
+| grist | OIDC (native) | File/SQLite | RWO PVC | — | 4 | Medium |
 | haproxy-ingress | Internal | — | — | — | 9 | Critical |
+| hedgedoc | OIDC (oauth2-proxy) | SQLite | RWO PVC | — | 4 | Low |
 | ilias | SAML 2.0 | MariaDB | — | — | 17 | Standard |
 | indico | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC + Redis | — | 5 | Medium |
 | invoiceninja | OIDC (oauth2-proxy) | DB backend | RWO PVC | — | 4 | Medium |
@@ -47,6 +50,7 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | redis | Internal | — | S3, RWO PVC | Redis, Memcached | 6 | Critical |
 | self-service-password | LDAP | — | — | — | 6 | Low |
 | sogo | OIDC | PostgreSQL | — | Memcached | 21 | Critical |
+| stalwart | OAuth/XOAUTH2 | — | RWO PVC | — | 5 | Critical |
 | typo3 | OIDC | MariaDB | RWO PVC | — | 6 | Low |
 | xwiki | OIDC | PostgreSQL | — | — | 15 | Standard |
 | zammad | SAML 2.0 | PostgreSQL | RWO PVC | Redis | 7 | Low |
