@@ -11,13 +11,50 @@ SPDX-License-Identifier: Apache-2.0
 
 
 
-Email, calendar, and address book groupware with modern UI, tight OpenLDAP
+Email, calendar, and address book groupware with modern UI and the current
+SOGo6 stack. Tight OpenLDAP address book integration, OIDC authentication,
+IMAP/SMTP via Dovecot and Postfix, Sieve email filtering, and Memcached/Redis
+session caching.
 
-address book integration, OIDC authentication, PostgreSQL backend, IMAP/SMTP
 
-via Dovecot and Postfix, Sieve email filtering, and Memcached session caching.
 
-Optimized for simplicity and LDAP-native environments.
+## Current Situation: SOGo6
+
+
+
+The suite currently runs the SOGo6 stack (not the SOGo 5 chart below):
+
+- **sogo6-ui** — web frontend (portal of groupware features)
+- **sogo6-server** (`openedusuite-nix/sogo6-server:0.2.11`) — Python auth /
+  voucher backend: generates short-lived **JWT vouchers** (JWTVoucher) that
+  the IMAP/service layer accepts for mailbox access; resolves users via
+  VoucherUserService; caches sessions/tokens in Redis (ClientRedis); chains
+  identity modules (OIDC via Keycloak, LDAP, MuFuSSO) in ModuleAuth
+- deployed as **two instances** (staff and students) behind the sogo6
+  ingress/switcher
+- init chain: `fix-permissions` → `wait-for-galera` → `db-setup` →
+  `wait-for-redis` → `gen-init-config`; OIDC client secret from the
+  `sogo6-secrets` secret, LDAP bind from `ums-ldap-server-admin`
+
+
+
+#### Scenario: Mailbox access via JWT voucher
+
+- GIVEN a user authenticated via the sogo6-ui
+- WHEN a mailbox/IMAP operation is requested
+- THEN the backend mints a short-lived JWT voucher
+- AND the IMAP service validates the voucher before serving the mailbox
+
+
+
+#### Known quirk: voucher expiry
+
+- GIVEN a voucher that outlived its TTL (JWTVoucher emits
+  "JWT Token has expired")
+- WHEN the service layer reuses it for an IMAP/folder operation
+- THEN folder listings come back empty until a fresh voucher is minted
+- AND the fix is a voucher refresh on the sogo6 backend (tracked as open
+  work item; see the deployment repo sogo6 sources)
 
 
 

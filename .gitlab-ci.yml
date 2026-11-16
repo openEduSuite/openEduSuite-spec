@@ -1,9 +1,13 @@
+stages:
+  - .pre
+
 lint:
   stage: .pre
-  image: alpine
+  image: python:3.12-alpine
   script:
     - apk add --no-cache git
-    - |
+    - |-
+      # 1. Every spec must carry an SPDX header.
       VIOLATIONS=0
       for f in $(find specs/ -name '*.md'); do
         if ! head -5 "$f" | grep -q 'SPDX-FileCopyrightText'; then
@@ -11,10 +15,37 @@ lint:
           VIOLATIONS=$((VIOLATIONS + 1))
         fi
       done
-      if [ "$VIOLATIONS" -gt 0 ]; then
-        echo "Lint failed: $VIOLATIONS files missing SPDX headers"
+      if [ "$VIOLATIONS" -gt 0 ]; then exit 1; fi
+      echo "OK: all $(find specs/ -name '*.md' | wc -l) specs have SPDX headers"
+
+      # 2. Corruption guard: specs must NOT be char-split (one character per
+      #    line). A legacy corruption event turned every specs/*/index.md into
+      #    single-character lines; this guard catches a regression and also
+      #    fails on any speculative text files (spurious words) in specs/.
+      python3 - <<'PYEOF'
+      from pathlib import Path
+      bad = []
+      for p in sorted(Path('specs').rglob('*.md')):
+          lines = p.read_bytes().split(b'\n')
+          if len(lines) > 100 and max((len(l) for l in lines), default=0) <= 2:
+              bad.append(str(p))
+      if bad:
+          print('CHAR-SPLIT CORRUPTION DETECTED:')
+          for b in bad:
+              print('  ' + b)
+          raise SystemExit(1)
+      print('OK: no char-split corruption in specs/')
+      PYEOF
+
+      # 3. Spec-doc count must match METADATA total_specs.
+      COUNT=$(find specs -name 'index.md' -o -name 'spec.md' | wc -l)
+      TOTAL=$(grep -E '^total_specs:' METADATA.yml | awk '{print $2}')
+      if [ "$COUNT" -ne "$TOTAL" ]; then
+        echo "METADATA total_specs=$TOTAL but specs tree has $COUNT spec docs"
         exit 1
       fi
-      echo "All $(find specs/ -name '*.md' | wc -l) specs have valid SPDX headers"
+      echo "OK: METADATA total_specs=$TOTAL matches specs tree ($COUNT)"
   rules:
-    - if: $CI_COMMIT_BRANCH == "master"
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: always
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"

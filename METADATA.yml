@@ -1,7 +1,7 @@
 ---
 title: openEduSuite OpenSpec Metadata Index
-generated: "2026-06-30"
-total_specs: 64
+generated: "2026-11-11"
+total_specs: 70
 ---
 
 # Spec Metadata Index
@@ -18,6 +18,8 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | collabora | Internal | — | — | — | 16 | Standard |
 | cryptpad | OIDC | — | S3, RWX PVC | Redis | 21 | Low |
 | dovecot-postfix | LDAP | PostgreSQL | RWO PVC | — | 13 | Low |
+| dify | OIDC (dify bridge) | PostgreSQL | RWO PVC, Weaviate | — | 4 | Medium |
+| n8n | OIDC (SSO bridge) | — | RWO PVC | — | 5 | Medium |
 | drawio | Internal | — | — | — | 19 | Low |
 | element | OIDC | PostgreSQL | S3 | Redis | 12 | Critical |
 | etherpad | OIDC | PostgreSQL | RWO PVC | — | 8 | Low |
