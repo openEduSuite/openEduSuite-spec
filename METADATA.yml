@@ -1,7 +1,7 @@
 ---
 title: openEduSuite OpenSpec Metadata Index
 generated: "2026-11-11"
-total_specs: 70
+total_specs: 74
 ---
 
 # Spec Metadata Index
@@ -17,33 +17,36 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | cert-manager | Internal | — | — | — | 6 | Critical |
 | collabora | Internal | — | — | — | 16 | Standard |
 | cryptpad | OIDC | — | S3, RWX PVC | Redis | 21 | Low |
-| dovecot-postfix | LDAP | PostgreSQL | RWO PVC | — | 13 | Low |
 | dify | OIDC (dify bridge) | PostgreSQL | RWO PVC, Weaviate | — | 4 | Medium |
-| n8n | OIDC (SSO bridge) | — | RWO PVC | — | 5 | Medium |
+| dovecot-postfix | LDAP | PostgreSQL | RWO PVC | — | 13 | Low |
 | drawio | Internal | — | — | — | 19 | Low |
 | element | OIDC | PostgreSQL | S3 | Redis | 12 | Critical |
 | etherpad | OIDC | PostgreSQL | RWO PVC | — | 8 | Low |
 | excalidraw | Internal | — | — | — | 4 | Low |
 | haproxy-ingress | Internal | — | — | — | 9 | Critical |
 | ilias | SAML 2.0 | MariaDB | — | — | 17 | Standard |
+| indico | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC + Redis | — | 5 | Medium |
+| invoiceninja | OIDC (oauth2-proxy) | DB backend | RWO PVC | — | 4 | Medium |
 | jitsi | OIDC | — | — | — | 12 | Standard |
 | keycloak | SAML 2.0 | PostgreSQL | RWO PVC | — | 8 | Critical |
 | limesurvey | OIDC | MariaDB | RWO PVC | — | 5 | Low |
 | mariadb | SAML 2.0 | PostgreSQL | S3, RWO PVC | — | 7 | Critical |
 | minio | Internal | PostgreSQL | S3, RWX PVC, RWO PVC | — | 6 | Critical |
 | moodle | SAML 2.0 | MariaDB | RWX PVC | — | 15 | Standard |
+| n8n | OIDC (SSO bridge) | — | RWO PVC | — | 5 | Medium |
 | nextcloud | OIDC | PostgreSQL | S3, RWX PVC | Redis | 20 | Critical |
 | notes | OIDC | PostgreSQL | S3 | Redis | 7 | Low |
 | nubus | SAML 2.0 | — | — | — | 8 | Critical |
 | opencloud | OIDC | — | S3 | — | 14 | Critical |
 | openproject | OIDC | PostgreSQL | S3, RWO PVC | Memcached | 20 | Low |
 | operaton | OIDC | PostgreSQL | RWO PVC | — | 7 | Medium |
+| overleaf | OIDC (oauth2-proxy) | MongoDB | RWO PVC | Redis | 4 | Medium |
 | ox-appsuite | SAML 2.0 | MariaDB | — | — | 21 | Critical |
 | planka | OIDC | PostgreSQL | RWO PVC | — | 6 | Low |
 | postgresql | OIDC | PostgreSQL | S3, RWO PVC | — | 5 | Critical |
 | redis | Internal | — | S3, RWO PVC | Redis, Memcached | 6 | Critical |
 | self-service-password | LDAP | — | — | — | 6 | Low |
-| sogo | OIDC | PostgreSQL | — | Memcached | 20 | Critical |
+| sogo | OIDC | PostgreSQL | — | Memcached | 21 | Critical |
 | typo3 | OIDC | MariaDB | RWO PVC | — | 6 | Low |
 | xwiki | OIDC | PostgreSQL | — | — | 15 | Standard |
 | zammad | SAML 2.0 | PostgreSQL | RWO PVC | Redis | 7 | Low |
@@ -74,6 +77,7 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 |------|------|----------|---------|-------|-----------|------|
 | federation | SAML 2.0 | — | — | — | 9 | Low |
 | ldap | SAML 2.0 | — | — | — | 7 | Low |
+| oauth2-proxy | OIDC | — | — | — | 4 | Critical |
 | oidc | SAML 2.0 | — | — | — | 5 | Low |
 | saml | SAML 2.0 | — | — | — | 4 | Low |
 

@@ -57,7 +57,7 @@ Wave 0 — Infrastructure (no app depends on these):
 
 Wave 1 — Core platform (depends on Wave 0 databases/cache/storage):
 
-  Nubus (provides IAM + Portal), OpenCloud (provides WebDAV/S3)
+  Nubus (provides IAM + Portal), OpenCloud (provides WebDAV/S3), oauth2-proxy (SSO gateway)
 
 
 
@@ -89,6 +89,12 @@ Wave 6 — Stateless tools (no dependencies):
 
   Draw.io, Excalidraw
 
+
+
+Wave 7 — Auxiliary services (SSO-gated via oauth2-proxy or own bridges):
+
+  Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton (engine)
+
 ```
 
 
@@ -118,6 +124,12 @@ Wave 6 — Stateless tools (no dependencies):
 | [BigBlueButton](../services/bigbluebutton/) | SAML 2.0 | PostgreSQL | RWX PVC | Redis | LGPL-3.0 | Jitsi |
 
 | [OpenProject](../services/openproject/) | OIDC | PostgreSQL | S3 | — | GPL-3.0 | — |
+| [Operaton](../services/operaton/) | OIDC | PostgreSQL | RWO PVC | — | Apache-2.0 | — |
+| [Dify](../services/dify/) | OIDC (bridge) | PostgreSQL | RWO PVC | — | Dify (Apache-2.0 components) | — |
+| [n8n](../services/n8n/) | OIDC (bridge) | — | RWO PVC | — | Fair-code (community) | — |
+| [Indico](../services/indico/) | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | MIT | — |
+| [Overleaf](../services/overleaf/) | OIDC (oauth2-proxy) | MongoDB | RWO PVC | Redis | AGPL-3.0 | — |
+| [Invoice Ninja](../services/invoiceninja/) | OIDC (oauth2-proxy) | DB backend | RWO PVC | — | Elastic License 2.0 | — |
 
 | [XWiki](../services/xwiki/) | OIDC | MariaDB / PostgreSQL | — | — | LGPL-2.1 | — |
 
@@ -186,6 +198,7 @@ Wave 6 — Stateless tools (no dependencies):
 |--------|----------|------|
 
 | OIDC | Nubus, SOGo, OpenCloud, Element, XWiki, Planka, Etherpad, Notes, TYPO3 | [OIDC](../auth/oidc/) |
+| OIDC (gateway) | Dify, n8n, Indico, Overleaf, Invoice Ninja, Operaton, RT, Toss, Typst, Stalwart, ... (~26 apps) | [oauth2-proxy](../auth/oauth2-proxy/) |
 
 | SAML 2.0 | Nextcloud, OX AppSuite, BigBlueButton, ILIAS, Moodle, BookStack, Zammad | [SAML](../auth/saml/) |
 
