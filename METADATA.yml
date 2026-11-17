@@ -1,7 +1,7 @@
 ---
 title: openEduSuite OpenSpec Metadata Index
-generated: "2026-11-11"
-total_specs: 88
+generated: "2026-11-17"
+total_specs: 89
 ---
 
 # Spec Metadata Index
@@ -72,16 +72,20 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | capacity-planning | Internal | PostgreSQL | S3, RWX PVC | Redis | 0 | Low |
 | deployment | Internal | PostgreSQL | S3 | Redis, Memcached | 10 | Low |
 | disaster-recovery | OIDC | PostgreSQL | S3, RWX PVC, RWO PVC | Redis | 0 | Low |
+| email-archiving | OIDC | MariaDB | S3, RWO PVC | — | 10 | Standard |
 | environments | Internal | — | S3, RWO PVC | — | 0 | Low |
 | glossary | SAML 2.0 | PostgreSQL | S3, RWX PVC, RWO PVC | Redis | 0 | Low |
 | monitoring | Internal | PostgreSQL | S3 | Redis | 0 | Low |
 | networking | Internal | — | — | — | 9 | Low |
+| nix-integration | Internal | — | — | — | 0 | Low |
 | operations | SAML 2.0 | MariaDB | S3, RWO PVC | — | 0 | Low |
 | performance | Internal | PostgreSQL | S3 | Redis | 0 | Low |
 | public-distribution | Internal | — | — | — | 10 | Low |
 | resource-sizing | LDAP | PostgreSQL | S3, RWX PVC | Redis | 0 | Low |
 | secret-derivation | LDAP | PostgreSQL | S3 | Redis | 13 | Low |
 | security | Internal | PostgreSQL | — | — | 10 | Low |
+| security/compliance-checklists | Internal | — | — | — | 0 | Medium |
+| security/threat-model | Internal | — | — | — | 0 | Medium |
 | storage | Internal | PostgreSQL | S3, RWX PVC, RWO PVC | Redis | 6 | Low |
 | upgrade-migration | Internal | PostgreSQL | S3 | — | 4 | Low |
 

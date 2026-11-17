@@ -1,0 +1,285 @@
+<!--
+SPDX-FileCopyrightText: 2026 openEduSuite Contributors
+SPDX-License-Identifier: Apache-2.0
+-->
+
+# Email Archiving (Exchange Verwaltung)
+
+## Purpose
+
+Defines the archiving capability for the suite's long-tail mailboxes: the
+Verwaltung (administration) operates Microsoft Exchange with **shared
+mailboxes and public folders**, the largest mailboxes exceeding 500 GB. An
+open-source, sovereign archive SHALL capture, retain, and make searchable
+the full Exchange message flow (including shared-mailbox and public-folder
+content), decouple compliance retention from live mailbox growth, and feed
+the existing cold-storage/backup regime.
+
+## Current Situation
+
+- **Verwaltung**: Microsoft Exchange; heavy reliance on shared mailboxes and
+  public folders; single mailboxes up to 500+ GB — primary mail store growth
+  is the driver for archiving.
+- **Faculty & students**: Dovecot/Postfix (spec `../services/dovecot-postfix`)
+  — not the archival pain point; unaffected by this capability.
+- **Suite mail**: Stalwart (`../services/stalwart`) with SOGo6 as webmail
+  (`../services/sogo`) — the suite's own SMTP/IMAP/JMAP stack; not the
+  Exchange archive target (kept as future consolidation context only).
+- No archive solution exists today; retention today = do nothing (live store
+  grows unbounded).
+
+## Scope
+
+- ✅ **In scope**: complete capture of Verwaltung Exchange traffic (in/out/
+  internal, incl. mail-enabled public folders), shared-mailbox + public-
+  folder backfill of existing long-tail (500+ GB) stores, retention
+  classes (*Aufbewahrungsfristen*), legal hold, tamper-evidence + audit log,
+  full-text search, eDiscovery export, SSO (Keycloak/LDAP), cold-tier
+  storage, backup/DR integration
+- ❌ **Out of scope**: replacing Exchange itself (migration is a separate
+  effort), archiving Dovecot faculty/student mailboxes, fighting spam/
+  phishing, preserving contacts/calendars as structured records (email only)
+
+## Non-Goals
+
+- Real-time mailbox migration tooling for Exchange
+- Replacing the university records/registry system (interface instead:
+  preservation-grade transfers, see Decision)
+- Archiving instant-messaging/admin-chat platforms
+
+## Requirements
+
+### Requirement: Complete flow capture (journaling)
+
+The archive SHALL capture every message transiting the Verwaltung Exchange
+— inbound, outbound and internal — including messages posted to mail-enabled
+public folders, independent of what users later delete from their
+mailboxes.
+
+#### Scenario: Deleted mail is still archived
+
+- GIVEN Exchange journaling is configured to forward a copy of all traffic
+  to the archive
+- WHEN a message is delivered and a user deletes it from the live mailbox
+- THEN the archive retains an intact copy with original envelope headers
+- AND the deletion has no effect on the archived copy
+
+### Requirement: Shared-mailbox and public-folder coverage
+
+The archive SHALL include the content of shared mailboxes and of the public
+folder tree, since the Verwaltung depends on both for its daily workflow.
+
+#### Scenario: Shared content reaches the archive
+
+- GIVEN a message is posted to a shared mailbox or a public folder
+- WHEN the archive ingests it (journal copy and/or structured export)
+- THEN the message is searchable with its original recipient/folder context
+- AND access to the archived copy is scoped by the addresses involved
+
+### Requirement: Backfill of existing long-tail stores (500+ GB)
+
+The archive SHALL ingest the pre-existing contents of large shared
+mailboxes and public folders (hundreds of GB per store) via bulk export
+paths (Exchange PST export, EWS, Graph/IMAP where available), without
+requiring user interaction.
+
+#### Scenario: Historical backfill
+
+- GIVEN an existing shared mailbox or public-folder tree larger than any
+  single ingest can process
+- WHEN an administrator triggers an export+import
+- THEN the content lands in the archive with folder structure preserved
+- AND old messages become searchable alongside new ones
+
+### Requirement: Retention classes
+
+The archive SHALL enforce configurable retention classes (per folder,
+per domain, per administrative category) aligned with German
+*Aufbewahrungsfristen*; expired items SHALL be purged, but never while a
+legal hold applies.
+
+#### Scenario: Retention expiry
+
+- GIVEN a retention class with a defined retention period
+- WHEN an archived message exceeds that period
+- THEN the message is purged from the archive
+- AND messages under legal hold are exempted from purging
+
+### Requirement: Legal hold
+
+The archive SHALL place legal holds on individual messages, mailboxes or
+whole domains; a held item SHALL survive any retention expiry and any
+administrative purge until the hold is lifted.
+
+#### Scenario: Hold overrides retention
+
+- GIVEN a legal hold is active for a mailbox
+- WHEN that mailbox's retention period expires
+- THEN the messages remain fully searchable and intact
+- AND the hold status is recorded in the audit log
+
+### Requirement: Tamper-evidence and audit trail
+
+The archive SHALL cryptographically fingerprint archived messages (digest
+and signature verification where available) and SHALL keep an append-only
+audit log of archive access, searches and exports.
+
+#### Scenario: Integrity can be proven
+
+- GIVEN an archived message
+- WHEN its integrity is verified
+- THEN the stored digest matches the message
+- AND search/export/access events are present in the audit log
+
+### Requirement: Full-text search
+
+The archive SHALL provide full-text search over headers, body and
+attachments with simple and expert (field/facet) query support and
+sub-second response on the archived corpus.
+
+#### Scenario: Finding an old message
+
+- GIVEN a user with access
+- WHEN they search for text or a header criterion that occurs in an
+  archived message
+- THEN the message is returned with surrounding metadata
+- AND attachments are included in the index
+
+### Requirement: eDiscovery export
+
+The archive SHALL allow authorized auditors to search the complete corpus
+(including other users' mail) and export result sets in open formats (EML/
+MBOX); regular users SHALL only see messages in which their own addresses
+appear.
+
+#### Scenario: Auditor export
+
+- GIVEN an auditor account with the audit/legal role
+- WHEN the auditor runs a search and exports the result
+- THEN a complete, tamper-verifiable export is produced
+- AND regular users' searches never expose other users' messages
+
+### Requirement: SSO and access control
+
+The archive SHALL authenticate via the suite identity layer (Keycloak OIDC
+or LDAP) and SHALL derive per-user visibility from the addresses found in
+the messages; administrators/auditors SHALL have explicit roles.
+
+#### Scenario: SSO login and scoping
+
+- GIVEN a user authenticated against Keycloak or LDAP
+- WHEN they open the archive
+- THEN they can only search their own message set
+- AND admins and auditors authenticate the same way with elevated roles
+
+### Requirement: Durable cold tier and backup integration
+
+The archive SHALL store message blobs on cheap object/cold storage (S3-compatible/MinIO) and SHALL be integrated into the existing k8up→restic→S3
+backup and mirror regime (including the institutional mirror), with a DR
+restore path that does not lose archived content.
+
+#### Scenario: Cold storage and restore
+
+- GIVEN archived content on the cold/object tier
+- WHEN the archive is restored after a disaster
+- THEN metadata, index and blobs are restored consistently
+- AND a restore drill confirms searches and exports work again
+
+## Evaluation (2026-11 research)
+
+| Option | License | Exchange feeding | Public folders | Assessment |
+|--------|---------|------------------|----------------|------------|
+| **Piler** (`jsuto/piler` v1.4.9) | GPLv3 | SMTP journaling target + bulk import (EML/MBOX/Maildir/IMAP) | via journaling + PST→mbox backfill | **Chosen core**: retention, legal hold, SHA-256 dedup, AES-256, tamper fingerprinting + audit log, Manticore FTS, LDAP/SSO. OSS edition = single server, filesystem blob store (S3 is enterprise-only — acceptable, PVC tier). |
+| **Open Archiver** | AGPLv3 (young, v0.x) | M365/Google/IMAP/PST; on-prem Exchange journaling = open feature request | no (Graph gap) | Modern (Meilisearch, S3), but public-folder-blind and rapidly changing. |
+| **Mail-Archiver** (`s1t5`) | GPLv3 | IMAP + M365 Graph + OAuth; deletion lock | no (Graph gap) | Simple (Postgres/Docker), polling-based — misses messages deleted between syncs; no tamper story. |
+| **MailArchiva (OSS)** | GPL (open core) | journaling/IMAP | partial | Free tier capped at 9 mailboxes — irrelevant at suite scale. |
+| **Stalwart multi-store/S3** | AGPLv3 | n/a (suite mail server) | n/a | Not an archive. Future cold-tier option if Verwaltung ever consolidates onto the suite. |
+| **Archivematica** | AGPL/GPL OAIS | PST→mbox (readpst), Maildir; PREMIS/METS AIPs | via PST/EWS export | **Preservation tier** for records-grade transfers (HArchG), not the daily search tool. |
+
+### Decision (2026-11-17)
+
+- **Two-layer approach**: Piler as the access/compliance archive (journaling
+  capture + backfill + retention/legal-hold/search/export), Archivematica as
+  the preservation tier for official-records transfers.
+- **Feeding paths are Exchange-flavor dependent** — OPEN DECISION pending
+  confirmation of on-prem vs Exchange Online:
+  - On-prem: `New-MailboxExportRequest` (PST, MRS, >50 GB via folder-split
+    exports) for shared mailboxes AND public-folder mailboxes → readpst →
+    mbox → archive import; ongoing capture via Exchange journaling (works
+    for public-folder recipients too).
+  - Online: shared mailboxes via Graph (import/export APIs GA 2026-05,
+    excluding archive/public/group mailboxes); ongoing capture via journal-
+    to-SMTP connector.
+- **Public-folder risk (time-critical)**: Exchange Online restricts
+  programmatic public-folder access since 2026-10-01 and retires EWS by
+  2027-04-01; Graph has no public-folder API (import/export targeted
+  Q4 2026, no general CRUD). If the Verwaltung is on Exchange Online,
+  archive-export public folders now and plan migration of live public
+  folders to shared mailboxes (which all open-source paths can reach).
+
+## Component Reference (planned)
+
+| Component | Purpose | Replicas | Storage |
+|-----------|---------|----------|---------|
+| piler | archive daemon/web UI (SMTP capture, rules, search) | 1 | blob store (cold tier) |
+| piler-smtp | built-in SMTP journaling target | 1 | — |
+| manticore | full-text search index | 1 | index PVC |
+| mariadb | archive metadata, retention/legal-hold state, audit log | 1 | RWO PVC |
+| readpst/libpst | PST→mbox conversion for backfill | job | — |
+| archivematica | OAIS preservation transfers (official records) | 1+ | AIP store (cold tier) |
+
+## Security Context
+
+| Component | RunAsUser | Capabilities | Seccomp |
+|-----------|-----------|--------------|---------|
+| archive components | non-root | drop: ALL | RuntimeDefault |
+
+## Configuration Reference
+
+| Property | Value |
+|----------|-------|
+| Ingest | Exchange journaling (SMTP) + bulk import (PST/mbox/EML/IMAP/Graph) |
+| Search | Manticore full-text index |
+| Auth | Keycloak OIDC or LDAP (suite identity) |
+| Retention | per-folder/per-domain classes (*Aufbewahrungsfristen*) + legal hold |
+| Storage | archive blobs on cold/object tier; metadata+index on PVC |
+| Backup | k8up → restic → S3 (+ institutional mirror) |
+
+## Depends On
+
+- Identity layer (Keycloak / LDAP)
+- MariaDB (`../services/mariadb`-style backend or dedicated)
+- Object/cold storage (`../platform/storage`)
+- k8up/restic backup + mirror (`../platform/backup`)
+- Mail transport access to the Verwaltung Exchange (journaling target)
+
+## Integrates With
+
+- Exchange (Verwaltung): journaling + PST/EWS/Graph export
+- Suite identity (Keycloak OIDC)
+- SOGo6/stalwart specs only as future-consolidation context
+  (`../services/stalwart`, `../services/sogo`)
+- Platform backup/storage/security (`../platform/backup`,
+  `../platform/storage`, `../platform/security`)
+
+## SLO
+
+**Tier**: Standard (archive availability; no dependence by live mail flow
+once journaling is queued)
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| **Availability** | 99.5% | Uptime over 30-day window |
+| **Capture completeness** | 100% of journaled traffic | audit counts vs MTA logs |
+| **Search latency (P95)** | <2 s | archive web UI |
+| **Restore (DR)** | ≤24 h RTO, RPO near-zero | restore drill |
+
+## Disaster Recovery
+
+**Tier**: Standard (RPO: near-zero via journaling, RTO: ≤24 h)
+
+- **Configuration**: GitOps-managed manifests + archive secrets
+- **Data**: metadata/index PVC + cold-tier blobs via the existing backup
+  regime (k8up → restic → S3 + institutional mirror)
+- **Recovery order**: restore metadata + index + blobs → redeploy archive →
+  verify search/export → re-establish journaling feed

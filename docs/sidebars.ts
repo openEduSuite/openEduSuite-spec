@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         {type: 'doc', id: 'platform/storage'},
         {type: 'doc', id: 'platform/backup'},
         {type: 'doc', id: 'platform/disaster-recovery'},
+        {type: 'doc', id: 'platform/email-archiving'},
         {type: 'doc', id: 'platform/monitoring'},
         {type: 'doc', id: 'platform/public-distribution'},
         {type: 'doc', id: 'platform/resource-sizing'},
