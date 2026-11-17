@@ -229,7 +229,7 @@ restore path that does not lose archived content.
 | piler (`sutoj/piler:1.4.9`, official OSS image — single container: MTA + worker + webui) | archive daemon/web UI (SMTP capture, rules, search) | 1 | blob store (cold tier) `store` + config/keyring `etc` |
 | memcached | cache (required by piler-compose stack) | 1 | — |
 | manticore | full-text search index | 1 | index PVC |
-| mariadb | archive metadata, retention/legal-hold state, audit log | 1 | RWO PVC |
+| mariadb | suite nix image `openedusuite-nix/mariadb:11.4.13-nix` | archive metadata, retention/legal-hold state, audit log | 1 | RWO PVC |
 | readpst/libpst | PST→mbox conversion for backfill | job | — |
 | archivematica | OAIS preservation transfers (official records) | 1+ | AIP store (cold tier) |
 
