@@ -250,6 +250,125 @@ restore path that does not lose archived content.
 | Storage | archive blobs on cold/object tier; metadata+index on PVC |
 | Backup | k8up → restic → S3 (+ institutional mirror) |
 
+## Deployment Sketch (planned)
+
+Target: UDC K3s cluster, `openedusuite` namespace, following suite
+conventions (HAProxy ingress, cert-manager, oauth2-proxy gateway,
+k8up→restic→S3 backup, local registry mirrors, Kyverno-compliant
+`securityContext`: `runAsNonRoot`, `drop: [ALL]`,
+`allowPrivilegeEscalation: false`, seccomp `RuntimeDefault` — aligned with
+`../platform/security` so no PolicyException is required).
+
+### Components
+
+| Component | Image source | Role |
+|-----------|--------------|------|
+| mariadb | suite MariaDB image (mirror) | archive metadata, retention/legal-hold state, audit log |
+| manticore | manticore image (mirror) | RT full-text index (headers/body/attachments) |
+| piler-web | jsuto/piler distro (mirror; php-fpm + nginx sidecar) | web UI, search, export, admin |
+| piler-smtp | jsuto/piler (mirror) | built-in SMTP journaling target |
+| piler-worker | jsuto/piler (mirror) | message parse/store, rules, index feed |
+| piler-import | jsuto/piler tools + `readpst` (libpst) | batch backfill (PST → mbox → import) |
+| oauth2-proxy-archive | suite oauth2-proxy image | AuthN front (Keycloak OIDC) |
+
+### Topology
+
+```text
+[on-prem Exchange Verwaltung]
+   ├─ journaling rule → archive SMTP addr (port 25, source-IP restricted)
+   │      └─→ HAProxy ingress → piler-smtp:2525 → queue → worker
+   │              → blobs (cold PVC) + metadata (MariaDB) + index (Manticore)
+   └─ New-MailboxExportRequest (PST, MRS, folder-split >50 GB)
+          └─→ PST share → piler-import job (readpst → mbox → import)
+
+[Users/auditors] → Keycloak OIDC → oauth2-proxy-archive
+      └─→ piler-web (nginx/php-fpm) → MariaDB + Manticore
+```
+
+### Networking & identity
+
+- **FQDN**: `archive.openedusuite.org` (HAProxy ingress, ssl-redirect,
+  cert-manager TLS).
+- **SMTP feed**: journaling from on-prem Exchange lands on the cluster SMTP
+  entry point (`:25`), **source-IP restricted** to the Exchange servers and
+  the suite MTAs (journaling must never be an open relay); internally
+  forwarded to `piler-smtp:2525`. Alternative: pre-relay via the suite
+  Postfix/Stalwart relay to keep port 25 off the archive Service directly.
+- **AuthN**: suite oauth2-proxy pattern (`--skip-provider-button=true`,
+  per-app cookie `_oauth2_proxy_archive`, provider `oidc` → Keycloak),
+  passing the authenticated mail address (e.g. `X-Auth-Request-Email`)
+  into piler's header/REMOTE_USER SSO seam.
+- **AuthZ stays inside piler**: address-scoped visibility for regular users
+  (own From/To/Cc), auditor role view-all mapped from an LDAP group
+  (ums-ldap bind). Fallback if the header-SSO seam is unavailable: piler
+  native LDAP/IMAP authentication.
+
+### Storage map + sizing
+
+| Mount | PVC / backend | Backend | Initial size |
+|-------|---------------|---------|--------------|
+| piler blobs (compressed + AES-256 message/attachment store) | RWO PVC, cold/cheaper storage class | corpus × ~0.6 (dedup+compression) + 30 % headroom ⇒ ≈1.5–2 TB for a 2 TB corpus |
+| manticore index | RWO PVC (fast disk) | ~10–15 % of indexable corpus |
+| mariadb data | RWO PVC | 100 GB (metadata for millions of messages, re-grow on demand) |
+| PST/mbox import staging | RWX temp volume | bounded per wave |
+
+All PVCs `k8up.io/backup: "true"` → restic → S3 + institutional mirror.
+
+### Resources (initial fleet ≈ 10 vCPU / 30 GB RAM)
+
+| Component | CPU | RAM |
+|-----------|-----|-----|
+| mariadb | 2 | 4 GB |
+| manticore | 4 | 8–16 GB (disk-backed RT index, cache) |
+| piler-web (nginx/php-fpm) | 2 | 2 GB |
+| piler-smtp + worker | 1–2 | 2 GB |
+
+### Secrets (kubectl-applied, NOT in git — suite convention)
+
+- `archive-mariadb`: DB_USERNAME / DB_PASSWORD / root
+- `piler-key`: master AES key + IV — **backup discipline: never lose, never
+  change the IV** (lost key = unreadable archive)
+- `piler-ldap`: bind credentials (`ums-ldap-server-admin` pattern)
+- `archive-s3`: restic/S3 credentials (or reuse suite backup secrets)
+
+### Bring-up sequence
+
+1. Secrets + ConfigMaps (`piler.conf`, journaling rule documentation)
+2. MariaDB → 3. Manticore → 4. piler core (smtp/worker/web)
+5. oauth2-proxy + ingress + TLS
+6. Connect journaling: Exchange rule → archive SMTP target; start in
+   dry-run / small pilot scope before going live
+7. Backfill: readpst/piler-import jobs in waves (folder-split >50 GB),
+   reconcile counts with Exchange export statistics
+8. Validation (below) → 9. switch journaling live, enable monitoring
+
+### Validation checklist (maps 1:1 to the 10 scenarios)
+
+- R1: journal a test message, delete it from the mailbox → archived copy
+  intact
+- R2: post to a shared mailbox and a mail-enabled public folder → both
+  archived with correct recipient context
+- R3: import one >50 GB store → folder structure preserved, counts match
+  Exchange export stats
+- R4/R5: retention class expiry purges; legal hold overrides purge
+- R6: fingerprint verify passes; audit log contains login/search/export
+- R7: expert search on a known header, P95 < 2 s
+- R8: auditor exports full result set; regular user sees only own mail
+- R9: Keycloak SSO login via oauth2-proxy; roles respected
+- R10: k8up run succeeds (restic list), restore drill reproduces search +
+  export
+
+### Operational notes
+
+- **piler master key**: offsite + K8s Secret copies, included in the restore
+  drill; never re-key in place.
+- **Capture completeness**: daily archived-count vs Exchange SMTP message
+  tracking log, alert on drift (journalling feed must never silently stop).
+- Retention scheduler + legal-hold review cadence; auditor role lifecycle
+  via the LDAP group.
+- Manticore index health (background reindex fallback); pinned images,
+  state backup before any upgrade.
+
 ## Depends On
 
 - Identity layer (Keycloak / LDAP)
