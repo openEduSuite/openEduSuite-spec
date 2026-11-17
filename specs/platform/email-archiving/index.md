@@ -226,8 +226,8 @@ restore path that does not lose archived content.
 
 | Component | Purpose | Replicas | Storage |
 |-----------|---------|----------|---------|
-| piler | archive daemon/web UI (SMTP capture, rules, search) | 1 | blob store (cold tier) |
-| piler-smtp | built-in SMTP journaling target | 1 | — |
+| piler (`sutoj/piler:1.4.9`, official OSS image — single container: MTA + worker + webui) | archive daemon/web UI (SMTP capture, rules, search) | 1 | blob store (cold tier) `store` + config/keyring `etc` |
+| memcached | cache (required by piler-compose stack) | 1 | — |
 | manticore | full-text search index | 1 | index PVC |
 | mariadb | archive metadata, retention/legal-hold state, audit log | 1 | RWO PVC |
 | readpst/libpst | PST→mbox conversion for backfill | job | — |
@@ -243,6 +243,7 @@ restore path that does not lose archived content.
 
 | Property | Value |
 |----------|-------|
+| Image | `sutoj/piler:1.4.9` (official OSS image; env-rendered config per official compose; `PILER_HOSTNAME` fixed at first start) |
 | Ingest | on-prem Exchange journaling (SMTP) + bulk import (PST via `readpst` → mbox/EML) |
 | Search | Manticore full-text index |
 | Auth | Keycloak OIDC or LDAP (suite identity) |
@@ -264,11 +265,10 @@ k8up→restic→S3 backup, local registry mirrors, Kyverno-compliant
 | Component | Image source | Role |
 |-----------|--------------|------|
 | mariadb | suite MariaDB image (mirror) | archive metadata, retention/legal-hold state, audit log |
-| manticore | manticore image (mirror) | RT full-text index (headers/body/attachments) |
-| piler-web | jsuto/piler distro (mirror; php-fpm + nginx sidecar) | web UI, search, export, admin |
-| piler-smtp | jsuto/piler (mirror) | built-in SMTP journaling target |
-| piler-worker | jsuto/piler (mirror) | message parse/store, rules, index feed |
-| piler-import | jsuto/piler tools + `readpst` (libpst) | batch backfill (PST → mbox → import) |
+| manticore | manticore image (mirror, tag per official piler compose) | RT full-text index (headers/body/attachments) |
+| piler | `sutoj/piler:1.4.9` (official image — single container: MTA + worker + webui nginx/php-fpm) | archive daemon + UI |
+| memcached | suite nix memcached 1.6.45-nix | cache (required by the piler stack) |
+| piler-import | piler tools + `readpst` (libpst) | batch backfill (PST → mbox → import) |
 | oauth2-proxy-archive | suite oauth2-proxy image | AuthN front (Keycloak OIDC) |
 
 ### Topology
@@ -334,7 +334,7 @@ All PVCs `k8up.io/backup: "true"` → restic → S3 + institutional mirror.
 ### Bring-up sequence
 
 1. Secrets + ConfigMaps (`piler.conf`, journaling rule documentation)
-2. MariaDB → 3. Manticore → 4. piler core (smtp/worker/web)
+2. MariaDB → 3. Manticore → 4. piler (single container: MTA+worker+webui)
 5. oauth2-proxy + ingress + TLS
 6. Connect journaling: Exchange rule → archive SMTP target; start in
    dry-run / small pilot scope before going live
