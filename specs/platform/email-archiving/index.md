@@ -17,9 +17,9 @@ the existing cold-storage/backup regime.
 
 ## Current Situation
 
-- **Verwaltung**: Microsoft Exchange; heavy reliance on shared mailboxes and
-  public folders; single mailboxes up to 500+ GB — primary mail store growth
-  is the driver for archiving.
+- **Verwaltung**: Microsoft Exchange (**on-prem**, confirmed 2026-11-17); heavy
+  reliance on shared mailboxes and public folders; single mailboxes up to
+  500+ GB — primary mail store growth is the driver for archiving.
 - **Faculty & students**: Dovecot/Postfix (spec `../services/dovecot-postfix`)
   — not the archival pain point; unaffected by this capability.
 - **Suite mail**: Stalwart (`../services/stalwart`) with SOGo6 as webmail
@@ -53,8 +53,9 @@ the existing cold-storage/backup regime.
 
 The archive SHALL capture every message transiting the Verwaltung Exchange
 — inbound, outbound and internal — including messages posted to mail-enabled
-public folders, independent of what users later delete from their
-mailboxes.
+public folders, independent of what users later delete from their mailboxes.
+On-prem Exchange journaling (standard/premium journal rule → archive SMTP
+target) is the capture mechanism.
 
 #### Scenario: Deleted mail is still archived
 
@@ -79,9 +80,10 @@ folder tree, since the Verwaltung depends on both for its daily workflow.
 ### Requirement: Backfill of existing long-tail stores (500+ GB)
 
 The archive SHALL ingest the pre-existing contents of large shared
-mailboxes and public folders (hundreds of GB per store) via bulk export
-paths (Exchange PST export, EWS, Graph/IMAP where available), without
-requiring user interaction.
+mailboxes and public folders (hundreds of GB per store) via on-prem
+`New-MailboxExportRequest` (MRS → PST, folder-split for stores >50 GB)
+followed by `readpst` → mbox bulk import, without requiring user
+interaction.
 
 #### Scenario: Historical backfill
 
@@ -196,26 +198,29 @@ restore path that does not lose archived content.
 | **Stalwart multi-store/S3** | AGPLv3 | n/a (suite mail server) | n/a | Not an archive. Future cold-tier option if Verwaltung ever consolidates onto the suite. |
 | **Archivematica** | AGPL/GPL OAIS | PST→mbox (readpst), Maildir; PREMIS/METS AIPs | via PST/EWS export | **Preservation tier** for records-grade transfers (HArchG), not the daily search tool. |
 
-### Decision (2026-11-17)
+### Decision (2026-11-17, on-prem confirmed)
 
 - **Two-layer approach**: Piler as the access/compliance archive (journaling
   capture + backfill + retention/legal-hold/search/export), Archivematica as
   the preservation tier for official-records transfers.
-- **Feeding paths are Exchange-flavor dependent** — OPEN DECISION pending
-  confirmation of on-prem vs Exchange Online:
-  - On-prem: `New-MailboxExportRequest` (PST, MRS, >50 GB via folder-split
-    exports) for shared mailboxes AND public-folder mailboxes → readpst →
-    mbox → archive import; ongoing capture via Exchange journaling (works
-    for public-folder recipients too).
-  - Online: shared mailboxes via Graph (import/export APIs GA 2026-05,
-    excluding archive/public/group mailboxes); ongoing capture via journal-
-    to-SMTP connector.
-- **Public-folder risk (time-critical)**: Exchange Online restricts
-  programmatic public-folder access since 2026-10-01 and retires EWS by
-  2027-04-01; Graph has no public-folder API (import/export targeted
-  Q4 2026, no general CRUD). If the Verwaltung is on Exchange Online,
-  archive-export public folders now and plan migration of live public
-  folders to shared mailboxes (which all open-source paths can reach).
+- **Verwaltung runs ON-PREM Exchange** (confirmed) → the full-fidelity feed
+  path is available and remains viable long-term:
+  - Ongoing capture: on-prem Exchange journaling rule (standard or premium)
+    → journal mailbox / direct SMTP forward → archive SMTP target (Piler
+    journaling). Captures inbound/outbound/internal traffic incl. messages
+    posted to mail-enabled public folders.
+  - Backfill (shared mailboxes AND public-folder mailboxes): on-prem-only
+    `New-MailboxExportRequest` (MRS → PST) — for stores >50 GB split into
+    multiple requests via `-IncludeFolders`/`-ExcludeFolders`/`-ContentFilter`;
+    public-folder mailbox exported as `-Mailbox "<PF mailbox>"`, hierarchy
+    preserved as PST folder tree. PST → `readpst` (libpst) → mbox → bulk
+    import; on-prem EWS export scripts remain an alternative since EWS is
+    NOT retired for on-prem.
+- **Public-folder risk only re-materializes on future EXO migration**: the
+  2026/2027 EWS retirement applies to Exchange Online only. If Verwaltung
+  later migrates, archive-export public folders during the on-prem window
+  and plan migration of live public folders to shared mailboxes (which all
+  open-source paths can reach).
 
 ## Component Reference (planned)
 
@@ -238,7 +243,7 @@ restore path that does not lose archived content.
 
 | Property | Value |
 |----------|-------|
-| Ingest | Exchange journaling (SMTP) + bulk import (PST/mbox/EML/IMAP/Graph) |
+| Ingest | on-prem Exchange journaling (SMTP) + bulk import (PST via `readpst` → mbox/EML) |
 | Search | Manticore full-text index |
 | Auth | Keycloak OIDC or LDAP (suite identity) |
 | Retention | per-folder/per-domain classes (*Aufbewahrungsfristen*) + legal hold |
@@ -255,7 +260,7 @@ restore path that does not lose archived content.
 
 ## Integrates With
 
-- Exchange (Verwaltung): journaling + PST/EWS/Graph export
+- Exchange (Verwaltung, **on-prem**): journaling rule + `New-MailboxExportRequest` (MRS→PST, folder-split >50 GB) → `readpst` → archive import
 - Suite identity (Keycloak OIDC)
 - SOGo6/stalwart specs only as future-consolidation context
   (`../services/stalwart`, `../services/sogo`)
