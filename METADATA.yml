@@ -26,7 +26,7 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | etherpad | OIDC | PostgreSQL | RWO PVC | — | 8 | Low |
 | ewoks | OIDC (oauth2-proxy) | — | RWO PVC | — | 4 | Low |
 | excalidraw | Internal | — | — | — | 4 | Low |
-| greenlight | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | 6 | Standard |
+| greenlight | OIDC (native) | PostgreSQL | RWO PVC | Redis | 6 | Standard |
 | grist | OIDC (native) | File/SQLite | RWO PVC | — | 4 | Medium |
 | haproxy-ingress | Internal | — | — | — | 9 | Critical |
 | hedgedoc | OIDC (oauth2-proxy) | SQLite | RWO PVC | — | 4 | Low |
@@ -58,7 +58,7 @@ Machine-readable metadata for all openEduSuite OpenSpec files.
 | self-service-password | LDAP | — | — | — | 6 | Low |
 | sogo | OIDC | PostgreSQL | — | Memcached | 21 | Critical |
 | stalwart | OAuth/XOAUTH2 | — | RWO PVC | — | 5 | Critical |
-| toss | OIDC (oauth2-proxy) | — | RWO PVC | — | 4 | Low |
+| toss | OIDC (native) | PostgreSQL | RWO PVC | — | 4 | Low |
 | typo3 | OIDC | MariaDB | RWO PVC | — | 6 | Low |
 | typst | OIDC (oauth2-proxy) | — | — | — | 4 | Low |
 | xwiki | OIDC | PostgreSQL | — | — | 15 | Standard |

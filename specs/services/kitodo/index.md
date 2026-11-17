@@ -17,8 +17,8 @@ publication of digital collections.
 
 - ✅ **In scope**: Kitodo.Production application deployment (Java web app),
   dedicated MySQL/MariaDB database (`kitodo-db`), Elasticsearch cluster
-  (`kitodo-es`) for full-text and metadata search, RabbitMQ message queue
-  (`kitodo-mq`) for asynchronous task processing, oauth2-proxy SSO via
+  (`kitodo-es`) for full-text and metadata search, ActiveMQ message queue
+  (`kitodo-mq`, OpenWire `:61616`) for asynchronous task processing, oauth2-proxy SSO via
   Keycloak OIDC, persistent storage for digitized assets
 - ❌ **Out of scope**: Multi-tenant hosting for external institutions,
   replacing the primary library catalog system, public-facing discovery layer
@@ -86,11 +86,12 @@ full-text via the dedicated Elasticsearch deployment `kitodo-es` (ports
 - THEN Kitodo forwards the search request to `kitodo-es:9200`
 - AND results are returned from Elasticsearch indices
 
-### Requirement: Asynchronous processing via RabbitMQ
+### Requirement: Asynchronous processing via ActiveMQ
 
-Kitodo.Production SHALL use the dedicated RabbitMQ deployment `kitodo-mq`
-for message queuing of asynchronous tasks (digitization workflows, OCR
-processing, metadata export).
+Kitodo.Production SHALL use the dedicated ActiveMQ deployment `kitodo-mq`
+(SLUB `kitodo-production-activemq` image, OpenWire port 61616) for message
+queuing of asynchronous tasks (digitization workflows, OCR processing,
+metadata export).
 
 #### Scenario: Job processing
 
@@ -101,15 +102,15 @@ processing, metadata export).
 
 ### Requirement: Separate backend deployments
 
-Kitodo backend services (database, Elasticsearch, RabbitMQ) SHALL be
-deployed as separate, dedicated deployments (`deploy-kitodo-db.yaml`,
-`deploy-kitodo-es.yaml`, `deploy-kitodo-mq.yaml`) to enable independent
-scaling and lifecycle management.
+Kitodo backend services (database, Elasticsearch, ActiveMQ) SHALL be
+deployed from the bundled `kitodo-backend.yaml` manifest (MySQL 8.0.43
+`kitodo-db`, Elasticsearch 7.17.10 `kitodo-es`, ActiveMQ `kitodo-mq`) to
+enable independent scaling and lifecycle management.
 
 #### Scenario: Independent service management
 
 - GIVEN a need to scale Elasticsearch independently
-- WHEN `deploy-kitodo-es.yaml` is updated
+- WHEN `kitodo-backend.yaml` is updated (Elasticsearch section)
 - THEN only the `kitodo-es` deployment is affected
 - AND the Kitodo application and other backends remain unchanged
 
@@ -120,7 +121,7 @@ scaling and lifecycle management.
 | kitodo-app | Kitodo.Production 3.5.0-2 Java web application | 1+ | — |
 | kitodo-db | MySQL/MariaDB database for Kitodo | 1 | MySQL data PVC |
 | kitodo-es | Elasticsearch for full-text and metadata search | 1+ | Elasticsearch data PVC |
-| kitodo-mq | RabbitMQ message queue for async tasks | 1 | RabbitMQ data PVC |
+| kitodo-mq | ActiveMQ message queue (OpenWire `:61616`) | 1 | — |
 | kitodo-oauth2-proxy | OAuth2 proxy (v7.15.4) for Keycloak OIDC SSO | 1 | — |
 
 ## Security Context
@@ -145,7 +146,7 @@ these constraints at admission time.
 | Container Port | 8080 (HTTP) |
 | Database | `kitodo-db:3306`, database/user: `kitodo` (credentials from `kitodo-secrets`) |
 | Search | `kitodo-es:9200/9300` (Elasticsearch) |
-| Message Queue | `kitodo-mq` (RabbitMQ) |
+| Message Queue | `kitodo-mq` (ActiveMQ, OpenWire `:61616`) |
 | SSO | oauth2-proxy v7.15.4, provider: `oidc`, upstream: `http://kitodo-app:8080` |
 
 ## Depends On
@@ -153,7 +154,7 @@ these constraints at admission time.
 - Keycloak (OIDC identity provider via oauth2-proxy)
 - MySQL/MariaDB (`kitodo-db`, port 3306)
 - Elasticsearch (`kitodo-es`, ports 9200/9300)
-- RabbitMQ (`kitodo-mq`)
+- ActiveMQ (`kitodo-mq`)
 - `kitodo-secrets` (database credentials)
 - HAProxy Ingress
 
@@ -178,8 +179,8 @@ these constraints at admission time.
 
 **Tier**: Standard (RPO: ≤24 h, RTO: 4 h)
 
-- **Configuration**: GitOps-managed manifests (`deploy-kitodo-*.yaml`,
-  oauth2-proxy configuration)
+- **Configuration**: GitOps-managed manifests (`kitodo-app.yaml`,
+  `kitodo-backend.yaml`, oauth2-proxy configuration)
 - **User data**: MySQL database (`kitodo-db`) + Elasticsearch indices
   (`kitodo-es`) + persistent volumes backups via the existing backup regime
 - **Recovery order**: restore DB (`kitodo-db`) → restore Elasticsearch

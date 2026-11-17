@@ -128,7 +128,7 @@ Wave 8 — Infrastructure utilities (no user SSO):
 | [Jitsi](../services/jitsi/) | OIDC | — | — | — | Apache-2.0 | BigBlueButton |
 
 | [BigBlueButton](../services/bigbluebutton/) | SAML 2.0 | PostgreSQL | RWX PVC | Redis | LGPL-3.0 | Jitsi |
-| [Greenlight](../services/greenlight/) | OIDC (oauth2-proxy) | PostgreSQL | RWO PVC | Redis | AGPL-3.0 | — |
+| [Greenlight](../services/greenlight/) | OIDC (native) | PostgreSQL | RWO PVC | Redis | AGPL-3.0 | — |
 
 | [OpenProject](../services/openproject/) | OIDC | PostgreSQL | S3 | — | GPL-3.0 | — |
 | [Operaton](../services/operaton/) | OIDC | PostgreSQL | RWO PVC | — | Apache-2.0 | — |
@@ -142,7 +142,7 @@ Wave 8 — Infrastructure utilities (no user SSO):
 | [HedgeDoc](../services/hedgedoc/) | OIDC (oauth2-proxy) | SQLite | RWO PVC | — | AGPL-3.0 | — |
 | [Stalwart](../services/stalwart/) | OAuth/XOAUTH2 | — | RWO PVC | — | AGPL-3.0 | — |
 | [RT](../services/rt/) | OIDC (oauth2-proxy) | MariaDB Galera | RWO PVC | — | GPL-2.0-or-later | — |
-| [Toss](../services/toss/) | OIDC (oauth2-proxy) | — | RWO PVC | — | MIT | — |
+| [Toss](../services/toss/) | OIDC (native) | PostgreSQL | RWO PVC | — | MIT | — |
 | [Typst](../services/typst/) | OIDC (oauth2-proxy) | — | — | — | Apache-2.0 | — |
 | [Ewoks](../services/ewoks/) | OIDC (oauth2-proxy) | — | RWO PVC | — | Apache-2.0 | — |
 | [Kitodo](../services/kitodo/) | OIDC (oauth2-proxy) | MySQL | Elasticsearch PVC | — | GPL-3.0 | — |

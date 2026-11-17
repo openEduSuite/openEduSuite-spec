@@ -11,17 +11,17 @@ Greenlight v3 is the BigBlueButton user-facing frontend / UI for room
 management and joining BBB meetings. It complements the bbb-core / k8s BBB
 deployments by providing a web interface where users sign in, create and
 configure rooms, schedule sessions, manage recordings, and obtain join URLs
-into the underlying BigBlueButton backend meetings. Authentication is handled
-through the standard oauth2-proxy gateway pattern (provider `oidc`, Keycloak)
-per the ingress / oauth2 wiring.
+into the underlying BigBlueButton backend meetings. Authentication uses
+Greenlight v3's native OpenID Connect client against Keycloak
+(`OPENID_CONNECT_*` envs); there is no oauth2-proxy gateway in the path.
 
 ## Scope
 
 - ✅ **In scope**: Greenlight v3 web deployment (pinned upstream image),
   dedicated PostgreSQL + Redis backends, persistent storage via
-  `greenlight-pvc`, ingress routing at `greenlight.<cluster-domain>`,
-  SSO via oauth2-proxy (Keycloak OIDC) gateway (per ingress/oauth2 wiring),
-  room management and BBB meeting join flows
+  `greenlight-pvc`, served at `https://bbb.openedusuite.org` behind the
+  BigBlueButton nginx frontend, native OIDC SSO against Keycloak
+  (`OPENID_CONNECT_*`), room management and BBB meeting join flows
 - ❌ **Out of scope**: the BBB backend / media server deployment itself (see
   `../bigbluebutton`), WebRTC media processing, recording storage on the BBB
   backend, GPU-accelerated transcription
@@ -47,18 +47,21 @@ Greenlight SHALL run from the pinned upstream image
 - THEN the container image is `bigbluebutton/greenlight:v3.9.0.1`
 - AND the HTTP container port exposed is `3000`
 
-### Requirement: SSO via oauth2-proxy (Keycloak OIDC)
+### Requirement: SSO via native OpenID Connect (Keycloak)
 
-Greenlight SHALL be reachable only through the per-app oauth2-proxy
-gateway (provider `oidc`, Keycloak) per the ingress / oauth2 wiring, so
-suite identities are brokered by the central IdP.
+Greenlight SHALL authenticate suite identities through its own OpenID
+Connect client configured against Keycloak (`OPENID_CONNECT_ISSUER` =
+`https://id.openedusuite.org/realms/openedusuite`,
+`OPENID_CONNECT_CLIENT_ID=greenlight`, `OPENID_CONNECT_UID_FIELD=sub`),
+so suite identities are brokered by the central IdP without a local
+password store for regular users.
 
 #### Scenario: User reaches Greenlight via SSO
 
-- GIVEN a user opening `greenlight.<cluster-domain>`
-- WHEN the oauth2-proxy finds no valid session cookie
+- GIVEN a user opening `https://bbb.openedusuite.org`
+- WHEN no Greenlight session exists for the user
 - THEN the user is redirected to Keycloak for OIDC authentication
-- AND the resulting session cookie grants access to the Greenlight UI
+- AND the OIDC redirect back to Greenlight establishes the session
 
 ### Requirement: Dedicated persistence
 
@@ -86,16 +89,18 @@ sensitive values via the `greenlight-secrets` secret.
 - AND credentials (DB URL, secret key base, BBB endpoint / secret) are
   sourced from the `greenlight-secrets` secret
 
-### Requirement: Ingress routing
+### Requirement: Serving at the BigBlueButton domain
 
-Greenlight SHALL be exposed at `greenlight.<cluster-domain>` through the
-suite ingress controller.
+Greenlight SHALL be exposed at `https://bbb.openedusuite.org` (`URL_HOST`)
+through the BigBlueButton ingress/nginx frontend (bbb-nginx), proxying to
+the Greenlight service (`greenlight:3000`).
 
 #### Scenario: External access
 
-- WHEN a user navigates to `greenlight.<cluster-domain>`
-- THEN the ingress routes the request to the Greenlight service on port
-  `3000` (behind the oauth2-proxy gateway)
+- WHEN a user navigates to `https://bbb.openedusuite.org`
+- THEN the BBB nginx frontend routes the request to the Greenlight service
+  on port `3000`
+- AND Greenlight serves the room-management UI under `URL_PREFIX: /`
 
 ### Requirement: BBB backend integration
 
@@ -116,7 +121,7 @@ BBB API to create meetings and generate join URLs.
 | greenlight | BigBlueButton frontend / UI (`:3000`) | 1 | `greenlight-pvc` |
 | greenlight-postgres | PostgreSQL for rooms, users, metadata | 1 | data PVC |
 | greenlight-redis | Redis for session / cache state | 1 | — |
-| oauth2-proxy | OIDC SSO gateway (Keycloak) | 1 | — |
+| bbb-nginx | BBB nginx frontend (`proxy_pass greenlight:3000`) | 1 | — |
 
 ## Security Context
 
@@ -130,28 +135,29 @@ BBB API to create meetings and generate join URLs.
 |----------|-------|
 | Image | `bigbluebutton/greenlight:v3.9.0.1` (pinned) |
 | Port | `:3000` (container HTTP) |
-| Ingress | `greenlight.<cluster-domain>` → oauth2-proxy → `:3000` |
-| Config | `greenlight-config` ConfigMap |
+| Route | `https://bbb.openedusuite.org` (`URL_HOST`) via bbb-nginx → greenlight:3000 |
+| Config | `greenlight-config` ConfigMap (`OPENID_CONNECT_*`, `URL_HOST`, `BD_BBB_ENDPOINT`) |
 | Secrets | `greenlight-secrets` secret (DB URL, secret key base, BBB endpoint/secret) |
 | Stores | `greenlight-postgres` (PostgreSQL), `greenlight-redis` (Redis) |
 | Storage | `greenlight-pvc` PVC (file uploads / generated assets) |
-| Auth | oauth2-proxy (Keycloak OIDC) gateway (per ingress/oauth2 wiring) |
+| Auth | native OIDC via Keycloak (`OPENID_CONNECT_CLIENT_ID=greenlight`) |
 
 ## Depends On
 
-- Keycloak (OIDC via oauth2-proxy)
+- Keycloak (native OIDC via `OPENID_CONNECT_*`)
 - PostgreSQL (`greenlight-postgres`)
 - Redis (`greenlight-redis`)
 - `greenlight-pvc` persistent volume
-- HAProxy Ingress
+- BBB nginx frontend (bbb-nginx / HAProxy Ingress)
 - BBB backend server (meeting API; managed separately — see `../bigbluebutton`)
 
 ## Integrates With
 
-- Keycloak (OIDC SSO via oauth2-proxy)
+- Keycloak (native OIDC SSO)
 - BigBlueButton backend (meeting creation / join API — see
   `../bigbluebutton`)
-- Portal (tile entry)
+- bbb.openedusuite.org domain (shared BBB nginx frontend; not a separate
+  portal tile)
 
 ## SLO
 
@@ -172,4 +178,4 @@ BBB API to create meetings and generate join URLs.
 - **Data**: `greenlight-postgres`, `greenlight-redis` and `greenlight-pvc`
   backups via the existing backup regime
 - **Recovery order**: restore DB + Redis + PVC → redeploy Greenlight from
-  GitOps → verify SSO via oauth2-proxy
+  GitOps → verify native OIDC login

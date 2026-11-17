@@ -372,8 +372,9 @@ Nubus Portal (tile, SSO redirect), Keycloak (SAML 2.0), BBB backend (meeting API
 This spec covers the BigBlueButton / Greenlight v3 deployment with Shibboleth
 SAML. The dedicated Greenlight v3 frontend (the BigBlueButton user-facing UI
 for room management and joining BBB meetings, `bigbluebutton/greenlight:v3.9.0.1`,
-with its own `greenlight-postgres` + `greenlight-redis` and SSO via oauth2-proxy
-Keycloak OIDC) is documented separately in `../greenlight`.
+with its own `greenlight-postgres` + `greenlight-redis` and native OpenID
+Connect SSO against Keycloak (`OPENID_CONNECT_*`, client `greenlight`) is
+documented separately in `../greenlight`.
 
 
 
