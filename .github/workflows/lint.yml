@@ -113,28 +113,46 @@ jobs:
           echo "Checking for broken cross-references in specs..."
           
           BROKEN=0
-          # Find all relative markdown links (../something)
-          while IFS= read -r link; do
-            file="$(echo "$link" | cut -d: -f1)"
-            target="$(echo "$link" | cut -d: -f2-)"
+          # Find all relative markdown links with filename preserved (-n)
+          while IFS= read -r line; do
+            file="$(echo "$line" | cut -d: -f1)"
+            lineno="$(echo "$line" | cut -d: -f2)"
+            match="$(echo "$line" | cut -d: -f3-)"
+            # Extract the link target: capture everything after ../ that is not
+            # part of the link text (stops at closing ) or space or ].
+            target="$(echo "$match" | sed -E 's/.*\.\.\///' | sed -E 's/(\)|\]|[[:space:]]).*//')"
             
             # Resolve the target path relative to the file's directory
             dir="$(dirname "$file")"
             resolved="$dir/$target"
             
-            # If it ends with /, check as directory with index.md
+            # Handle anchor fragments (path#anchor) - strip anchor and check path only
+            resolve_base="${resolved%%\#*}"
+            
+            if [[ -z "$target" ]]; then
+              continue
+            fi
+            
             if [[ "$target" == */ ]]; then
-              if [ ! -f "${resolved}index.md" ]; then
-                echo "::error file=$file::Broken cross-ref: $target"
+              # ends with / -> check for directory/index.md
+              if [ ! -f "${resolve_base}index.md" ]; then
+                echo "::error file=$file,line=$lineno::Broken cross-ref: $target"
+                BROKEN=$((BROKEN + 1))
+              fi
+            elif [[ "$target" == *#* ]]; then
+              # path#anchor - check that the file exists, anchor within is not validated
+              if [ ! -f "$resolve_base" ]; then
+                echo "::error file=$file,line=$lineno::Broken cross-ref file: ${resolve_base} (anchor: ${target##*#})"
                 BROKEN=$((BROKEN + 1))
               fi
             else
+              # plain file or directory
               if [ ! -f "$resolved" ] && [ ! -d "$resolved" ]; then
-                echo "::error file=$file::Broken cross-ref: $target"
+                echo "::error file=$file,line=$lineno::Broken cross-ref: $target"
                 BROKEN=$((BROKEN + 1))
               fi
             fi
-          done < <(grep -rohn '\.\./[^) "\[]*' specs/ --include='*.md' | grep -v '\.\.$')
+          done < <(grep -rno '\.\./[^)]\[]*\]' specs/ --include='*.md' | grep -v '\.\.$' || true)
           
           if [ "$BROKEN" -gt 0 ]; then
             echo "::error::$BROKEN broken cross-references found"

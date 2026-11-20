@@ -53,32 +53,117 @@ def load_interconnection_matrix():
     return {}
 
 
+# Display names used by the interconnection matrix -> spec directory ids.
+SERVICE_IDS = {
+    'Keycloak': 'keycloak',
+    'Nextcloud': 'nextcloud',
+    'OpenCloud': 'opencloud',
+    'OX AppSuite': 'ox-appsuite',
+    'SOGo': 'sogo',
+    'Element': 'element',
+    'Nubus': 'nubus',
+    'OpenProject': 'openproject',
+    'XWiki': 'xwiki',
+    'ILIAS': 'ilias',
+    'Moodle': 'moodle',
+    'BBB': 'bigbluebutton',
+    'Etherpad': 'etherpad',
+    'BookStack': 'bookstack',
+    'Planka': 'planka',
+    'Zammad': 'zammad',
+    'LimeSurvey': 'limesurvey',
+    'SSP': 'self-service-password',
+    'Collabora': 'collabora',
+    'CryptPad': 'cryptpad',
+    'Draw.io': 'drawio',
+    'Excalidraw': 'excalidraw',
+    'TYPO3': 'typo3',
+    'Notes': 'notes',
+    'Jitsi': 'jitsi',
+    'Dovecot-Postfix': 'dovecot-postfix',
+}
+
+# Two-letter column codes used by the matrix header -> service ids.
+CODE_TO_ID = {
+    'KC': 'keycloak', 'NC': 'nextcloud', 'OC': 'opencloud', 'OX': 'ox-appsuite',
+    'SG': 'sogo', 'EL': 'element', 'NB': 'nubus', 'OP': 'openproject',
+    'XW': 'xwiki', 'IL': 'ilias', 'MD': 'moodle', 'BB': 'bigbluebutton',
+    'EP': 'etherpad', 'BS': 'bookstack', 'PK': 'planka', 'ZM': 'zammad',
+    'LS': 'limesurvey', 'SP': 'self-service-password', 'CP': 'collabora',
+    'DI': 'drawio', 'EX': 'excalidraw', 'T3': 'typo3', 'NT': 'notes',
+    'JT': 'jitsi', 'DP': 'dovecot-postfix',
+}
+
+
 def parse_markdown_table(content):
-    """Parse markdown table from content."""
+    """Extract the interconnection matrix from the markdown file.
+
+    The matrix is the table whose header starts with an empty corner cell and
+    then holds two-letter service codes (KC, NC, ...). Returns a dict keyed by
+    spec service id::
+
+        {'keycloak': {'display': 'Keycloak', 'connections': {'nextcloud': 'AUTH', ...}}, ...}
+
+    Handles empty cells (kept for column alignment) and the one known
+    'pipe inside a cell' value ('IMAP|MAIL' in the SOGo row).
+    """
     lines = content.split('\n')
-    matrix = {}
-    headers = []
-    
-    in_table = False
-    for line in lines:
-        stripped = line.strip()
-        
-        if stripped.startswith('|') and not stripped.startswith('|---'):
-            cells = [c.strip() for c in stripped.split('|') if c.strip()]
-            
-            if not in_table:
-                headers = cells[1:]  # Skip first column (service name)
-                in_table = True
-            else:
-                service = cells[0]
-                connections = cells[1:]
-               (matrix[service] if service in matrix else matrix.setdefault(service, {}))['connections'] = {}
-                
-                for i, conn in enumerate(connections):
-                    if i < len(headers) and conn:
-                        matrix[service]['connections'][headers[i]] = conn
-    
-    return matrix
+    tables = []
+    current = []
+    prev_was_table = False
+
+    for raw in lines:
+        line = raw.strip()
+        if line.startswith('|'):
+            cells = [c.strip() for c in line.split('|')]
+            # Skip separator rows (cells contain only dashes/colons/spaces)
+            # but keep collecting the surrounding table.
+            if cells and all(not c or set(c) <= set('-:') for c in cells):
+                prev_was_table = True
+                continue
+            current.append(cells)
+            prev_was_table = True
+        elif line == '' and prev_was_table:
+            # Blank line between table rows: keep collecting.
+            continue
+        else:
+            if current:
+                tables.append(current)
+                current = []
+            prev_was_table = False
+    if current:
+        tables.append(current)
+
+    for table in tables:
+        if not table:
+            continue
+        header = table[0]
+        codes = [c for c in header[1:] if c.strip()]
+        if len(codes) < 2:
+            continue
+        if not all(code in CODE_TO_ID for code in codes):
+            continue
+
+        matrix = {}
+        header_len = len(header)
+        for row in table[1:]:
+            # Re-merge the single known pipe-in-cell value ('IMAP|MAIL').
+            if len(row) == header_len + 1:
+                row = row[:-2] + [row[-2] + '|' + row[-1]]
+            if len(row) < header_len:
+                row = row + [''] * (header_len - len(row))
+            row = row[:header_len]
+
+            display = row[1].strip('*`\t ')
+            service_id = SERVICE_IDS.get(display, display.lower()
+                                         .replace(' ', '-').replace('.', '-'))
+            conns = {}
+            for code, value in zip(codes, row[2:]):
+                if value and value != '—':
+                    conns[CODE_TO_ID[code]] = value
+            matrix[service_id] = {'display': display, 'connections': conns}
+        return matrix
+    return {}
 
 
 def get_all_services():
